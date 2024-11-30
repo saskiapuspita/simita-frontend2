@@ -1,146 +1,783 @@
-<app-header></app-header>
-<app-sidebar></app-sidebar>
-<main id="main" class="main">
+<div class="pagetitle">
+    <h1>Pendaftaran Peminatan</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">Peminatan</li>
+            <li class="breadcrumb-item">Pendaftaran Peminatan</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+<section class="section">
+    <div class="row">
+        <div class="col-lg-12">
 
-    <div class="pagetitle">
-        <h1>Pendaftaran Peminatan</h1>
-        <nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">Peminatan</li>
-                <li class="breadcrumb-item">Pendaftaran Peminatan</li>
-            </ol>
-        </nav>
-    </div><!-- End Page Title -->
-    <section class="section">
-        <div class="row">
-            <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
 
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label for="nama" class="form-label">Nama</label>
+                            <input value="{{ decodedToken.name }}" type="text" class="form-control" id="nama" disabled>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="nim" class="form-label">NIM</label>
+                            <input value="{{ decodedToken.nim }}" type="text" class="form-control" id="nim" disabled>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="ipk" class="form-label">IPK</label>
+                            <input value="{{ decodedToken.ipk }}" type="text" class="form-control" id="ipk" disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <form class="row g-3">
+
+                        <div class="col-12">
+                            <label for="pilihanMinat1" class="form-label">Pilihan Minat 1</label>
+                            <select [(ngModel)]="optionValue" [ngModelOptions]="{standalone: true}" class="form-select"
+                                id="pilihanMinat1" aria-label="State">
+                                <option disabled selected value>Select an option</option>
+                                <option value="proter">Produksi Ternak</option>
+                                <option value="nmt">Nutrisi dan Makanan Ternak</option>
+                                <option value="sosek">Sosial Ekonomi Peternakan</option>
+                                <option value="tht">Teknologi Hasil Ternak</option>
+                                <option value="rpt">Reproduksi dan Pemuliaan Ternak</option>
+                            </select>
+                        </div>
+
+                        <input type="hidden" [(ngModel)]="urutanMinat1" [ngModelOptions]="{standalone: true}"
+                            id="urutanMinat1">
+
+                        <div class="col-12">
+                            <label for="pilihanMinat2" class="form-label">Pilihan Minat 2</label>
+                            <select [(ngModel)]="optionValue2" [ngModelOptions]="{standalone: true}" class="form-select"
+                                id="pilihanMinat2" aria-label="State" (selectionChange)="onSelectionChange($event)">
+                                <option disabled selected value>Select an option</option>
+                                <option value="proter" [disabled]="optionValue === 'proter'">Produksi Ternak
+                                </option>
+                                <option value="nmt" [disabled]="optionValue === 'nmt'">Nutrisi dan Makanan Ternak
+                                </option>
+                                <option value="sosek" [disabled]="optionValue === 'sosek'">Sosial Ekonomi Peternakan
+                                </option>
+                                <option value="tht" [disabled]="optionValue === 'tht'">Teknologi Hasil Ternak
+                                </option>
+                                <option value="rpt" [disabled]="optionValue === 'rpt'">Reproduksi dan Pemuliaan
+                                    Ternak</option>
+                            </select>
+                        </div>
+
+                        <input type="hidden" [(ngModel)]="urutanMinat2" [ngModelOptions]="{standalone: true}"
+                            id="urutanMinat2">
+
+                        <div class="col-12">
+                            <label for="pilihanMinat3" class="form-label">Pilihan Minat 3</label>
+                            <select [(ngModel)]="optionValue3" [ngModelOptions]="{standalone: true}" class="form-select"
+                                id="pilihanMinat3" aria-label="State" (selectionChange)="onSelectionChange($event)">
+                                <option disabled selected value>Select an option</option>
+                                <option value="proter"
+                                    [disabled]="optionValue === 'proter' || optionValue2 === 'proter'">Produksi
+                                    Ternak
+                                </option>
+                                <option value="nmt" [disabled]="optionValue === 'nmt' || optionValue2 === 'nmt'">
+                                    Nutrisi dan Makanan Ternak
+                                </option>
+                                <option value="sosek" [disabled]="optionValue === 'sosek' || optionValue2 === 'sosek'">
+                                    Sosial Ekonomi
+                                    Peternakan
+                                </option>
+                                <option value="tht" [disabled]="optionValue === 'tht' || optionValue2 === 'sosek'">
+                                    Teknologi Hasil Ternak
+                                </option>
+                                <option value="rpt" [disabled]="optionValue === 'rpt' || optionValue2 === 'rpt'">
+                                    Reproduksi dan Pemuliaan
+                                    Ternak</option>
+                            </select>
+                        </div>
+
+                        <input type="hidden" [(ngModel)]="urutanMinat3" [ngModelOptions]="{standalone: true}"
+                            id="urutanMinat3">
+
+                        <div class="col-12">
+                            <label for="pilihanMinat4" class="form-label">Pilihan Minat 4</label>
+                            <select [(ngModel)]="optionValue4" [ngModelOptions]="{standalone: true}" class="form-select"
+                                id="pilihanMinat4" aria-label="State" (selectionChange)="onSelectionChange($event)">
+                                <option disabled selected value>Select an option</option>
+                                <option value="proter"
+                                    [disabled]="optionValue === 'proter' || optionValue2 === 'proter' || optionValue3 === 'proter'">
+                                    Produksi Ternak
+                                </option>
+                                <option value="nmt"
+                                    [disabled]="optionValue === 'nmt' || optionValue2 === 'nmt' || optionValue3 === 'nmt'">
+                                    Nutrisi dan Makanan Ternak
+                                </option>
+                                <option value="sosek"
+                                    [disabled]="optionValue === 'sosek' || optionValue2 === 'sosek' || optionValue3 === 'sosek'">
+                                    Sosial Ekonomi Peternakan
+                                </option>
+                                <option value="tht"
+                                    [disabled]="optionValue === 'tht' || optionValue2 === 'tht' || optionValue3 === 'tht'">
+                                    Teknologi Hasil Ternak
+                                </option>
+                                <option value="rpt"
+                                    [disabled]="optionValue === 'rpt' || optionValue2 === 'rpt' || optionValue3 === 'rpt'">
+                                    Reproduksi dan Pemuliaan
+                                    Ternak</option>
+                            </select>
+                        </div>
+
+                        <input type="hidden" [(ngModel)]="urutanMinat4" [ngModelOptions]="{standalone: true}"
+                            id="urutanMinat4">
+
+                        <div class="col-12">
+                            <label for="pilihanMinat5" class="form-label">Pilihan Minat 5</label>
+                            <select [(ngModel)]="optionValue5" [ngModelOptions]="{standalone: true}" class="form-select"
+                                id="pilihanMinat5" aria-label="State" (selectionChange)="onSelectionChange($event)">
+                                <option disabled selected value>Select an option</option>
+                                <option value="proter"
+                                    [disabled]="optionValue === 'proter' || optionValue2 === 'proter' || optionValue3 === 'proter' || optionValue4 === 'proter'">
+                                    Produksi Ternak
+                                </option>
+                                <option value="nmt"
+                                    [disabled]="optionValue === 'nmt' || optionValue2 === 'nmt' || optionValue3 === 'nmt' || optionValue4 === 'nmt'">
+                                    Nutrisi dan Makanan Ternak
+                                </option>
+                                <option value="sosek"
+                                    [disabled]="optionValue === 'sosek' || optionValue2 === 'sosek' || optionValue3 === 'sosek' || optionValue4 === 'sosek'">
+                                    Sosial Ekonomi Peternakan
+                                </option>
+                                <option value="tht"
+                                    [disabled]="optionValue === 'tht' || optionValue2 === 'tht' || optionValue3 === 'tht' || optionValue4 === 'tht'">
+                                    Teknologi Hasil Ternak
+                                </option>
+                                <option value="rpt"
+                                    [disabled]="optionValue === 'rpt' || optionValue2 === 'rpt' || optionValue3 === 'rpt' || optionValue4 === 'rpt'">
+                                    Reproduksi dan Pemuliaan
+                                    Ternak</option>
+                            </select>
+                        </div>
+
+                        <input type="hidden" [(ngModel)]="urutanMinat5" [ngModelOptions]="{standalone: true}"
+                            id="urutanMinat5">
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <div class="divider"></div>
+                            <button type="reset" class="btn btn-secondary">Reset</button>
+                        </div>
+                    </form><!-- End No Labels Form -->
+
+                </div>
+            </div>
+
+            <ng-container
+                *ngIf="optionValue == 'proter' || optionValue2 == 'proter' || optionValue3 == 'proter' || optionValue4 == 'proter' || optionValue5 == 'proter'">
                 <div class="card">
                     <div class="card-body">
+                        <label>Nilai Mata Kuliah Wajib Minat Produksi Ternak</label>
 
-                        <form class="row g-3">
-                            <div class="col-md-6">
-                                <label for="nama" class="form-label">Nama</label>
-                                <input type="text" class="form-control" id="nama" disabled>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="nim" class="form-label">NIM</label>
-                                <input type="text" class="form-control" id="nim" disabled>
-                            </div>
-                            <div class="col-12">
-                                <label for="ipk" class="form-label">IPK</label>
-                                <input type="text" class="form-control" id="ipk" required>
-                            </div>
-                            <div class="col-12">
-                                <label for="pilihanMinat1" class="form-label">Pilihan Minat 1</label>
-                                <select [(ngModel)]="optionValue" name="pilihanMinat1" class="form-select"
-                                    id="pilihanMinat1" aria-label="State">
-                                    <option disabled selected value>Select an option</option>
-                                    <option value="proter">Produksi Ternak</option>
-                                    <option value="nmt">Nutrisi dan Makanan Ternak</option>
-                                    <option value="sosek">Sosial Ekonomi Peternakan</option>
-                                    <option value="tht">Teknologi Hasil Ternak</option>
-                                    <option value="rpt">Reproduksi dan Pemuliaan Ternak</option>
-                                </select>
-                            </div>
+                        <form [formGroup]="formPeminatanMhsProter" (ngSubmit)="submitForm()">
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <label for="namaMataKuliahProter1" class="form-label">Nama Mata Kuliah</label>
+                                    <select [(ngModel)]="mataKuliahProter1" [ngModelOptions]="{standalone: true}"
+                                        class="form-select" id="namaMataKuliahProter1" aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="matkulProter1">Matkul Proter 1</option>
+                                        <option value="matkulProter2">Matkul Proter 2</option>
+                                        <option value="matkulProter3">Matkul Proter 3</option>
+                                        <option value="matkulProter4">Matkul Proter 4</option>
+                                        <option value="matkulProter5">Matkul Proter 5</option>
+                                    </select>
+                                </div>
 
-                            <div class="col-12">
-                                <label for="pilihanMinat2" class="form-label">Pilihan Minat 2</label>
-                                <select [(ngModel)]="optionValue2" name="pilihanMinat2" class="form-select"
-                                    id="pilihanMinat2" aria-label="State" (selectionChange)="onSelectionChange($event)">
-                                    <option disabled selected value>Select an option</option>
-                                    <option value="proter" [disabled]="optionValue === 'proter'">Produksi Ternak
-                                    </option>
-                                    <option value="nmt" [disabled]="optionValue === 'nmt'">Nutrisi dan Makanan Ternak
-                                    </option>
-                                    <option value="sosek" [disabled]="optionValue === 'sosek'">Sosial Ekonomi Peternakan
-                                    </option>
-                                    <option value="tht" [disabled]="optionValue === 'tht'">Teknologi Hasil Ternak
-                                    </option>
-                                    <option value="rpt" [disabled]="optionValue === 'rpt'">Reproduksi dan Pemuliaan
-                                        Ternak</option>
-                                </select>
+                                <div class="col-6">
+                                    <label for="nilaiMatkulProter1" class="form-label">Nilai</label>
+                                    <select class="form-select" name="nilaiMatkulProter1" id="nilaiMatkulProter1"
+                                        aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="A">A</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B">B</option>
+                                        <option value="C+">C+</option>
+                                        <option value="C">C</option>
+                                        <option value="D+">D+</option>
+                                        <option value="D">D</option>
+                                    </select>
+                                </div>
                             </div>
 
-                            <div class="col-12">
-                                <label for="pilihanMinat3" class="form-label">Pilihan Minat 3</label>
-                                <select [(ngModel)]="optionValue3" name="pilihanMinat3" class="form-select"
-                                    id="pilihanMinat3" aria-label="State" (selectionChange)="onSelectionChange($event)">
-                                    <option disabled selected value>Select an option</option>
-                                    <option value="proter"
-                                        [disabled]="optionValue === 'proter' || optionValue2 === 'proter'">Produksi
-                                        Ternak
-                                    </option>
-                                    <option value="nmt" [disabled]="optionValue === 'nmt' || optionValue2 === 'nmt'">
-                                        Nutrisi dan Makanan Ternak
-                                    </option>
-                                    <option value="sosek"
-                                        [disabled]="optionValue === 'sosek' || optionValue2 === 'sosek'">Sosial Ekonomi
-                                        Peternakan
-                                    </option>
-                                    <option value="tht" [disabled]="optionValue === 'tht' || optionValue2 === 'sosek'">
-                                        Teknologi Hasil Ternak
-                                    </option>
-                                    <option value="rpt" [disabled]="optionValue === 'rpt' || optionValue2 === 'rpt'">
-                                        Reproduksi dan Pemuliaan
-                                        Ternak</option>
-                                </select>
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <label for="namaMataKuliahProter2" class="form-label">Nama Mata Kuliah</label>
+                                    <select [(ngModel)]="mataKuliahProter2" [ngModelOptions]="{standalone: true}"
+                                        (selectionChange)="onSelectionChangeMataKuliahProter($event)"
+                                        class="form-select" id="namaMataKuliahProter2" aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="matkulProter1"
+                                            [disabled]="mataKuliahProter1 === 'matkulProter1'">Matkul Proter 1</option>
+                                        <option value="matkulProter2"
+                                            [disabled]="mataKuliahProter1 === 'matkulProter2'">Matkul Proter 2</option>
+                                        <option value="matkulProter3"
+                                            [disabled]="mataKuliahProter1 === 'matkulProter3'">Matkul Proter 3</option>
+                                        <option value="matkulProter4"
+                                            [disabled]="mataKuliahProter1 === 'matkulProter4'">Matkul Proter 4</option>
+                                        <option value="matkulProter5"
+                                            [disabled]="mataKuliahProter1 === 'matkulProter5'">Matkul Proter 5</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-6">
+                                    <label for="nilaiMatkulProter2" class="form-label">Nilai</label>
+                                    <select class="form-select" name="nilaiMatkulProter2" id="nilaiMatkulProter2"
+                                        aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="A">A</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B">B</option>
+                                        <option value="C+">C+</option>
+                                        <option value="C">C</option>
+                                        <option value="D+">D+</option>
+                                        <option value="D">D</option>
+                                    </select>
+                                </div>
                             </div>
 
-                            <div class="col-12">
-                                <label for="pilihanMinat4" class="form-label">Pilihan Minat 4</label>
-                                <select [(ngModel)]="optionValue4" name="pilihanMinat4" class="form-select"
-                                    id="pilihanMinat4" aria-label="State" (selectionChange)="onSelectionChange($event)">
-                                    <option disabled selected value>Select an option</option>
-                                    <option value="proter"
-                                        [disabled]="optionValue === 'proter' || optionValue2 === 'proter' || optionValue3 === 'proter'">
-                                        Produksi Ternak
-                                    </option>
-                                    <option value="nmt"
-                                        [disabled]="optionValue === 'nmt' || optionValue2 === 'nmt' || optionValue3 === 'nmt'">
-                                        Nutrisi dan Makanan Ternak
-                                    </option>
-                                    <option value="sosek"
-                                        [disabled]="optionValue === 'sosek' || optionValue2 === 'sosek' || optionValue3 === 'sosek'">
-                                        Sosial Ekonomi Peternakan
-                                    </option>
-                                    <option value="tht"
-                                        [disabled]="optionValue === 'tht' || optionValue2 === 'tht' || optionValue3 === 'tht'">
-                                        Teknologi Hasil Ternak
-                                    </option>
-                                    <option value="rpt"
-                                        [disabled]="optionValue === 'rpt' || optionValue2 === 'rpt' || optionValue3 === 'rpt'">
-                                        Reproduksi dan Pemuliaan
-                                        Ternak</option>
-                                </select>
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <label for="namaMataKuliahProter3" class="form-label">Nama Mata Kuliah</label>
+                                    <select [(ngModel)]="mataKuliahProter3" [ngModelOptions]="{standalone: true}"
+                                        (selectionChange)="onSelectionChangeMataKuliahProter($event)"
+                                        class="form-select" id="namaMataKuliahProter3" aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="matkulProter1"
+                                            [disabled]="mataKuliahProter1 === 'matkulProter1' || mataKuliahProter2 === 'matkulProter1'">
+                                            Matkul Proter 1</option>
+                                        <option value="matkulProter2"
+                                            [disabled]="mataKuliahProter1 === 'matkulProter2' || mataKuliahProter2 === 'matkulProter2'">
+                                            Matkul Proter 2</option>
+                                        <option value="matkulProter3"
+                                            [disabled]="mataKuliahProter1 === 'matkulProter3' || mataKuliahProter2 === 'matkulProter3'">
+                                            Matkul Proter 3</option>
+                                        <option value="matkulProter4"
+                                            [disabled]="mataKuliahProter1 === 'matkulProter4' || mataKuliahProter2 === 'matkulProter4'">
+                                            Matkul Proter 4</option>
+                                        <option value="matkulProter5"
+                                            [disabled]="mataKuliahProter1 === 'matkulProter5' || mataKuliahProter2 === 'matkulProter5'">
+                                            Matkul Proter 5</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-6">
+                                    <label for="nilaiMatkulProter3" class="form-label">Nilai</label>
+                                    <select class="form-select" name="nilaiMatkulProter3" id="nilaiMatkulProter3"
+                                        aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="A">A</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B">B</option>
+                                        <option value="C+">C+</option>
+                                        <option value="C">C</option>
+                                        <option value="D+">D+</option>
+                                        <option value="D">D</option>
+                                    </select>
+                                </div>
                             </div>
 
-                            <div class="col-12">
-                                <label for="pilihanMinat5" class="form-label">Pilihan Minat 5</label>
-                                <select [(ngModel)]="optionValue5" name="pilihanMinat5" class="form-select"
-                                    id="pilihanMinat4" aria-label="State" (selectionChange)="onSelectionChange($event)">
-                                    <option disabled selected value>Select an option</option>
-                                    <option value="proter"
-                                        [disabled]="optionValue === 'proter' || optionValue2 === 'proter' || optionValue3 === 'proter' || optionValue4 === 'proter'">
-                                        Produksi Ternak
-                                    </option>
-                                    <option value="nmt"
-                                        [disabled]="optionValue === 'nmt' || optionValue2 === 'nmt' || optionValue3 === 'nmt' || optionValue4 === 'nmt'">
-                                        Nutrisi dan Makanan Ternak
-                                    </option>
-                                    <option value="sosek"
-                                        [disabled]="optionValue === 'sosek' || optionValue2 === 'sosek' || optionValue3 === 'sosek' || optionValue4 === 'sosek'">
-                                        Sosial Ekonomi Peternakan
-                                    </option>
-                                    <option value="tht"
-                                        [disabled]="optionValue === 'tht' || optionValue2 === 'tht' || optionValue3 === 'tht' || optionValue4 === 'tht'">
-                                        Teknologi Hasil Ternak
-                                    </option>
-                                    <option value="rpt"
-                                        [disabled]="optionValue === 'rpt' || optionValue2 === 'rpt' || optionValue3 === 'rpt' || optionValue4 === 'rpt'">
-                                        Reproduksi dan Pemuliaan
-                                        Ternak</option>
-                                </select>
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <label for="namaMataKuliahProter4" class="form-label">Nama Mata Kuliah</label>
+                                    <select [(ngModel)]="mataKuliahProter4" [ngModelOptions]="{standalone: true}"
+                                        (selectionChange)="onSelectionChangeMataKuliahProter($event)"
+                                        class="form-select" id="namaMataKuliahProter4" aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="matkulProter1"
+                                            [disabled]="mataKuliahProter1 === 'matkulProter1' || mataKuliahProter2 === 'matkulProter1' || mataKuliahProter3 === 'matkulProter1'">
+                                            Matkul Proter 1</option>
+                                        <option value="matkulProter2"
+                                            [disabled]="mataKuliahProter1 === 'matkulProter2' || mataKuliahProter2 === 'matkulProter2' || mataKuliahProter3 === 'matkulProter2'">
+                                            Matkul Proter 2</option>
+                                        <option value="matkulProter3"
+                                            [disabled]="mataKuliahProter1 === 'matkulProter3' || mataKuliahProter2 === 'matkulProter3' || mataKuliahProter3 === 'matkulProter3'">
+                                            Matkul Proter 3</option>
+                                        <option value="matkulProter4"
+                                            [disabled]="mataKuliahProter1 === 'matkulProter4' || mataKuliahProter2 === 'matkulProter4' || mataKuliahProter3 === 'matkulProter4'">
+                                            Matkul Proter 4</option>
+                                        <option value="matkulProter5"
+                                            [disabled]="mataKuliahProter1 === 'matkulProter5' || mataKuliahProter2 === 'matkulProter5' || mataKuliahProter3 === 'matkulProter4'">
+                                            Matkul Proter 5</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-6">
+                                    <label for="nilaiMatkulProter4" class="form-label">Nilai</label>
+                                    <select class="form-select" name="nilaiMatkulProter4" id="nilaiMatkulProter4"
+                                        aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="A">A</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B">B</option>
+                                        <option value="C+">C+</option>
+                                        <option value="C">C</option>
+                                        <option value="D+">D+</option>
+                                        <option value="D">D</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <label for="namaMataKuliahProter5" class="form-label">Nama Mata Kuliah</label>
+                                    <select [(ngModel)]="mataKuliahProter5" [ngModelOptions]="{standalone: true}"
+                                        (selectionChange)="onSelectionChangeMataKuliahProter($event)"
+                                        class="form-select" id="namaMataKuliahProter5" aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="matkulProter1"
+                                            [disabled]="mataKuliahProter1 === 'matkulProter1' || mataKuliahProter2 === 'matkulProter1' || mataKuliahProter3 === 'matkulProter1' || mataKuliahProter4 === 'matkulProter1'">
+                                            Matkul Proter 1</option>
+                                        <option value="matkulProter2"
+                                            [disabled]="mataKuliahProter1 === 'matkulProter2' || mataKuliahProter2 === 'matkulProter2' || mataKuliahProter3 === 'matkulProter2' || mataKuliahProter4 === 'matkulProter2'">
+                                            Matkul Proter 2</option>
+                                        <option value="matkulProter3"
+                                            [disabled]="mataKuliahProter1 === 'matkulProter3' || mataKuliahProter2 === 'matkulProter3' || mataKuliahProter3 === 'matkulProter3' || mataKuliahProter4 === 'matkulProter3'">
+                                            Matkul Proter 3</option>
+                                        <option value="matkulProter4"
+                                            [disabled]="mataKuliahProter1 === 'matkulProter4' || mataKuliahProter2 === 'matkulProter4' || mataKuliahProter3 === 'matkulProter4' || mataKuliahProter4 === 'matkulProter4'">
+                                            Matkul Proter 4</option>
+                                        <option value="matkulProter5"
+                                            [disabled]="mataKuliahProter1 === 'matkulProter5' || mataKuliahProter2 === 'matkulProter5' || mataKuliahProter3 === 'matkulProter5' || mataKuliahProter4 === 'matkulProter5'">
+                                            Matkul Proter 5</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-6">
+                                    <label for="nilaiMatkulProter5" class="form-label">Nilai</label>
+                                    <select class="form-select" name="nilaiMatkulProter5" id="nilaiMatkulProter5"
+                                        aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="A">A</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B">B</option>
+                                        <option value="C+">C+</option>
+                                        <option value="C">C</option>
+                                        <option value="D+">D+</option>
+                                        <option value="D">D</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <div class="divider"></div>
+                                <button type="reset" class="btn btn-secondary">Reset</button>
+                            </div>
+                        </form><!-- End No Labels Form -->
+                    </div>
+                </div>
+            </ng-container>
+
+            <ng-container
+                *ngIf="optionValue == 'nmt' || optionValue2 == 'nmt' || optionValue3 == 'nmt' || optionValue4 == 'nmt' || optionValue5 == 'nmt'">
+                <div class="card">
+                    <div class="card-body">
+                        <label>Nilai Mata Kuliah Wajib Minat Nutrisi dan Makanan Ternak</label>
+
+                        <form>
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <label for="namaMataKuliahNMT1" class="form-label">Nama Mata Kuliah</label>
+                                    <select [(ngModel)]="mataKuliahNMT1" [ngModelOptions]="{standalone: true}"
+                                        class="form-select" id="namaMataKuliahNMT1" aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="matkulNMT1">Matkul NMT 1</option>
+                                        <option value="matkulNMT2">Matkul NMT 2</option>
+                                        <option value="matkulNMT3">Matkul NMT 3</option>
+                                        <option value="matkulNMT4">Matkul NMT 4</option>
+                                        <option value="matkulNMT5">Matkul NMT 5</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-6">
+                                    <label for="nilaiMatkulNMT1" class="form-label">Nilai</label>
+                                    <select class="form-select" name="nilaiMatkulNMT1" id="nilaiMatkulNMT1"
+                                        aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="A">A</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B">B</option>
+                                        <option value="C+">C+</option>
+                                        <option value="C">C</option>
+                                        <option value="D+">D+</option>
+                                        <option value="D">D</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <label for="namaMataKuliahNMT2" class="form-label">Nama Mata Kuliah</label>
+                                    <select [(ngModel)]="mataKuliahNMT2" [ngModelOptions]="{standalone: true}"
+                                        (selectionChange)="onSelectionChangeMataKuliahNMT($event)" class="form-select"
+                                        id="namaMataKuliahNMT2" aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="matkulNMT1" [disabled]="mataKuliahNMT1 === 'matkulNMT1'">Matkul
+                                            NMT 1</option>
+                                        <option value="matkulNMT2" [disabled]="mataKuliahNMT1 === 'matkulNMT2'">Matkul
+                                            NMT 2</option>
+                                        <option value="matkulNMT3" [disabled]="mataKuliahNMT1 === 'matkulNMT3'">Matkul
+                                            NMT 3</option>
+                                        <option value="matkulNMT4" [disabled]="mataKuliahNMT1 === 'matkulNMT4'">Matkul
+                                            NMT 4</option>
+                                        <option value="matkulNMT5" [disabled]="mataKuliahNMT1 === 'matkulNMT5'">Matkul
+                                            NMT 5</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-6">
+                                    <label for="nilaiMatkulNMT2" class="form-label">Nilai</label>
+                                    <select class="form-select" name="nilaiMatkulNMT2" id="nilaiMatkulNMT2"
+                                        aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="A">A</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B">B</option>
+                                        <option value="C+">C+</option>
+                                        <option value="C">C</option>
+                                        <option value="D+">D+</option>
+                                        <option value="D">D</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <label for="namaMataKuliahNMT3" class="form-label">Nama Mata Kuliah</label>
+                                    <select [(ngModel)]="mataKuliahNMT3" [ngModelOptions]="{standalone: true}"
+                                        (selectionChange)="onSelectionChangeMataKuliahNMT($event)" class="form-select"
+                                        id="namaMataKuliahNMT3" aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="matkulNMT1"
+                                            [disabled]="mataKuliahNMT1 === 'matkulNMT1' || mataKuliahNMT2 === 'matkulNMT1'">
+                                            Matkul NMT 1</option>
+                                        <option value="matkulNMT2"
+                                            [disabled]="mataKuliahNMT1 === 'matkulNMT2' || mataKuliahNMT2 === 'matkulNMT2'">
+                                            Matkul NMT 2</option>
+                                        <option value="matkulNMT3"
+                                            [disabled]="mataKuliahNMT1 === 'matkulNMT3' || mataKuliahNMT2 === 'matkulNMT3'">
+                                            Matkul NMT 3</option>
+                                        <option value="matkulNMT4"
+                                            [disabled]="mataKuliahNMT1 === 'matkulNMT4' || mataKuliahNMT2 === 'matkulNMT4'">
+                                            Matkul NMT 4</option>
+                                        <option value="matkulNMT5"
+                                            [disabled]="mataKuliahNMT1 === 'matkulNMT5' || mataKuliahNMT2 === 'matkulNMT5'">
+                                            Matkul NMT 5</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-6">
+                                    <label for="nilaiMatkulNMT3" class="form-label">Nilai</label>
+                                    <select class="form-select" name="nilaiMatkulNMT3" id="nilaiMatkulNMT3"
+                                        aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="A">A</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B">B</option>
+                                        <option value="C+">C+</option>
+                                        <option value="C">C</option>
+                                        <option value="D+">D+</option>
+                                        <option value="D">D</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <label for="namaMataKuliahNMT4" class="form-label">Nama Mata Kuliah</label>
+                                    <select [(ngModel)]="mataKuliahNMT4" [ngModelOptions]="{standalone: true}"
+                                        (selectionChange)="onSelectionChangeMataKuliahNMT($event)" class="form-select"
+                                        id="namaMataKuliahNMT4" aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="matkulNMT1"
+                                            [disabled]="mataKuliahNMT1 === 'matkulNMT1' || mataKuliahNMT2 === 'matkulNMT1' || mataKuliahNMT3 === 'matkulNMT1'">
+                                            Matkul NMT 1</option>
+                                        <option value="matkulNMT2"
+                                            [disabled]="mataKuliahNMT1 === 'matkulNMT2' || mataKuliahNMT2 === 'matkulNMT2' || mataKuliahNMT3 === 'matkulNMT2'">
+                                            Matkul NMT 2</option>
+                                        <option value="matkulNMT3"
+                                            [disabled]="mataKuliahNMT1 === 'matkulNMT3' || mataKuliahNMT2 === 'matkulNMT3' || mataKuliahNMT3 === 'matkulNMT3'">
+                                            Matkul NMT 3</option>
+                                        <option value="matkulNMT4"
+                                            [disabled]="mataKuliahNMT1 === 'matkulNMT4' || mataKuliahNMT2 === 'matkulNMT4' || mataKuliahNMT3 === 'matkulNMT4'">
+                                            Matkul NMT 4</option>
+                                        <option value="matkulNMT5"
+                                            [disabled]="mataKuliahNMT1 === 'matkulNMT5' || mataKuliahNMT2 === 'matkulNMT5' || mataKuliahNMT3 === 'matkulNMT4'">
+                                            Matkul NMT 5</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-6">
+                                    <label for="nilaiMatkulNMT4" class="form-label">Nilai</label>
+                                    <select class="form-select" name="nilaiMatkulNMT4" id="nilaiMatkulNMT4"
+                                        aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="A">A</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B">B</option>
+                                        <option value="C+">C+</option>
+                                        <option value="C">C</option>
+                                        <option value="D+">D+</option>
+                                        <option value="D">D</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <label for="namaMataKuliahNMT5" class="form-label">Nama Mata Kuliah</label>
+                                    <select [(ngModel)]="mataKuliahNMT5" [ngModelOptions]="{standalone: true}"
+                                        (selectionChange)="onSelectionChangeMataKuliahNMT($event)" class="form-select"
+                                        id="namaMataKuliahNMT5" aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="matkulNMT1"
+                                            [disabled]="mataKuliahNMT1 === 'matkulNMT1' || mataKuliahNMT2 === 'matkulNMT1' || mataKuliahNMT3 === 'matkulNMT1' || mataKuliahNMT4 === 'matkulNMT1'">
+                                            Matkul NMT 1</option>
+                                        <option value="matkulNMT2"
+                                            [disabled]="mataKuliahNMT1 === 'matkulNMT2' || mataKuliahNMT2 === 'matkulNMT2' || mataKuliahNMT3 === 'matkulNMT2' || mataKuliahNMT4 === 'matkulNMT2'">
+                                            Matkul NMT 2</option>
+                                        <option value="matkulNMT3"
+                                            [disabled]="mataKuliahNMT1 === 'matkulNMT3' || mataKuliahNMT2 === 'matkulNMT3' || mataKuliahNMT3 === 'matkulNMT3' || mataKuliahNMT4 === 'matkulNMT3'">
+                                            Matkul NMT 3</option>
+                                        <option value="matkulNMT4"
+                                            [disabled]="mataKuliahNMT1 === 'matkulNMT4' || mataKuliahNMT2 === 'matkulNMT4' || mataKuliahNMT3 === 'matkulNMT4' || mataKuliahNMT4 === 'matkulNMT4'">
+                                            Matkul NMT 4</option>
+                                        <option value="matkulNMT5"
+                                            [disabled]="mataKuliahNMT1 === 'matkulNMT5' || mataKuliahNMT2 === 'matkulNMT5' || mataKuliahNMT3 === 'matkulNMT5' || mataKuliahNMT4 === 'matkulNMT5'">
+                                            Matkul NMT 5</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-6">
+                                    <label for="nilaiMatkulNMT5" class="form-label">Nilai</label>
+                                    <select class="form-select" name="nilaiMatkulNMT5" id="nilaiMatkulNMT5"
+                                        aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="A">A</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B">B</option>
+                                        <option value="C+">C+</option>
+                                        <option value="C">C</option>
+                                        <option value="D+">D+</option>
+                                        <option value="D">D</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <div class="divider"></div>
+                                <button type="reset" class="btn btn-secondary">Reset</button>
+                            </div>
+                        </form><!-- End No Labels Form -->
+                    </div>
+                </div>
+            </ng-container>
+
+            <ng-container
+                *ngIf="optionValue == 'sosek' || optionValue2 == 'sosek' || optionValue3 == 'sosek' || optionValue4 == 'sosek' || optionValue5 == 'sosek'">
+                <div class="card">
+                    <div class="card-body">
+                        <label>Nilai Mata Kuliah Wajib Minat Sosial Ekonomi Peternakan</label>
+
+                        <form>
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <label for="namaMataKuliahSosek1" class="form-label">Nama Mata Kuliah</label>
+                                    <select [(ngModel)]="mataKuliahSosek1" [ngModelOptions]="{standalone: true}"
+                                        class="form-select" id="namaMataKuliahSosek1" aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="matkulSosek1">Matkul Sosek 1</option>
+                                        <option value="matkulSosek2">Matkul Sosek 2</option>
+                                        <option value="matkulSosek3">Matkul Sosek 3</option>
+                                        <option value="matkulSosek4">Matkul Sosek 4</option>
+                                        <option value="matkulSosek5">Matkul Sosek 5</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-6">
+                                    <label for="nilaiMatkulSosek1" class="form-label">Nilai</label>
+                                    <select class="form-select" name="nilaiMatkulSosek1" id="nilaiMatkulSosek1"
+                                        aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="A">A</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B">B</option>
+                                        <option value="C+">C+</option>
+                                        <option value="C">C</option>
+                                        <option value="D+">D+</option>
+                                        <option value="D">D</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <label for="namaMataKuliahSosek2" class="form-label">Nama Mata Kuliah</label>
+                                    <select [(ngModel)]="mataKuliahSosek2" [ngModelOptions]="{standalone: true}"
+                                        (selectionChange)="onSelectionChangeMataKuliahSosek($event)" class="form-select"
+                                        id="namaMataKuliahSosek2" aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="matkulSosek1" [disabled]="mataKuliahSosek1 === 'matkulSosek1'">
+                                            Matkul Sosek 1</option>
+                                        <option value="matkulSosek2" [disabled]="mataKuliahSosek1 === 'matkulSosek2'">
+                                            Matkul Sosek 2</option>
+                                        <option value="matkulSosek3" [disabled]="mataKuliahSosek1 === 'matkulSosek3'">
+                                            Matkul Sosek 3</option>
+                                        <option value="matkulSosek4" [disabled]="mataKuliahSosek1 === 'matkulSosek4'">
+                                            Matkul Sosek 4</option>
+                                        <option value="matkulSosek5" [disabled]="mataKuliahSosek1 === 'matkulSosek5'">
+                                            Matkul Sosek 5</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-6">
+                                    <label for="nilaiMatkulSosek2" class="form-label">Nilai</label>
+                                    <select class="form-select" name="nilaiMatkulSosek2" id="nilaiMatkulSosek2"
+                                        aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="A">A</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B">B</option>
+                                        <option value="C+">C+</option>
+                                        <option value="C">C</option>
+                                        <option value="D+">D+</option>
+                                        <option value="D">D</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <label for="namaMataKuliahSosek3" class="form-label">Nama Mata Kuliah</label>
+                                    <select [(ngModel)]="mataKuliahSosek3" [ngModelOptions]="{standalone: true}"
+                                        (selectionChange)="onSelectionChangeMataKuliahSosek($event)" class="form-select"
+                                        id="namaMataKuliahSosek3" aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="matkulSosek1"
+                                            [disabled]="mataKuliahSosek1 === 'matkulSosek1' || mataKuliahSosek2 === 'matkulSosek1'">
+                                            Matkul Sosek 1</option>
+                                        <option value="matkulSosek2"
+                                            [disabled]="mataKuliahSosek1 === 'matkulSosek2' || mataKuliahSosek2 === 'matkulSosek2'">
+                                            Matkul Sosek 2</option>
+                                        <option value="matkulSosek3"
+                                            [disabled]="mataKuliahSosek1 === 'matkulSosek3' || mataKuliahSosek2 === 'matkulSosek3'">
+                                            Matkul Sosek 3</option>
+                                        <option value="matkulSosek4"
+                                            [disabled]="mataKuliahSosek1 === 'matkulSosek4' || mataKuliahSosek2 === 'matkulSosek4'">
+                                            Matkul Sosek 4</option>
+                                        <option value="matkulSosek5"
+                                            [disabled]="mataKuliahSosek1 === 'matkulSosek5' || mataKuliahSosek2 === 'matkulSosek5'">
+                                            Matkul Sosek 5</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-6">
+                                    <label for="nilaiMatkulSosek3" class="form-label">Nilai</label>
+                                    <select class="form-select" name="nilaiMatkulSosek3" id="nilaiMatkulSosek3"
+                                        aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="A">A</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B">B</option>
+                                        <option value="C+">C+</option>
+                                        <option value="C">C</option>
+                                        <option value="D+">D+</option>
+                                        <option value="D">D</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <label for="namaMataKuliahSosek4" class="form-label">Nama Mata Kuliah</label>
+                                    <select [(ngModel)]="mataKuliahSosek4" [ngModelOptions]="{standalone: true}"
+                                        (selectionChange)="onSelectionChangeMataKuliahSosek($event)" class="form-select"
+                                        id="namaMataKuliahSosek4" aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="matkulSosek1"
+                                            [disabled]="mataKuliahSosek1 === 'matkulSosek1' || mataKuliahSosek2 === 'matkulSosek1' || mataKuliahSosek3 === 'matkulSosek1'">
+                                            Matkul Sosek 1</option>
+                                        <option value="matkulSosek2"
+                                            [disabled]="mataKuliahSosek1 === 'matkulSosek2' || mataKuliahSosek2 === 'matkulSosek2' || mataKuliahSosek3 === 'matkulSosek2'">
+                                            Matkul Sosek 2</option>
+                                        <option value="matkulSosek3"
+                                            [disabled]="mataKuliahSosek1 === 'matkulSosek3' || mataKuliahSosek2 === 'matkulSosek3' || mataKuliahSosek3 === 'matkulSosek3'">
+                                            Matkul Sosek 3</option>
+                                        <option value="matkulSosek4"
+                                            [disabled]="mataKuliahSosek1 === 'matkulSosek4' || mataKuliahSosek2 === 'matkulSosek4' || mataKuliahSosek3 === 'matkulSosek4'">
+                                            Matkul Sosek 4</option>
+                                        <option value="matkulSosek5"
+                                            [disabled]="mataKuliahSosek1 === 'matkulSosek5' || mataKuliahSosek2 === 'matkulSosek5' || mataKuliahSosek3 === 'matkulSosek4'">
+                                            Matkul Sosek 5</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-6">
+                                    <label for="nilaiMatkulSosek4" class="form-label">Nilai</label>
+                                    <select class="form-select" name="nilaiMatkulSosek4" id="nilaiMatkulSosek4"
+                                        aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="A">A</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B">B</option>
+                                        <option value="C+">C+</option>
+                                        <option value="C">C</option>
+                                        <option value="D+">D+</option>
+                                        <option value="D">D</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <label for="namaMataKuliahSosek5" class="form-label">Nama Mata Kuliah</label>
+                                    <select [(ngModel)]="mataKuliahSosek5" [ngModelOptions]="{standalone: true}"
+                                        (selectionChange)="onSelectionChangeMataKuliahSosek($event)" class="form-select"
+                                        id="namaMataKuliahSosek5" aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="matkulSosek1"
+                                            [disabled]="mataKuliahSosek1 === 'matkulSosek1' || mataKuliahSosek2 === 'matkulSosek1' || mataKuliahSosek3 === 'matkulSosek1' || mataKuliahSosek4 === 'matkulSosek1'">
+                                            Matkul Sosek 1</option>
+                                        <option value="matkulSosek2"
+                                            [disabled]="mataKuliahSosek1 === 'matkulSosek2' || mataKuliahSosek2 === 'matkulSosek2' || mataKuliahSosek3 === 'matkulSosek2' || mataKuliahSosek4 === 'matkulSosek2'">
+                                            Matkul Sosek 2</option>
+                                        <option value="matkulSosek3"
+                                            [disabled]="mataKuliahSosek1 === 'matkulSosek3' || mataKuliahSosek2 === 'matkulSosek3' || mataKuliahSosek3 === 'matkulSosek3' || mataKuliahSosek4 === 'matkulSosek3'">
+                                            Matkul Sosek 3</option>
+                                        <option value="matkulSosek4"
+                                            [disabled]="mataKuliahSosek1 === 'matkulSosek4' || mataKuliahSosek2 === 'matkulSosek4' || mataKuliahSosek3 === 'matkulSosek4' || mataKuliahSosek4 === 'matkulSosek4'">
+                                            Matkul Sosek 4</option>
+                                        <option value="matkulSosek5"
+                                            [disabled]="mataKuliahSosek1 === 'matkulSosek5' || mataKuliahSosek2 === 'matkulSosek5' || mataKuliahSosek3 === 'matkulSosek5' || mataKuliahSosek4 === 'matkulSosek5'">
+                                            Matkul Sosek 5</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-6">
+                                    <label for="nilaiMatkulSosek5" class="form-label">Nilai</label>
+                                    <select class="form-select" name="nilaiMatkulSosek5" id="nilaiMatkulSosek5"
+                                        aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="A">A</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B">B</option>
+                                        <option value="C+">C+</option>
+                                        <option value="C">C</option>
+                                        <option value="D+">D+</option>
+                                        <option value="D">D</option>
+                                    </select>
+                                </div>
                             </div>
 
                             <div class="text-center">
@@ -152,414 +789,456 @@
 
                     </div>
                 </div>
+            </ng-container>
 
-                <ng-container *ngIf="optionValue == 'proter' || optionValue2 == 'proter' || optionValue3 == 'proter' || optionValue4 == 'proter' || optionValue5 == 'proter'">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5>Nilai Mata Kuliah Wajib Minat Produksi Ternak</h5>
+            <ng-container
+                *ngIf="optionValue == 'tht' || optionValue2 == 'tht' || optionValue3 == 'tht' || optionValue4 == 'tht' || optionValue5 == 'tht'">
+                <div class="card">
+                    <div class="card-body">
+                        <label>Nilai Mata Kuliah Wajib Minat Teknologi Hasil Ternak</label>
 
-                            <form>
-                                <div class="row mb-3">
-                                    <div class="col-12">
-                                        <label for="namaMataKuliah" class="form-label">Nama Mata Kuliah</label>
-                                        <select class="form-select" id="namaMataKuliah" aria-label="State">
-                                            <option disabled selected value>Select an option</option>
-                                            <option value="kesnak">Kesejahteraan Ternak</option>
-                                            <option value="imtp">Ilmu dan Manajemen Ternak Pedaging</option>
-                                        </select>
-                                    </div>
+                        <form>
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <label for="namaMataKuliahTHT1" class="form-label">Nama Mata Kuliah</label>
+                                    <select [(ngModel)]="mataKuliahTHT1" [ngModelOptions]="{standalone: true}"
+                                        class="form-select" id="namaMataKuliahTHT1" aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="matkulTHT1">Matkul THT 1</option>
+                                        <option value="matkulTHT2">Matkul THT 2</option>
+                                        <option value="matkulTHT3">Matkul THT 3</option>
+                                        <option value="matkulTHT4">Matkul THT 4</option>
+                                        <option value="matkulTHT5">Matkul THT 5</option>
+                                    </select>
                                 </div>
-                                <div class="row mb-3">
-                                    <fieldset class="row mb-3">
-                                        <legend class="col-form-label col-sm-2 pt-0">Nilai</legend>
-                                        <div class="col-sm-10">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios1" value="option1" checked>
-                                                <label class="form-check-label" for="gridRadios1">A</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios2" value="option2">
-                                                <label class="form-check-label" for="gridRadios2">B+</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios3" value="option2">
-                                                <label class="form-check-label" for="gridRadios3">B</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios4" value="option2">
-                                                <label class="form-check-label" for="gridRadios4">C+</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios5" value="option2">
-                                                <label class="form-check-label" for="gridRadios5">C</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios6" value="option2">
-                                                <label class="form-check-label" for="gridRadios6">D+</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios7" value="option2">
-                                                <label class="form-check-label" for="gridRadios7">D</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios8" value="option2">
-                                                <label class="form-check-label" for="gridRadios8">E</label>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                </div>
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                    <div class="divider"></div>
-                                    <button type="reset" class="btn btn-secondary">Reset</button>
-                                </div>
-                            </form><!-- End No Labels Form -->
 
-                        </div>
-                    </div>
-                </ng-container>
-
-                <ng-container *ngIf="optionValue == 'nmt' || optionValue2 == 'nmt' || optionValue3 == 'nmt' || optionValue4 == 'nmt' || optionValue5 == 'nmt'">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5>Nilai Mata Kuliah Wajib Minat Nutrisi dan Makanan Ternak</h5>
-
-                            <form>
-                                <div class="row mb-3">
-                                    <div class="col-12">
-                                        <label for="namaMataKuliah" class="form-label">Nama Mata Kuliah</label>
-                                        <select class="form-select" id="namaMataKuliah" aria-label="State">
-                                            <option disabled selected value>Select an option</option>
-                                            <option value="dntbmt">Dasar Nutrisi Ternak dan Bahan</option>
-                                            <option value="itpt">Ilmu dan Teknologi Pakan Ternak</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <fieldset class="row mb-3">
-                                        <legend class="col-form-label col-sm-2 pt-0">Nilai</legend>
-                                        <div class="col-sm-10">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios1" value="option1" checked>
-                                                <label class="form-check-label" for="gridRadios1">A</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios2" value="option2">
-                                                <label class="form-check-label" for="gridRadios2">B+</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios3" value="option2">
-                                                <label class="form-check-label" for="gridRadios3">B</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios4" value="option2">
-                                                <label class="form-check-label" for="gridRadios4">C+</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios5" value="option2">
-                                                <label class="form-check-label" for="gridRadios5">C</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios6" value="option2">
-                                                <label class="form-check-label" for="gridRadios6">D+</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios7" value="option2">
-                                                <label class="form-check-label" for="gridRadios7">D</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios8" value="option2">
-                                                <label class="form-check-label" for="gridRadios8">E</label>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                </div>
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                    <div class="divider"></div>
-                                    <button type="reset" class="btn btn-secondary">Reset</button>
-                                </div>
-                            </form><!-- End No Labels Form -->
-
-                        </div>
-                    </div>
-                </ng-container>
-
-                <ng-container *ngIf="optionValue == 'sosek' || optionValue2 == 'sosek' || optionValue3 == 'sosek' || optionValue4 == 'sosek' || optionValue5 == 'sosek'">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5>Nilai Mata Kuliah Wajib Minat Sosial Ekonomi Peternakan</h5>
-
-                            <form>
-                                <div class="row mb-3">
-                                    <div class="col-12">
-                                        <label for="namaMataKuliah" class="form-label">Nama Mata Kuliah</label>
-                                        <select class="form-select" id="namaMataKuliah" aria-label="State">
-                                            <option disabled selected value>Select an option</option>
-                                            <option value="epp">Ekonomi Produksi Peternakan</option>
-                                            <option value="kphtot">Kelembagaan dan Pemasaran Hasil Ternak dan Olahan
-                                                Ternak</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <fieldset class="row mb-3">
-                                        <legend class="col-form-label col-sm-2 pt-0">Nilai</legend>
-                                        <div class="col-sm-10">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios1" value="option1" checked>
-                                                <label class="form-check-label" for="gridRadios1">A</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios2" value="option2">
-                                                <label class="form-check-label" for="gridRadios2">B+</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios3" value="option2">
-                                                <label class="form-check-label" for="gridRadios3">B</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios4" value="option2">
-                                                <label class="form-check-label" for="gridRadios4">C+</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios5" value="option2">
-                                                <label class="form-check-label" for="gridRadios5">C</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios6" value="option2">
-                                                <label class="form-check-label" for="gridRadios6">D+</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios7" value="option2">
-                                                <label class="form-check-label" for="gridRadios7">D</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios8" value="option2">
-                                                <label class="form-check-label" for="gridRadios8">E</label>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                </div>
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                    <div class="divider"></div>
-                                    <button type="reset" class="btn btn-secondary">Reset</button>
-                                </div>
-                            </form><!-- End No Labels Form -->
-
-                        </div>
-                    </div>
-                </ng-container>
-
-                <ng-container *ngIf="optionValue == 'tht' || optionValue2 == 'tht' || optionValue3 == 'tht' || optionValue4 == 'tht' || optionValue5 == 'tht'">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5>Nilai Mata Kuliah Wajib Minat Teknologi Hasil Ternak</h5>
-
-                            <form>
-                                <div class="row mb-3">
-                                    <div class="col-12">
-                                        <label for="namaMataKuliah" class="form-label">Nama Mata Kuliah</label>
-                                        <select class="form-select" id="namaMataKuliah" aria-label="State">
-                                            <option disabled selected value>Select an option</option>
-                                            <option value="epp">Dasar Teknologi Hasil Ternak</option>
-                                            <option value="kphtot">Pengendalian Mutu</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <fieldset class="row mb-3">
-                                        <legend class="col-form-label col-sm-2 pt-0">Nilai</legend>
-                                        <div class="col-sm-10">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios1" value="option1" checked>
-                                                <label class="form-check-label" for="gridRadios1">A</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios2" value="option2">
-                                                <label class="form-check-label" for="gridRadios2">B+</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios3" value="option2">
-                                                <label class="form-check-label" for="gridRadios3">B</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios4" value="option2">
-                                                <label class="form-check-label" for="gridRadios4">C+</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios5" value="option2">
-                                                <label class="form-check-label" for="gridRadios5">C</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios6" value="option2">
-                                                <label class="form-check-label" for="gridRadios6">D+</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios7" value="option2">
-                                                <label class="form-check-label" for="gridRadios7">D</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios8" value="option2">
-                                                <label class="form-check-label" for="gridRadios8">E</label>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                </div>
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                    <div class="divider"></div>
-                                    <button type="reset" class="btn btn-secondary">Reset</button>
-                                </div>
-                            </form><!-- End No Labels Form -->
-
-                        </div>
-                    </div>
-                </ng-container>
-
-                <ng-container *ngIf="optionValue == 'rpt' || optionValue2 == 'rpt' || optionValue3 == 'rpt' || optionValue4 == 'rpt' || optionValue5 == 'rpt'">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5>Nilai Mata Kuliah Wajib Minat Reproduksi dan Pemuliaan Ternak</h5>
-
-                            <form>
-                                <div class="row mb-3">
-                                    <div class="col-12">
-                                        <label for="namaMataKuliah" class="form-label">Nama Mata Kuliah</label>
-                                        <select class="form-select" id="namaMataKuliah" aria-label="State">
-                                            <option disabled selected value>Select an option</option>
-                                            <option value="epp">Ilmu Reproduksi Ternak</option>
-                                            <option value="kphtot">Pemuliaan Ternak</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <fieldset class="row mb-3">
-                                        <legend class="col-form-label col-sm-2 pt-0">Nilai</legend>
-                                        <div class="col-sm-10">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios1" value="option1" checked>
-                                                <label class="form-check-label" for="gridRadios1">A</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios2" value="option2">
-                                                <label class="form-check-label" for="gridRadios2">B+</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios3" value="option2">
-                                                <label class="form-check-label" for="gridRadios3">B</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios4" value="option2">
-                                                <label class="form-check-label" for="gridRadios4">C+</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios5" value="option2">
-                                                <label class="form-check-label" for="gridRadios5">C</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios6" value="option2">
-                                                <label class="form-check-label" for="gridRadios6">D+</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios7" value="option2">
-                                                <label class="form-check-label" for="gridRadios7">D</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios8" value="option2">
-                                                <label class="form-check-label" for="gridRadios8">E</label>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                </div>
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                    <div class="divider"></div>
-                                    <button type="reset" class="btn btn-secondary">Reset</button>
-                                </div>
-                            </form><!-- End No Labels Form -->
-
-                        </div>
-                    </div>
-                </ng-container>
-
-                <section class="section">
-                    <div class="row">
-                        <div class="col-lg-12">
-
-                            <div class="card">
-                                <div class="card-body">
-
-                                    <!-- Table with stripped rows -->
-                                    <table class="table datatable">
-                                        <thead>
-                                            <tr>
-                                                <th>Nama Mata Kuliah</th>
-                                                <th>Nilai</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Unity Pugh</td>
-                                                <td>9958</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Theodore Duran</td>
-                                                <td>8971</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <!-- End Table with stripped rows -->
-
+                                <div class="col-6">
+                                    <label for="nilaiMatkulTHT1" class="form-label">Nilai</label>
+                                    <select class="form-select" name="nilaiMatkulTHT1" id="nilaiMatkulTHT1"
+                                        aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="A">A</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B">B</option>
+                                        <option value="C+">C+</option>
+                                        <option value="C">C</option>
+                                        <option value="D+">D+</option>
+                                        <option value="D">D</option>
+                                    </select>
                                 </div>
                             </div>
 
-                        </div>
-                    </div>
-                </section>
-            </div>
-        </div>
-    </section>
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <label for="namaMataKuliahTHT2" class="form-label">Nama Mata Kuliah</label>
+                                    <select [(ngModel)]="mataKuliahTHT2" [ngModelOptions]="{standalone: true}"
+                                        (selectionChange)="onSelectionChangeMataKuliahTHT($event)" class="form-select"
+                                        id="namaMataKuliahTHT2" aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="matkulTHT1" [disabled]="mataKuliahTHT1 === 'matkulTHT1'">
+                                            Matkul THT 1</option>
+                                        <option value="matkulTHT2" [disabled]="mataKuliahTHT1 === 'matkulTHT2'">
+                                            Matkul THT 2</option>
+                                        <option value="matkulTHT3" [disabled]="mataKuliahTHT1 === 'matkulTHT3'">
+                                            Matkul THT 3</option>
+                                        <option value="matkulTHT4" [disabled]="mataKuliahTHT1 === 'matkulTHT4'">
+                                            Matkul THT 4</option>
+                                        <option value="matkulTHT5" [disabled]="mataKuliahTHT1 === 'matkulTHT5'">
+                                            Matkul THT 5</option>
+                                    </select>
+                                </div>
 
-</main><!-- End #main -->
+                                <div class="col-6">
+                                    <label for="nilaiMatkulTHT2" class="form-label">Nilai</label>
+                                    <select class="form-select" name="nilaiMatkulTHT2" id="nilaiMatkulTHT2"
+                                        aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="A">A</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B">B</option>
+                                        <option value="C+">C+</option>
+                                        <option value="C">C</option>
+                                        <option value="D+">D+</option>
+                                        <option value="D">D</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <label for="namaMataKuliahTHT3" class="form-label">Nama Mata Kuliah</label>
+                                    <select [(ngModel)]="mataKuliahTHT3" [ngModelOptions]="{standalone: true}"
+                                        (selectionChange)="onSelectionChangeMataKuliahTHT($event)" class="form-select"
+                                        id="namaMataKuliahTHT3" aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="matkulTHT1"
+                                            [disabled]="mataKuliahTHT1 === 'matkulTHT1' || mataKuliahTHT2 === 'matkulTHT1'">
+                                            Matkul THT 1</option>
+                                        <option value="matkulTHT2"
+                                            [disabled]="mataKuliahTHT1 === 'matkulTHT2' || mataKuliahTHT2 === 'matkulTHT2'">
+                                            Matkul THT 2</option>
+                                        <option value="matkulTHT3"
+                                            [disabled]="mataKuliahTHT1 === 'matkulTHT3' || mataKuliahTHT2 === 'matkulTHT3'">
+                                            Matkul THT 3</option>
+                                        <option value="matkulTHT4"
+                                            [disabled]="mataKuliahTHT1 === 'matkulTHT4' || mataKuliahTHT2 === 'matkulTHT4'">
+                                            Matkul THT 4</option>
+                                        <option value="matkulTHT5"
+                                            [disabled]="mataKuliahTHT1 === 'matkulTHT5' || mataKuliahTHT2 === 'matkulTHT5'">
+                                            Matkul THT 5</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-6">
+                                    <label for="nilaiMatkulTHT3" class="form-label">Nilai</label>
+                                    <select class="form-select" name="nilaiMatkulTHT3" id="nilaiMatkulTHT3"
+                                        aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="A">A</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B">B</option>
+                                        <option value="C+">C+</option>
+                                        <option value="C">C</option>
+                                        <option value="D+">D+</option>
+                                        <option value="D">D</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <label for="namaMataKuliahTHT4" class="form-label">Nama Mata Kuliah</label>
+                                    <select [(ngModel)]="mataKuliahTHT4" [ngModelOptions]="{standalone: true}"
+                                        (selectionChange)="onSelectionChangeMataKuliahTHT($event)" class="form-select"
+                                        id="namaMataKuliahTHT4" aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="matkulTHT1"
+                                            [disabled]="mataKuliahTHT1 === 'matkulTHT1' || mataKuliahTHT2 === 'matkulTHT1' || mataKuliahTHT3 === 'matkulTHT1'">
+                                            Matkul THT 1</option>
+                                        <option value="matkulTHT2"
+                                            [disabled]="mataKuliahTHT1 === 'matkulTHT2' || mataKuliahTHT2 === 'matkulTHT2' || mataKuliahTHT3 === 'matkulTHT2'">
+                                            Matkul THT 2</option>
+                                        <option value="matkulTHT3"
+                                            [disabled]="mataKuliahTHT1 === 'matkulTHT3' || mataKuliahTHT2 === 'matkulTHT3' || mataKuliahTHT3 === 'matkulTHT3'">
+                                            Matkul THT 3</option>
+                                        <option value="matkulTHT4"
+                                            [disabled]="mataKuliahTHT1 === 'matkulTHT4' || mataKuliahTHT2 === 'matkulTHT4' || mataKuliahTHT3 === 'matkulTHT4'">
+                                            Matkul THT 4</option>
+                                        <option value="matkulTHT5"
+                                            [disabled]="mataKuliahTHT1 === 'matkulTHT5' || mataKuliahTHT2 === 'matkulTHT5' || mataKuliahTHT3 === 'matkulTHT4'">
+                                            Matkul THT 5</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-6">
+                                    <label for="nilaiMatkulTHT4" class="form-label">Nilai</label>
+                                    <select class="form-select" name="nilaiMatkulTHT4" id="nilaiMatkulTHT4"
+                                        aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="A">A</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B">B</option>
+                                        <option value="C+">C+</option>
+                                        <option value="C">C</option>
+                                        <option value="D+">D+</option>
+                                        <option value="D">D</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <label for="namaMataKuliahTHT5" class="form-label">Nama Mata Kuliah</label>
+                                    <select [(ngModel)]="mataKuliahTHT5" [ngModelOptions]="{standalone: true}"
+                                        (selectionChange)="onSelectionChangeMataKuliahTHT($event)" class="form-select"
+                                        id="namaMataKuliahTHT5" aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="matkulTHT1"
+                                            [disabled]="mataKuliahTHT1 === 'matkulTHT1' || mataKuliahTHT2 === 'matkulTHT1' || mataKuliahTHT3 === 'matkulTHT1' || mataKuliahTHT4 === 'matkulTHT1'">
+                                            Matkul THT 1</option>
+                                        <option value="matkulTHT2"
+                                            [disabled]="mataKuliahTHT1 === 'matkulTHT2' || mataKuliahTHT2 === 'matkulTHT2' || mataKuliahTHT3 === 'matkulTHT2' || mataKuliahTHT4 === 'matkulTHT2'">
+                                            Matkul THT 2</option>
+                                        <option value="matkulTHT3"
+                                            [disabled]="mataKuliahTHT1 === 'matkulTHT3' || mataKuliahTHT2 === 'matkulTHT3' || mataKuliahTHT3 === 'matkulTHT3' || mataKuliahTHT4 === 'matkulTHT3'">
+                                            Matkul THT 3</option>
+                                        <option value="matkulTHT4"
+                                            [disabled]="mataKuliahTHT1 === 'matkulTHT4' || mataKuliahTHT2 === 'matkulTHT4' || mataKuliahTHT3 === 'matkulTHT4' || mataKuliahTHT4 === 'matkulTHT4'">
+                                            Matkul THT 4</option>
+                                        <option value="matkulTHT5"
+                                            [disabled]="mataKuliahTHT1 === 'matkulTHT5' || mataKuliahTHT2 === 'matkulTHT5' || mataKuliahTHT3 === 'matkulTHT5' || mataKuliahTHT4 === 'matkulTHT5'">
+                                            Matkul THT 5</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-6">
+                                    <label for="nilaiMatkulTHT5" class="form-label">Nilai</label>
+                                    <select class="form-select" name="nilaiMatkulTHT5" id="nilaiMatkulTHT5"
+                                        aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="A">A</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B">B</option>
+                                        <option value="C+">C+</option>
+                                        <option value="C">C</option>
+                                        <option value="D+">D+</option>
+                                        <option value="D">D</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <div class="divider"></div>
+                                <button type="reset" class="btn btn-secondary">Reset</button>
+                            </div>
+                        </form><!-- End No Labels Form -->
+
+                    </div>
+                </div>
+            </ng-container>
+
+            <ng-container
+                *ngIf="optionValue == 'rpt' || optionValue2 == 'rpt' || optionValue3 == 'rpt' || optionValue4 == 'rpt' || optionValue5 == 'rpt'">
+                <div class="card">
+                    <div class="card-body">
+                        <label>Nilai Mata Kuliah Wajib Minat Reproduksi dan Pemuliaan Ternak</label>
+
+                        <form>
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <label for="namaMataKuliahRPT1" class="form-label">Nama Mata Kuliah</label>
+                                    <select [(ngModel)]="mataKuliahRPT1" [ngModelOptions]="{standalone: true}"
+                                        class="form-select" id="namaMataKuliahRPT1" aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="matkulRPT1">Matkul RPT 1</option>
+                                        <option value="matkulRPT2">Matkul RPT 2</option>
+                                        <option value="matkulRPT3">Matkul RPT 3</option>
+                                        <option value="matkulRPT4">Matkul RPT 4</option>
+                                        <option value="matkulRPT5">Matkul RPT 5</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-6">
+                                    <label for="nilaiMatkulRPT1" class="form-label">Nilai</label>
+                                    <select class="form-select" name="nilaiMatkulRPT1" id="nilaiMatkulRPT1"
+                                        aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="A">A</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B">B</option>
+                                        <option value="C+">C+</option>
+                                        <option value="C">C</option>
+                                        <option value="D+">D+</option>
+                                        <option value="D">D</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <label for="namaMataKuliahRPT2" class="form-label">Nama Mata Kuliah</label>
+                                    <select [(ngModel)]="mataKuliahRPT2" [ngModelOptions]="{standalone: true}"
+                                        (selectionChange)="onSelectionChangeMataKuliahRPT($event)" class="form-select"
+                                        id="namaMataKuliahRPT2" aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="matkulRPT1" [disabled]="mataKuliahRPT1 === 'matkulRPT1'">
+                                            Matkul RPT 1</option>
+                                        <option value="matkulRPT2" [disabled]="mataKuliahRPT1 === 'matkulRPT2'">
+                                            Matkul RPT 2</option>
+                                        <option value="matkulRPT3" [disabled]="mataKuliahRPT1 === 'matkulRPT3'">
+                                            Matkul RPT 3</option>
+                                        <option value="matkulRPT4" [disabled]="mataKuliahRPT1 === 'matkulRPT4'">
+                                            Matkul RPT 4</option>
+                                        <option value="matkulRPT5" [disabled]="mataKuliahRPT1 === 'matkulRPT5'">
+                                            Matkul RPT 5</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-6">
+                                    <label for="nilaiMatkulRPT2" class="form-label">Nilai</label>
+                                    <select class="form-select" name="nilaiMatkulRPT2" id="nilaiMatkulRPT2"
+                                        aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="A">A</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B">B</option>
+                                        <option value="C+">C+</option>
+                                        <option value="C">C</option>
+                                        <option value="D+">D+</option>
+                                        <option value="D">D</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <label for="namaMataKuliahRPT3" class="form-label">Nama Mata Kuliah</label>
+                                    <select [(ngModel)]="mataKuliahRPT3" [ngModelOptions]="{standalone: true}"
+                                        (selectionChange)="onSelectionChangeMataKuliahRPT($event)" class="form-select"
+                                        id="namaMataKuliahRPT3" aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="matkulRPT1"
+                                            [disabled]="mataKuliahRPT1 === 'matkulRPT1' || mataKuliahRPT2 === 'matkulRPT1'">
+                                            Matkul RPT 1</option>
+                                        <option value="matkulRPT2"
+                                            [disabled]="mataKuliahRPT1 === 'matkulRPT2' || mataKuliahRPT2 === 'matkulRPT2'">
+                                            Matkul RPT 2</option>
+                                        <option value="matkulRPT3"
+                                            [disabled]="mataKuliahRPT1 === 'matkulRPT3' || mataKuliahRPT2 === 'matkulRPT3'">
+                                            Matkul RPT 3</option>
+                                        <option value="matkulRPT4"
+                                            [disabled]="mataKuliahRPT1 === 'matkulRPT4' || mataKuliahRPT2 === 'matkulRPT4'">
+                                            Matkul RPT 4</option>
+                                        <option value="matkulRPT5"
+                                            [disabled]="mataKuliahRPT1 === 'matkulRPT5' || mataKuliahRPT2 === 'matkulRPT5'">
+                                            Matkul RPT 5</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-6">
+                                    <label for="nilaiMatkulRPT3" class="form-label">Nilai</label>
+                                    <select class="form-select" name="nilaiMatkulRPT3" id="nilaiMatkulRPT3"
+                                        aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="A">A</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B">B</option>
+                                        <option value="C+">C+</option>
+                                        <option value="C">C</option>
+                                        <option value="D+">D+</option>
+                                        <option value="D">D</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <label for="namaMataKuliahRPT4" class="form-label">Nama Mata Kuliah</label>
+                                    <select [(ngModel)]="mataKuliahRPT4" [ngModelOptions]="{standalone: true}"
+                                        (selectionChange)="onSelectionChangeMataKuliahRPT($event)" class="form-select"
+                                        id="namaMataKuliahRPT4" aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="matkulRPT1"
+                                            [disabled]="mataKuliahRPT1 === 'matkulRPT1' || mataKuliahRPT2 === 'matkulRPT1' || mataKuliahRPT3 === 'matkulRPT1'">
+                                            Matkul RPT 1</option>
+                                        <option value="matkulRPT2"
+                                            [disabled]="mataKuliahRPT1 === 'matkulRPT2' || mataKuliahRPT2 === 'matkulRPT2' || mataKuliahRPT3 === 'matkulRPT2'">
+                                            Matkul RPT 2</option>
+                                        <option value="matkulRPT3"
+                                            [disabled]="mataKuliahRPT1 === 'matkulRPT3' || mataKuliahRPT2 === 'matkulRPT3' || mataKuliahRPT3 === 'matkulRPT3'">
+                                            Matkul RPT 3</option>
+                                        <option value="matkulRPT4"
+                                            [disabled]="mataKuliahRPT1 === 'matkulRPT4' || mataKuliahRPT2 === 'matkulRPT4' || mataKuliahRPT3 === 'matkulRPT4'">
+                                            Matkul RPT 4</option>
+                                        <option value="matkulRPT5"
+                                            [disabled]="mataKuliahRPT1 === 'matkulRPT5' || mataKuliahRPT2 === 'matkulRPT5' || mataKuliahRPT3 === 'matkulRPT4'">
+                                            Matkul RPT 5</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-6">
+                                    <label for="nilaiMatkulRPT4" class="form-label">Nilai</label>
+                                    <select class="form-select" name="nilaiMatkulRPT4" id="nilaiMatkulRPT4"
+                                        aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="A">A</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B">B</option>
+                                        <option value="C+">C+</option>
+                                        <option value="C">C</option>
+                                        <option value="D+">D+</option>
+                                        <option value="D">D</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <label for="namaMataKuliahRPT5" class="form-label">Nama Mata Kuliah</label>
+                                    <select [(ngModel)]="mataKuliahRPT5" [ngModelOptions]="{standalone: true}"
+                                        (selectionChange)="onSelectionChangeMataKuliahRPT($event)" class="form-select"
+                                        id="namaMataKuliahRPT5" aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="matkulRPT1"
+                                            [disabled]="mataKuliahRPT1 === 'matkulRPT1' || mataKuliahRPT2 === 'matkulRPT1' || mataKuliahRPT3 === 'matkulRPT1' || mataKuliahRPT4 === 'matkulRPT1'">
+                                            Matkul RPT 1</option>
+                                        <option value="matkulRPT2"
+                                            [disabled]="mataKuliahRPT1 === 'matkulRPT2' || mataKuliahRPT2 === 'matkulRPT2' || mataKuliahRPT3 === 'matkulRPT2' || mataKuliahRPT4 === 'matkulRPT2'">
+                                            Matkul RPT 2</option>
+                                        <option value="matkulRPT3"
+                                            [disabled]="mataKuliahRPT1 === 'matkulRPT3' || mataKuliahRPT2 === 'matkulRPT3' || mataKuliahRPT3 === 'matkulRPT3' || mataKuliahRPT4 === 'matkulRPT3'">
+                                            Matkul RPT 3</option>
+                                        <option value="matkulRPT4"
+                                            [disabled]="mataKuliahRPT1 === 'matkulRPT4' || mataKuliahRPT2 === 'matkulRPT4' || mataKuliahRPT3 === 'matkulRPT4' || mataKuliahRPT4 === 'matkulRPT4'">
+                                            Matkul RPT 4</option>
+                                        <option value="matkulRPT5"
+                                            [disabled]="mataKuliahRPT1 === 'matkulRPT5' || mataKuliahRPT2 === 'matkulRPT5' || mataKuliahRPT3 === 'matkulRPT5' || mataKuliahRPT4 === 'matkulRPT5'">
+                                            Matkul RPT 5</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-6">
+                                    <label for="nilaiMatkulRPT5" class="form-label">Nilai</label>
+                                    <select class="form-select" name="nilaiMatkulRPT5" id="nilaiMatkulRPT5"
+                                        aria-label="State">
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="A">A</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B">B</option>
+                                        <option value="C+">C+</option>
+                                        <option value="C">C</option>
+                                        <option value="D+">D+</option>
+                                        <option value="D">D</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <div class="divider"></div>
+                                <button type="reset" class="btn btn-secondary">Reset</button>
+                            </div>
+                        </form><!-- End No Labels Form -->
+
+                    </div>
+                </div>
+            </ng-container>
+
+            <section class="section">
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <div class="card">
+                            <div class="card-body">
+
+                                <!-- Table with stripped rows -->
+                                <table class="table datatable">
+                                    <thead>
+                                        <tr>
+                                            <th>Nama Mata Kuliah</th>
+                                            <th>Nilai</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Unity Pugh</td>
+                                            <td>9958</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Theodore Duran</td>
+                                            <td>8971</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!-- End Table with stripped rows -->
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</section>

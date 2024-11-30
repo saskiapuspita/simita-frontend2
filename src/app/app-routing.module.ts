@@ -4,16 +4,48 @@ import { LoginComponent } from './layouts/login/login.component';
 import { RegisterComponent } from './layouts/register/register.component';
 import { PendaftaranPeminatanComponent } from './layouts/pendaftaran-peminatan/pendaftaran-peminatan.component';
 import { DashboardComponent } from './layouts/dashboard/dashboard.component';
+import { AuthGuardService } from './services/auth-guard.service';
+import { HeaderComponent } from './layouts/header/header.component';
+import { PengajuanPklComponent } from './layouts/pengajuan-pkl/pengajuan-pkl.component';
+import { ProfilComponent } from './layouts/profil/profil.component';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent, title: 'Login' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent, title: 'Login' },
   { path: 'register', component: RegisterComponent, title: 'Register' },
-  { path: 'dashboard', component: DashboardComponent, title: 'Dashboard' },
-  { path: 'pendaftaran-peminatan', component: PendaftaranPeminatanComponent, title: 'Pendaftaran Peminatan' },
+  {
+    path: 'header',
+    component: HeaderComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    title: 'Dashboard',
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'pendaftaran-peminatan',
+    component: PendaftaranPeminatanComponent,
+    title: 'Pendaftaran Peminatan',
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'pengajuan-pkl',
+    component: PengajuanPklComponent,
+    title: 'Pengajuan Pkl',
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'user-profil',
+    component: ProfilComponent,
+    title: 'Profil Pengguna',
+    canActivate: [AuthGuardService],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

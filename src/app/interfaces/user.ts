@@ -4,6 +4,8 @@ export interface User {
   email: string;
   nim: string;
   ipk: number;
+  sks: number;
+  noTelp: string;
   role: string;
   password: string;
 }

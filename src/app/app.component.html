@@ -1,5 +1,8 @@
-<!-- <app-register></app-register>
-<app-header></app-header>
-<app-sidebar></app-sidebar>
-<router-outlet></router-outlet> -->
-<router-outlet></router-outlet>
+<div *ngIf="isAuthenticated">
+    <app-header></app-header>
+    <app-sidebar></app-sidebar>
+    <main id="main" class="main">
+        <router-outlet></router-outlet>
+    </main>
+</div>
+<router-outlet *ngIf="!isAuthenticated"></router-outlet>

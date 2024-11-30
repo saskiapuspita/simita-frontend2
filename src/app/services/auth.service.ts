@@ -11,14 +11,16 @@ import { TokenAndId } from '../interfaces/token-and-id';
 import { ErrorHandlerService } from './error-handler.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-  private url = 
-  // 'https://api.simitafapetub.site/auth';
-  'http://localhost:4000/auth';
+  private url =
+    // 'https://api.simitafapetub.site/auth';
+    'http://localhost:4000/auth';
 
-  isUserLoggedIn$ = new BehaviorSubject<boolean>(false);
+  loginStatus = new BehaviorSubject<boolean>(this.checkLoginStatus());
+  private UserName = new BehaviorSubject<string>(localStorage.getItem('username')!);
+  private UserRole = new BehaviorSubject<string>(localStorage.getItem('userrole')!);
   userId!: Pick<User, 'id'>;
   name!: Pick<User, 'id'>;
   email!: Pick<User, 'id'>;
@@ -42,20 +44,18 @@ export class AuthService {
       );
   }
 
-  login(input: string
-  ): Observable<TokenAndId> {
+  login(input: string): Observable<TokenAndId> {
     return this.http
-      .post<TokenAndId>(
-        `${this.url}/login`,
-        input,
-        this.httpOptions
-      )
+      .post<TokenAndId>(`${this.url}/login`, input, this.httpOptions)
       .pipe(
         first(),
         tap((tokenObject: TokenAndId) => {
           this.userId = tokenObject.userId;
+          this.loginStatus.next(true);
+          localStorage.setItem('loginStatus', '1');
           localStorage.setItem('token', tokenObject.token);
-          this.isUserLoggedIn$.next(true);
+          localStorage.setItem('username', tokenObject.name);
+          localStorage.setItem('userrole', tokenObject.role);
           this.router.navigate(['dashboard']);
           // if (tokenObject.role == "mahasiswa") {
           //   this.router.navigate(['peminatanmahasiswa']);
@@ -76,5 +76,36 @@ export class AuthService {
     const token = this.getToken()!;
     const decodedToken = jwtHelper.decodeToken(token);
     return decodedToken;
+  }
+
+  checkLoginStatus(): boolean {
+    var loginCookie = localStorage.getItem('loginStatus');
+    if (loginCookie == '1') {
+      return true;
+    }
+    return false;
+  }
+
+  logout() {
+    // Set Loginstatus to false and delete saved jwt cookie
+    this.loginStatus.next(false);
+    localStorage.removeItem('token');
+    localStorage.removeItem('userrole');
+    localStorage.removeItem('username');
+    localStorage.setItem('loginStatus', '0');
+    this.router.navigate(['/login']);
+    console.log('Logged Out Successfully');
+  }
+
+  get isLoggesIn() {
+    return this.loginStatus.asObservable();
+  }
+
+  get currentUserName() {
+    return this.UserName.asObservable();
+  }
+
+  get currentUserRole() {
+    return this.UserRole.asObservable();
   }
 }
