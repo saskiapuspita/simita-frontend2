@@ -21,6 +21,7 @@ export interface KelompokPkl {
   idAnggota4: number;
   idAnggota5: number;
   idLokasiPkl: number;
+  idDosenPembimbing: number;
 
   namaAnggota1: string;
   namaAnggota2: string;

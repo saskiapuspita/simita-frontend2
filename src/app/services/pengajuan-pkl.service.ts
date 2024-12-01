@@ -38,6 +38,15 @@ export class PengajuanPklService {
       );
   }
 
+  fetchById(idUser: Pick<User, 'id'>): Observable<{}> {
+    return this.http
+      .get<User>(`${this.apiUrlPengajuanPkl}/${idUser}`, this.httpOptions)
+      .pipe(
+        first(),
+        catchError(this.errorHandlerService.handleError<User>('fetchById'))
+      );
+  }
+
   fetchStudentNotAsAnggotaAtauKetua(): Observable<User[]> {
     return this.http
       .get<User[]>(
@@ -54,16 +63,18 @@ export class PengajuanPklService {
       );
   }
 
-  fetchDetailStudentNotInGroup(idAnggota: Pick<User, 'id'>): Observable<{}> {
+  fetchDetailStudentNotInGroup(
+    idAnggota: Pick<KelompokPkl, 'id'>
+  ): Observable<{}> {
     return this.http
-      .get<User>(
+      .get<KelompokPkl>(
         `${this.apiUrlKelompokPkl}/studentNotInGroup/${idAnggota}`,
         this.httpOptions
       )
       .pipe(
         first(),
         catchError(
-          this.errorHandlerService.handleError<User>(
+          this.errorHandlerService.handleError<KelompokPkl>(
             'fetchDetailStudentNotInGroup'
           )
         )
@@ -85,6 +96,7 @@ export class PengajuanPklService {
           idAnggota4: formData.idAnggota4,
           idAnggota5: formData.idAnggota5,
           idLokasiPkl: formData.idLokasiPkl,
+          idDosenPembimbing: formData.idDosenPembimbing,
           user: idUser,
         },
         this.httpOptions
@@ -103,25 +115,22 @@ export class PengajuanPklService {
       );
   }
 
-  updateKelompokPkl(
-    formData: Partial<KelompokPkl>,
-    userId: Pick<User, 'id'>
-  ): Observable<User> {
+  updateStatusPengajuanPkl(
+    idPengajuanPkl: Pick<KelompokPkl, 'id'>
+  ): Observable<KelompokPkl> {
     return this.http
-      .patch<User>(
-        `${this.apiUrlKelompokPkl}/${userId}`,
+      .patch<KelompokPkl>(
+        `${this.apiUrlPengajuanPkl}/updateStatus/${idPengajuanPkl}`,
         {
-          idKetua: formData.idKetua,
-          namaKetua: formData.namaKetua,
-          idAnggota: formData.idAnggota,
-          namaAnggota: formData.namaAnggota,
-          status: formData.statusPengajuanPkl,
+          idPengajuanPkl: idPengajuanPkl
         },
         this.httpOptions
       )
       .pipe(
         catchError(
-          this.errorHandlerService.handleError<User>('updateKelompokPkl')
+          this.errorHandlerService.handleError<KelompokPkl>(
+            'updateStatusPengajuanPkl'
+          )
         )
       );
   }

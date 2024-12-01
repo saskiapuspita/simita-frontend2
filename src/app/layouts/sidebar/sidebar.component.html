@@ -37,9 +37,9 @@
             </a>
           </li>
         </ul>
-      </li><!-- End Forms Nav -->
+      </li><!-- End PKL Nav -->
 
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="UserRole == 'mahasiswa'">
         <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-layout-text-window-reverse"></i><span>Penelitian</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
@@ -50,9 +50,9 @@
             </a>
           </li>
         </ul>
-      </li><!-- End Tables Nav -->
+      </li><!-- End Penelitian Nav -->
 
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="UserRole == 'mahasiswa'">
         <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-bar-chart"></i><span>Seminar</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
@@ -70,7 +70,7 @@
         </ul>
       </li><!-- End Charts Nav -->
 
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="UserRole == 'mahasiswa'">
         <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-gem"></i><span>Ujian Sarjana</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
@@ -83,12 +83,19 @@
         </ul>
       </li><!-- End Icons Nav -->
 
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="UserRole == 'mahasiswa'">
         <a class="nav-link collapsed" href="users-profile.html">
           <i class="bi bi-person"></i>
           <span>Peminjaman Ruang</span>
         </a>
       </li><!-- End Profile Page Nav -->
+
+      <li class="nav-item" *ngIf="UserRole == 'dosen'">
+        <a class="nav-link collapsed" routerLink="/approval">
+          <i class="bi bi-person"></i>
+          <span>Approval</span>
+        </a>
+      </li><!-- End Approval Page Nav -->
     </ul>
 
   </aside><!-- End Sidebar-->

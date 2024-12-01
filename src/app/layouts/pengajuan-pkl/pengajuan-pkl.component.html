@@ -14,7 +14,7 @@
             <!-- alert -->
             <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="isVisible">
                 <i class="bi bi-check-circle me-1"></i>
-                A simple success alert with icon—check it out!
+                Data berhasil ditambahkan!
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
 
@@ -187,6 +187,20 @@
                                         </div>
                                     </div>
 
+                                    <div class="col-12">
+                                        <label for="idDosenPembimbing" class="form-label">Dosen Pembimbing</label>
+                                        <select class="form-select" aria-label="State" name="idDosenPembimbing"
+                                            id="idDosenPembimbing" [formControlName]="'idDosenPembimbing'" required>
+                                            <option disabled selected value>Select an option</option>
+                                            <option *ngFor="let item of namaDosen$ | async" [value]="item.id">{{
+                                                item.name }}
+                                            </option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please select a valid state.
+                                        </div>
+                                    </div>
+
                                     <div>
                                         <button type="submit" class="btn btn-outline-primary">Submit</button>
                                     </div>
@@ -236,6 +250,7 @@
 
                 </div>
             </div>
+            
         </div>
     </div>
 </section>

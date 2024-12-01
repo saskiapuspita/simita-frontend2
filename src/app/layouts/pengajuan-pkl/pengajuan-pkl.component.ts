@@ -6,11 +6,13 @@ import {
   FormBuilder,
 } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { Dosen } from 'src/app/interfaces/dosen';
 import { KelompokPkl } from 'src/app/interfaces/kelompok-pkl';
 import { LokasiPkl } from 'src/app/interfaces/lokasi-pkl';
 import { User } from 'src/app/interfaces/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { LokasiPklService } from 'src/app/services/lokasi-pkl.service';
+import { MasterDosenService } from 'src/app/services/master-dosen.service';
 import { PengajuanPklService } from 'src/app/services/pengajuan-pkl.service';
 
 @Component({
@@ -28,15 +30,17 @@ export class PengajuanPklComponent {
   namaMahasiswa$!: Observable<User[]>;
   namaKetua$!: Observable<KelompokPkl[]>;
   namaLokasi$!: Observable<LokasiPkl[]>;
+  namaDosen$!: Observable<Dosen[]>;
   selectedStudent: any;
   filteredStudentBasedOnId: any;
-  listAnggotaPkl!: KelompokPkl[];
+  listAnggotaPkl!: any;
   isVisible: boolean = false;
 
   constructor(
     private authService: AuthService,
     private pengajuanPklService: PengajuanPklService,
-    private lokasiPklService: LokasiPklService
+    private lokasiPklService: LokasiPklService,
+    private masterDosenService: MasterDosenService
   ) {}
 
   ngOnInit() {
@@ -44,6 +48,7 @@ export class PengajuanPklComponent {
     this.namaAnggota$ = this.fetchStudentNotAsAnggotaAtauKetua();
     this.namaKetua$ = this.fetchAllKetuaKelompokPkl();
     this.namaLokasi$ = this.fetchAllLokasiPkl();
+    this.namaDosen$ = this.fetchAllDosen();
     this.formPengajuanAnggotaPkl = this.createPengajuanPklFormGroup();
     this.formAddKetuaKelompokPkl = this.AddKetuaKelompokPklFormGroup();
     this.formAddLokasiPkl = this.AddLokasiPklFormGroup();
@@ -52,7 +57,7 @@ export class PengajuanPklComponent {
 
   // anggota pkl
   loadDataAnggotaPkl() {
-    this.pengajuanPklService.fetchAll().subscribe((res) => {
+    this.pengajuanPklService.fetchById(this.decodedToken.userId).subscribe((res) => {
       this.listAnggotaPkl = res;
     });
   }
@@ -71,6 +76,7 @@ export class PengajuanPklComponent {
       | 'idAnggota4'
       | 'idAnggota5'
       | 'idLokasiPkl'
+      | 'idDosenPembimbing'
     >
   ): void {
     this.pengajuanPklService
@@ -93,6 +99,7 @@ export class PengajuanPklComponent {
       idAnggota4: new FormControl('', [Validators.required]),
       idAnggota5: new FormControl('', [Validators.required]),
       idLokasiPkl: new FormControl('', [Validators.required]),
+      idDosenPembimbing: new FormControl('', [Validators.required]),
     });
   }
 
@@ -168,6 +175,11 @@ export class PengajuanPklComponent {
         this.showAlert();
         // window.location.reload();
       });
+  }
+
+  // dosen
+  fetchAllDosen(): Observable<Dosen[]> {
+    return this.masterDosenService.fetchAll();
   }
 
   // alert

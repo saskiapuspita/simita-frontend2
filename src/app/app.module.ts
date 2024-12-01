@@ -13,6 +13,7 @@ import { RegisterComponent } from './layouts/register/register.component';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { PengajuanPklComponent } from './layouts/pengajuan-pkl/pengajuan-pkl.component';
 import { ProfilComponent } from './layouts/profil/profil.component';
+import { ApprovalComponent } from './layouts/approval/approval.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { ProfilComponent } from './layouts/profil/profil.component';
     RegisterComponent,
     PengajuanPklComponent,
     ProfilComponent,
+    ApprovalComponent,
   ],
   imports: [
     BrowserModule,

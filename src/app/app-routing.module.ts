@@ -8,6 +8,7 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { HeaderComponent } from './layouts/header/header.component';
 import { PengajuanPklComponent } from './layouts/pengajuan-pkl/pengajuan-pkl.component';
 import { ProfilComponent } from './layouts/profil/profil.component';
+import { ApprovalComponent } from './layouts/approval/approval.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -40,6 +41,12 @@ const routes: Routes = [
     path: 'user-profil',
     component: ProfilComponent,
     title: 'Profil Pengguna',
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'approval',
+    component: ApprovalComponent,
+    title: 'Approval',
     canActivate: [AuthGuardService],
   },
 ];
