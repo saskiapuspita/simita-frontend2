@@ -68,11 +68,11 @@ export class MasterDosenService {
 
   update(
     formData: Partial<Dosen>,
-    DosenId: Pick<Dosen, 'id'>
+    idDosen: Pick<Dosen, 'id'>
   ): Observable<Dosen> {
     return this.http
       .patch<Dosen>(
-        `${this.url}/${DosenId}`,
+        `${this.url}/${idDosen}`,
         {
           name: formData.name,
           email: formData.email,

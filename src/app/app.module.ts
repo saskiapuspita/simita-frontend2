@@ -14,6 +14,7 @@ import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { PengajuanPklComponent } from './layouts/pengajuan-pkl/pengajuan-pkl.component';
 import { ProfilComponent } from './layouts/profil/profil.component';
 import { ApprovalComponent } from './layouts/approval/approval.component';
+import { MasterDosenComponent } from './layouts/master-dosen/master-dosen.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ApprovalComponent } from './layouts/approval/approval.component';
     PengajuanPklComponent,
     ProfilComponent,
     ApprovalComponent,
+    MasterDosenComponent
   ],
   imports: [
     BrowserModule,

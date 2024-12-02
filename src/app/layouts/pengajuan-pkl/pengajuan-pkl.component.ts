@@ -50,7 +50,7 @@ export class PengajuanPklComponent {
     this.namaLokasi$ = this.fetchAllLokasiPkl();
     this.namaDosen$ = this.fetchAllDosen();
     this.formPengajuanAnggotaPkl = this.createPengajuanPklFormGroup();
-    this.formAddKetuaKelompokPkl = this.AddKetuaKelompokPklFormGroup();
+    this.formAddKetuaKelompokPkl = this.addKetuaKelompokPklFormGroup();
     this.formAddLokasiPkl = this.AddLokasiPklFormGroup();
     this.loadDataAnggotaPkl();
   }
@@ -82,7 +82,8 @@ export class PengajuanPklComponent {
     this.pengajuanPklService
       .create(formPengajuanAnggotaPkl, this.decodedToken.userId)
       .subscribe(() => {
-        // this.closePopUp();
+        this.formPengajuanAnggotaPkl.reset();
+        this.showAlert();
       });
   }
 
@@ -120,8 +121,6 @@ export class PengajuanPklComponent {
   }
 
   deleteAnggotaPkl(id: any): void {
-    console.log('id: ' + id);
-
     this.pengajuanPklService.delete(id).subscribe(() => {
       this.loadDataAnggotaPkl();
     });
@@ -142,11 +141,13 @@ export class PengajuanPklComponent {
     this.pengajuanPklService
       .addKetuaKelompokPkl(formAddKetuaKelompokPkl, this.decodedToken.userId)
       .subscribe(() => {
-        window.location.reload();
+        this.formAddKetuaKelompokPkl.reset();
+        this.showAlert();
+        // window.location.reload();
       });
   }
 
-  AddKetuaKelompokPklFormGroup(): FormGroup {
+  addKetuaKelompokPklFormGroup(): FormGroup {
     return new FormGroup({
       idKetua: new FormControl('', [Validators.required]),
     });
@@ -173,7 +174,6 @@ export class PengajuanPklComponent {
       .subscribe(() => {
         this.formAddLokasiPkl.reset();
         this.showAlert();
-        // window.location.reload();
       });
   }
 

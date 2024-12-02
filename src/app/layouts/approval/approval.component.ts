@@ -10,7 +10,7 @@ import { PengajuanPklService } from 'src/app/services/pengajuan-pkl.service';
 })
 export class ApprovalComponent {
   isVisible: boolean = false;
-  listPengajuanPkl!: KelompokPkl[];
+  listPengajuanPkl!: any;
   decodedToken: any;
 
   constructor(
@@ -24,7 +24,7 @@ export class ApprovalComponent {
   }
 
   loadDataAnggotaPkl() {
-    this.pengajuanPklService.fetchAll().subscribe((res) => {
+    this.pengajuanPklService.fetchById(this.decodedToken.userId).subscribe((res) => {
       this.listPengajuanPkl = res;
     });
   }

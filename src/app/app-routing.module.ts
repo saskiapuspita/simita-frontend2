@@ -9,6 +9,7 @@ import { HeaderComponent } from './layouts/header/header.component';
 import { PengajuanPklComponent } from './layouts/pengajuan-pkl/pengajuan-pkl.component';
 import { ProfilComponent } from './layouts/profil/profil.component';
 import { ApprovalComponent } from './layouts/approval/approval.component';
+import { MasterDosenComponent } from './layouts/master-dosen/master-dosen.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -49,6 +50,12 @@ const routes: Routes = [
     title: 'Approval',
     canActivate: [AuthGuardService],
   },
+  {
+    path: 'master-dosen',
+    component: MasterDosenComponent,
+    title: 'Master Dosen',
+    canActivate: [AuthGuardService],
+  }
 ];
 
 @NgModule({
