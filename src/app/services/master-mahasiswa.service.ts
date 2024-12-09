@@ -43,7 +43,7 @@ export class MasterMahasiswaService {
       );
   }
 
-  createUser(formData: Partial<User>): Observable<User> {
+  create(formData: Partial<User>): Observable<User> {
     return this.http
       .post<User>(
         this.url,
@@ -62,7 +62,7 @@ export class MasterMahasiswaService {
       );
   }
 
-  deleteUser(userId: Pick<User, 'id'>): Observable<{}> {
+  delete(userId: Pick<User, 'id'>): Observable<{}> {
     return this.http
       .delete<User>(`${this.url}/${userId}`, this.httpOptions)
       .pipe(
@@ -71,7 +71,7 @@ export class MasterMahasiswaService {
       );
   }
 
-  updateUser(
+  update(
     formData: Partial<User>,
     userId: Pick<User, 'id'>
   ): Observable<User> {
@@ -89,7 +89,7 @@ export class MasterMahasiswaService {
         this.httpOptions
       )
       .pipe(
-        catchError(this.errorHandlerService.handleError<User>('updateUser'))
+        catchError(this.errorHandlerService.handleError<User>('update'))
       );
   }
 

@@ -59,6 +59,7 @@ export class PengajuanPklComponent {
   loadDataAnggotaPkl() {
     this.pengajuanPklService.fetchById(this.decodedToken.userId).subscribe((res) => {
       this.listAnggotaPkl = res;
+      console.log("list anggota pkl: " + this.listAnggotaPkl);
     });
   }
 

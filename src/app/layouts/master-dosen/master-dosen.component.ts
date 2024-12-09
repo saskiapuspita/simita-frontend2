@@ -1,6 +1,6 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { NavigationExtras, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Dosen } from 'src/app/interfaces/dosen';
 import { AuthService } from 'src/app/services/auth.service';
 import { MasterDosenService } from 'src/app/services/master-dosen.service';
@@ -15,12 +15,10 @@ export class MasterDosenComponent {
   isVisible: boolean = false;
   formDosen!: FormGroup;
   listDosen!: Dosen[];
-  inputdata: any;
-  editdata: any;
+  detailDosen: any;
   alertMessage: string = '';
 
   constructor(
-    private router: Router,
     private authService: AuthService,
     private masterDosenService: MasterDosenService
   ) {}
@@ -73,11 +71,11 @@ export class MasterDosenComponent {
       return;
     }
 
-    if (action === 'add') {
+    if (action == 'add') {
       this.alertMessage = 'Data berhasil ditambahkan!';
-    } else if (action === 'update') {
+    } else if (action == 'update') {
       this.alertMessage = 'Data berhasil diperbarui!';
-    } else {
+    } else if (action == 'delete') {
       this.alertMessage = 'Data berhasil dihapus!';
     }
 
@@ -85,13 +83,15 @@ export class MasterDosenComponent {
     setTimeout(() => (this.isVisible = false), 2500);
   }
 
-  update() {
-    this.listDosen.forEach((item) => {
+  update(idDosen: any) {
+    this.masterDosenService.fetchById(idDosen).subscribe((res: any) => {
+      this.detailDosen = res.data;
+      
       this.formDosen.setValue({
-        id: item.id,
-        name: item.name,
-        email: item.email,
-        nidn: item.nidn,
+        id: this.detailDosen[0].id,
+        name: this.detailDosen[0].name,
+        email: this.detailDosen[0].email,
+        nidn: this.detailDosen[0].nidn
       });
     });
   }

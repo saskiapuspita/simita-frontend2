@@ -15,7 +15,7 @@
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a routerLink="/pendaftaran-peminatan">
+            <a routerLink="/pengajuan-peminatan">
               <i class="bi bi-circle"></i><span>Pendaftaran Peminatan</span>
             </a>
           </li>
@@ -91,7 +91,7 @@
         </a>
       </li><!-- End Profile Page Nav -->
 
-      <li class="nav-item" *ngIf="UserRole == 'dosen'">
+      <li class="nav-item" *ngIf="UserRole != 'mahasiswa'">
         <a class="nav-link collapsed" routerLink="/approval">
           <i class="bi bi-person"></i>
           <span>Approval</span>
@@ -104,8 +104,23 @@
         </a>
         <ul id="master-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
+            <a routerLink="/master-mahasiswa">
+              <i class="bi bi-circle"></i><span>Mahasiswa</span>
+            </a>
+          </li>
+          <li>
             <a routerLink="/master-dosen">
               <i class="bi bi-circle"></i><span>Dosen</span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="/master-peminatan">
+              <i class="bi bi-circle"></i><span>Peminatan</span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="/master-mata-kuliah">
+              <i class="bi bi-circle"></i><span>Mata Kuliah</span>
             </a>
           </li>
         </ul>

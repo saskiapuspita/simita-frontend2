@@ -1,0 +1,333 @@
+<div class="pagetitle">
+    <h1>Peminatan</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">Peminatan</li>
+            <li class="breadcrumb-item">Pengajuan Peminatan</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+<section class="section">
+    <div class="row">
+        <div class="col-lg-12">
+
+            <!-- alert -->
+            <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="isVisible">
+                <i class="bi bi-check-circle me-1"></i>
+                Data berhasil ditambahkan!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+
+                    <!-- Bordered Tabs -->
+                    <ul class="nav nav-tabs nav-tabs-bordered" id="borderedTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pengajuan-peminatan-tab" data-bs-toggle="tab"
+                                data-bs-target="#bordered-pengajuan-peminatan" type="button" role="tab"
+                                aria-controls="pengajuan-peminatan" aria-selected="true"><b>Pengajuan Peminatan</b></button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="status-pengajuan-tab" data-bs-toggle="tab"
+                                data-bs-target="#bordered-status-pengajuan" type="button" role="tab"
+                                aria-controls="status-pengajuan" aria-selected="false"><b>Status Pengajuan
+                                Peminatan</b></button>
+                        </li>
+                    </ul>
+                    <div class="tab-content pt-2" id="borderedTabContent">
+                        <div class="tab-pane fade show active" id="bordered-pengajuan-peminatan" role="tabpanel"
+                            aria-labelledby="pengajuan-peminatan-tab">
+                            <form [formGroup]="formPengajuanPeminatan" (ngSubmit)="submitFormPeminatan()">
+                                <div class="row g-3">
+
+                                    <!-- pilihan minat 1 -->
+                                    <div class="col-md-2">
+                                        <label for="urutanMinat" class="form-label">Prioritas</label>
+                                        <select class="form-select" aria-label="State" name="urutanMinat"
+                                            id="urutanMinat" [formControlName]="'urutanMinat'" required>
+                                            <option disabled selected value>Select an option</option>
+                                            <option *ngFor="let item of peminatan$ | async; let i = index"
+                                                [value]="i+1">{{i+1}}
+                                            </option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please select a valid state.
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-10">
+                                        <label for="pilihanMinat" class="form-label">Nama Peminatan</label>
+                                        <select class="form-select" aria-label="State" name="pilihanMinat" id="pilihanMinat"
+                                            [formControlName]="'pilihanMinat'" required>
+                                            <option disabled selected value>Select an option</option>
+                                            <option *ngFor="let item of peminatan$ | async" [value]="item.id">{{
+                                                item.nama }}
+                                            </option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please select a valid state.
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="idMatkulMinat1" class="form-label">Nama Mata Kuliah</label>
+                                        <select class="form-select" aria-label="State" name="idMatkulMinat1"
+                                            id="idMatkulMinat1" [formControlName]="'idMatkulMinat1'" required>
+                                            <option disabled selected value>Select an option</option>
+                                            <option *ngFor="let item of mataKuliah$ | async" [value]="item.idMatkul">{{
+                                                item.namaMatkul }}
+                                            </option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please select a valid state.
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="nilaiMatkulMinat1" class="form-label">Nilai</label>
+                                        <select class="form-select" aria-label="State" name="nilaiMatkulMinat1"
+                                            id="nilaiMatkulMinat1" [formControlName]="'nilaiMatkulMinat1'" required>
+                                            <option disabled selected value>Select an option</option>
+                                            <option value="A">A</option>
+                                            <option value="B+">B+</option>
+                                            <option value="B">B</option>
+                                            <option value="C+">C+</option>
+                                            <option value="D">D</option>
+                                            <option value="E">E</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please select a valid state.
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="idMatkulMinat2" class="form-label">Nama Mata Kuliah</label>
+                                        <select class="form-select" aria-label="State" name="idMatkulMinat2"
+                                            id="idMatkulMinat2" [formControlName]="'idMatkulMinat2'" required>
+                                            <option disabled selected value>Select an option</option>
+                                            <option *ngFor="let item of mataKuliah$ | async" [value]="item.idMatkul">{{
+                                                item.namaMatkul }}
+                                            </option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please select a valid state.
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="nilaiMatkulMinat2" class="form-label">Nilai</label>
+                                        <select class="form-select" aria-label="State" name="nilaiMatkulMinat2"
+                                            id="nilaiMatkulMinat2" [formControlName]="'nilaiMatkulMinat2'" required>
+                                            <option disabled selected value>Select an option</option>
+                                            <option value="A">A</option>
+                                            <option value="B+">B+</option>
+                                            <option value="B">B</option>
+                                            <option value="C+">C+</option>
+                                            <option value="D">D</option>
+                                            <option value="E">E</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please select a valid state.
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="idMatkulMinat3" class="form-label">Nama Mata Kuliah</label>
+                                        <select class="form-select" aria-label="State" name="idMatkulMinat3"
+                                            id="idMatkulMinat3" [formControlName]="'idMatkulMinat3'" required>
+                                            <option disabled selected value>Select an option</option>
+                                            <option *ngFor="let item of mataKuliah$ | async" [value]="item.idMatkul">{{
+                                                item.namaMatkul }}
+                                            </option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please select a valid state.
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="nilaiMatkulMinat3" class="form-label">Nilai</label>
+                                        <select class="form-select" aria-label="State" name="nilaiMatkulMinat3"
+                                            id="nilaiMatkulMinat3" [formControlName]="'nilaiMatkulMinat3'" required>
+                                            <option disabled selected value>Select an option</option>
+                                            <option value="A">A</option>
+                                            <option value="B+">B+</option>
+                                            <option value="B">B</option>
+                                            <option value="C+">C+</option>
+                                            <option value="D">D</option>
+                                            <option value="E">E</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please select a valid state.
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="idMatkulMinat4" class="form-label">Nama Mata Kuliah</label>
+                                        <select class="form-select" aria-label="State" name="idMatkulMinat4"
+                                            id="idMatkulMinat4" [formControlName]="'idMatkulMinat4'" required>
+                                            <option disabled selected value>Select an option</option>
+                                            <option *ngFor="let item of mataKuliah$ | async" [value]="item.idMatkul">{{
+                                                item.namaMatkul }}
+                                            </option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please select a valid state.
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="nilaiMatkulMinat4" class="form-label">Nilai</label>
+                                        <select class="form-select" aria-label="State" name="nilaiMatkulMinat4"
+                                            id="nilaiMatkulMinat4" [formControlName]="'nilaiMatkulMinat4'" required>
+                                            <option disabled selected value>Select an option</option>
+                                            <option value="A">A</option>
+                                            <option value="B+">B+</option>
+                                            <option value="B">B</option>
+                                            <option value="C+">C+</option>
+                                            <option value="D">D</option>
+                                            <option value="E">E</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please select a valid state.
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="idMatkulMinat5" class="form-label">Nama Mata Kuliah</label>
+                                        <select class="form-select" aria-label="State" name="idMatkulMinat5"
+                                            id="idMatkulMinat5" [formControlName]="'idMatkulMinat5'" required>
+                                            <option disabled selected value>Select an option</option>
+                                            <option *ngFor="let item of mataKuliah$ | async" [value]="item.idMatkul">{{
+                                                item.namaMatkul }}
+                                            </option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please select a valid state.
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="nilaiMatkulMinat5" class="form-label">Nilai</label>
+                                        <select class="form-select" aria-label="State" name="nilaiMatkulMinat5"
+                                            id="nilaiMatkulMinat5" [formControlName]="'nilaiMatkulMinat5'" required>
+                                            <option disabled selected value>Select an option</option>
+                                            <option value="A">A</option>
+                                            <option value="B+">B+</option>
+                                            <option value="B">B</option>
+                                            <option value="C+">C+</option>
+                                            <option value="D">D</option>
+                                            <option value="E">E</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please select a valid state.
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="haveRecommendation" formControlName="haveRecommendation">
+                                            <label class="form-check-label" for="haveRecommendation">
+                                                Punya Surat Rekomendasi
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-10">
+                                        <label for="inputNumber" class="form-label">File Upload</label>
+                                        <input class="form-control" type="file" id="formFile">
+                                    </div>
+
+                                    <div>
+                                        <button type="submit" class="btn btn-outline-primary m-1">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <!-- Table with stripped rows -->
+                            <table class="table table-sm table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Urutan Minat</th>
+                                        <th>Minat</th>
+                                        <th>Nama Matkul</th>
+                                        <th>Nilai Matkul</th>
+                                        <th>Nama Matkul</th>
+                                        <th>Nilai Matkul</th>
+                                        <th>Nama Matkul</th>
+                                        <th>Nilai Matkul</th>
+                                        <th>Nama Matkul</th>
+                                        <th>Nilai Matkul</th>
+                                        <th>Nama Matkul</th>
+                                        <th>Nilai Matkul</th>
+                                        <th>IPK Minat</th>
+                                        <th>Rekomendasi Dosen</th>
+                                        <th>Status Pengajuan</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of listPeminatan; let i = index">
+                                        <td>{{item.urutanMinat}}</td>
+                                        <td>{{item.namaMinat}}</td>
+                                        <td>{{item.namaMatkulMinat1}}</td>
+                                        <td>{{item.nilaiMatkulMinat1}}</td>
+                                        <td>{{item.namaMatkulMinat2}}</td>
+                                        <td>{{item.nilaiMatkulMinat2}}</td>
+                                        <td>{{item.namaMatkulMinat3}}</td>
+                                        <td>{{item.nilaiMatkulMinat3}}</td>
+                                        <td>{{item.namaMatkulMinat4}}</td>
+                                        <td>{{item.nilaiMatkulMinat4}}</td>
+                                        <td>{{item.namaMatkulMinat5}}</td>
+                                        <td>{{item.nilaiMatkulMinat5}}</td>
+                                        <td >{{item.ipkMinat | number : '1.2-2'}}</td>
+                                        <td>{{item.haveRecommendation === 0 || item.haveRecommendation === null ? 'Tidak ada' : 'Ada'}}
+                                        </td>
+                                        <td>{{item.statusPengajuan === 0 || item.statusPengajuan === null ? 'Menunggu persetujuan' : 'Disetujui'}}</td>
+                                        <td>
+                                            <button (click)="delete(item.id)" type="button"
+                                                class="btn btn-danger m-1"><i class="bi bi-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <!-- End Table with stripped rows -->
+                        </div>
+                        <div class="tab-pane fade" id="bordered-status-pengajuan" role="tabpanel"
+                            aria-labelledby="status-pengajuan-tab">
+                            <h5 style="color: red;">// TO DO: hanya akan tampil data yang telah di approve oleh kadep dan di assign dosen pembimbing oleh kaminat</h5>
+                            <p style="color: red;">data yang tampil hanya akan ada 1 baris</p>
+                            <!-- Table with stripped rows -->
+                            <table class="table table-sm table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Urutan Minat</th>
+                                        <th>Minat</th>
+                                        <th>Rekomendasi Dosen</th>
+                                        <th>Status Pengajuan</th>
+                                        <th>Dosen Pembimbing</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of listPeminatan; let i = index">
+                                        <td>{{item.urutanMinat}}</td>
+                                        <td>{{item.namaMinat}}</td>
+                                        <td>{{item.haveRecommendation === 0 || item.haveRecommendation === null ? 'Tidak ada' : 'Ada'}}
+                                        </td>
+                                        <td>{{item.statusPengajuan === 0 || item.statusPengajuan === null ? 'Menunggu persetujuan' : 'Disetujui'}}</td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <!-- End Table with stripped rows -->
+                        </div>
+                    </div><!-- End Bordered Tabs -->
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

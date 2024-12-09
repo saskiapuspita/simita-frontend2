@@ -49,7 +49,7 @@ export class ProfilComponent {
     userId: Pick<User, 'id'>
   ): void {
     this.masterMahasiswaService
-      .updateUser(formEditUser, userId)
+      .update(formEditUser, userId)
       .subscribe(() => {
         alert('Update profil user berhasil!');
         // this.setDisplayData();

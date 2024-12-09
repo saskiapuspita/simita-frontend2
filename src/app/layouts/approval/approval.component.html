@@ -1,46 +1,40 @@
 <div class="pagetitle">
-    <h1>Pendaftaran Peminatan</h1>
-    <nav>
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">PKL</li>
-            <li class="breadcrumb-item">Pengajuan PKL</li>
-        </ol>
-    </nav>
+    <h1>Approval</h1>
 </div><!-- End Page Title -->
 <section class="section">
     <div class="row">
         <div class="col-lg-12">
 
-            <!-- <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="isVisible">
+            <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="isVisible">
                 <i class="bi bi-check-circle me-1"></i>
                 Pengajuan Disetujui
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div> -->
+            </div>
 
             <div class="card">
                 <div class="card-body">
 
                     <ul class="nav nav-tabs nav-tabs-bordered" id="borderedTab" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="pengajuanPkl-tab" data-bs-toggle="tab"
+                            <button class="nav-link" id="pengajuanPkl-tab" data-bs-toggle="tab"
                                 data-bs-target="#bordered-pengajuanPkl" type="button" role="tab"
-                                aria-controls="pengajuanPkl" aria-selected="true">Pengajuan PKL</button>
+                                aria-controls="pengajuanPkl" aria-selected="false" *ngIf="UserRole == 'dosen'">Pengajuan PKL</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
-                                data-bs-target="#bordered-profile" type="button" role="tab" aria-controls="profile"
-                                aria-selected="false">Profile</button>
+                            <button class="nav-link" id="pengajuanPeminatan-tab" data-bs-toggle="tab"
+                                data-bs-target="#bordered-pengajuanPeminatan" type="button" role="tab"
+                                aria-controls="pengajuanPeminatan" aria-selected="false" *ngIf="UserRole == 'kepala departemen'">Pengajuan Peminatan</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="contact-tab" data-bs-toggle="tab"
-                                data-bs-target="#bordered-contact" type="button" role="tab" aria-controls="contact"
-                                aria-selected="false">Contact</button>
+                            <button class="nav-link" id="approvedPengajuanPeminatan-tab" data-bs-toggle="tab"
+                                data-bs-target="#bordered-approvedPengajuanPeminatan" type="button" role="tab"
+                                aria-controls="approvedPengajuanPeminatan" aria-selected="false" *ngIf="UserRole == 'kepala minat'">Rekapitulasi Peminatan</button>
                         </li>
                     </ul>
                     <div class="tab-content pt-2" id="borderedTabContent">
-                        <div class="tab-pane fade show active" id="bordered-pengajuanPkl" role="tabpanel"
+                        <div class="tab-pane fade" id="bordered-pengajuanPkl" role="tabpanel"
                             aria-labelledby="pengajuanPkl-tab">
-                            <table class="table table-sm table-bordered">
+                            <table class="table table-sm table-bordered" *ngIf="UserRole == 'dosen'">
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -67,7 +61,7 @@
                                         <td>{{item.namaLokasi}}</td>
                                         <td>{{item.statusPengajuanPkl === 0 ? 'Menunggu persetujuan' : 'Disetujui'}}
                                         </td>
-                                        <td><button (click)="approvePengajuan(item.id)"
+                                        <td><button (click)="approvePengajuanPkl(item.id)"
                                                 [disabled]="item.statusPengajuanPkl === 1" type="button"
                                                 class="btn btn-success"><i class="bi bi-check-circle"></i></button>
                                         </td>
@@ -75,15 +69,93 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="tab-pane fade" id="bordered-profile" role="tabpanel" aria-labelledby="profile-tab">
-                            Nesciunt totam et. Consequuntur magnam aliquid eos nulla dolor iure eos quia. Accusantium
-                            distinctio omnis et atque fugiat. Itaque doloremque aliquid sint quasi quia distinctio
-                            similique. Voluptate nihil recusandae mollitia dolores. Ut laboriosam voluptatum dicta.
+                        <div class="tab-pane fade" id="bordered-pengajuanPeminatan" role="tabpanel"
+                            aria-labelledby="pengajuanPeminatan-tab">
+                            <form [formGroup]="formGenerateRekapitulasiPeminatan" (ngSubmit)="submitFormGenerateRekapitulasiPeminatan()" *ngIf="UserRole == 'kepala departemen'">
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <label for="idPeminatan" class="form-label">Peminatan</label>
+                                        <select class="form-select" aria-label="State" name="idPeminatan" id="idPeminatan"
+                                            [formControlName]="'idPeminatan'" required>
+                                            <option disabled selected value>Select an option</option>
+                                            <option *ngFor="let item of peminatan$ | async" [value]="item.id">{{
+                                                item.nama
+                                                }}
+                                            </option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please select a valid state.
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <button type="submit" class="btn btn-outline-primary m-1">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <table class="table table-sm table-bordered" *ngIf="UserRole == 'kepala departemen'">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Nama Peminatan</th>
+                                        <th>Urutan Minat</th>
+                                        <th>IPK Minat</th>
+                                        <th>Nama Mahasiswa</th>
+                                        <th>Status Pengajuan</th>
+                                        <th>Surat Rekomendasi</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of listPengajuanPeminatan; let i = index">
+                                        <td>{{ i + 1 }}</td>
+                                        <td>{{ item.namaPeminatan }}</td>
+                                        <td>{{ item.urutanMinat }}</td>
+                                        <td>{{ item.ipkMinat }}</td>
+                                        <td>{{ item.namaMahasiswa }}</td>
+                                        <td>{{ item.statusPengajuan === 0 ? 'Menunggu persetujuan' : 'Disetujui' }}</td>
+                                        <td>{{ item.haveRecommendation === 0 ? 'Tidak' : 'Ada' }}</td>
+                                        <td>
+                                            <button (click)="approvePengajuanPeminatan(item.id)"
+                                                [disabled]="item.statusPengajuan === 1" type="button"
+                                                class="btn btn-success"><i class="bi bi-check-circle"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-                        <div class="tab-pane fade" id="bordered-contact" role="tabpanel" aria-labelledby="contact-tab">
-                            Saepe animi et soluta ad odit soluta sunt. Nihil quos omnis animi debitis cumque.
-                            Accusantium quibusdam perspiciatis qui qui omnis magnam. Officiis accusamus impedit
-                            molestias nostrum veniam. Qui amet ipsum iure. Dignissimos fuga tempore dolor.
+                        <div class="tab-pane fade" id="bordered-approvedPengajuanPeminatan" role="tabpanel" aria-labelledby="approvedPengajuanPeminatan-tab">
+                            <table class="table table-sm table-bordered" *ngIf="UserRole == 'kepala minat'">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Nama Peminatan</th>
+                                        <th>Urutan Minat</th>
+                                        <th>IPK Minat</th>
+                                        <th>Nama Mahasiswa</th>
+                                        <th>Status Pengajuan</th>
+                                        <th>Surat Rekomendasi</th>
+                                        <th>Dosen Pembimbing</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of listApprovedPengajuanPeminatan; let i = index">
+                                        <td>{{ i + 1 }}</td>
+                                        <td>{{ item.namaPeminatan }}</td>
+                                        <td>{{ item.urutanMinat }}</td>
+                                        <td>{{ item.ipkMinat }}</td>
+                                        <td>{{ item.namaMahasiswa }}</td>
+                                        <td>{{ item.statusPengajuan === 0 ? 'Menunggu persetujuan' : 'Disetujui' }}</td>
+                                        <td>{{ item.haveRecommendation === 0 ? 'Tidak' : 'Ada' }}</td>
+                                        <td>{{ item.namaDosen }}</td>
+                                        <td>
+                                        <button (click)="update(item.id)" type="button" class="btn btn-primary"><i class="bi bi-pencil-square"
+                                                data-bs-toggle="modal" data-bs-target="#basicModal"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                     <!-- <ul class="nav nav-tabs nav-tabs-bordered" id="borderedTab" role="tablist">
@@ -134,3 +206,44 @@
         </div>
     </div>
 </section>
+
+<div class="modal fade" id="basicModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form [formGroup]="formAssignDosenPembimbing" (ngSubmit)="submitAssignDosenPembimbing()">
+                <div class="modal-header">
+                    <h5 class="modal-title">Assign Dosen Pembimbing</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-3">
+                        <label for="id" class="col-sm-2 col-form-label" hidden>Id</label>
+                        <div class="col-sm-10">
+                            <input formControlName="id" id="id" type="text"
+                                class="form-control" hidden>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <label for="idDosen" class="col-sm-2 col-form-label">Dosen Pembimbing</label>
+                        <div class="col-sm-10">
+                            <select class="form-select" aria-label="State" name="idDosen" id="idDosen"
+                                [formControlName]="'idDosen'" required>
+                                <option disabled selected value>Select an option</option>
+                                <option *ngFor="let item of namaDosen$ | async" [value]="item.id">{{
+                                    item.name }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary"
+                        data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

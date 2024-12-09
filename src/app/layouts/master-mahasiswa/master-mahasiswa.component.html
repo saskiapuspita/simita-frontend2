@@ -1,9 +1,9 @@
 <div class="pagetitle">
-    <h1>Master Dosen</h1>
+    <h1>Master Mahasiswa</h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">Master</li>
-            <li class="breadcrumb-item">Dosen</li>
+            <li class="breadcrumb-item">Mahasiswa</li>
         </ol>
     </nav>
 </div><!-- End Page Title -->
@@ -25,7 +25,7 @@
                     <div class="modal fade" id="basicModal" tabindex="-1">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                <form [formGroup]="formDosen" (ngSubmit)="submitFormDosen()">
+                                <form [formGroup]="formMahasiswa" (ngSubmit)="submitformMahasiswa()">
                                     <div class="modal-header">
                                         <h5 class="modal-title">Basic Modal</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -35,8 +35,8 @@
                                         <div class="row mb-3">
                                             <label for="id" class="col-sm-2 col-form-label" hidden>Id</label>
                                             <div class="col-sm-10">
-                                                <input formControlName="id" id="id" type="text"
-                                                    class="form-control" hidden>
+                                                <input formControlName="id" id="id" type="text" class="form-control"
+                                                    hidden>
                                             </div>
                                         </div>
 
@@ -55,9 +55,27 @@
                                             </div>
                                         </div>
                                         <div class="row mb-3">
-                                            <label for="nidn" class="col-sm-2 col-form-label">NIDN</label>
+                                            <label for="nim" class="col-sm-2 col-form-label">NIM</label>
                                             <div class="col-sm-10">
-                                                <input formControlName="nidn" id="nidn" type="text"
+                                                <input formControlName="nim" id="nim" type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label for="ipk" class="col-sm-2 col-form-label">IPK</label>
+                                            <div class="col-sm-10">
+                                                <input formControlName="ipk" id="ipk" type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label for="sks" class="col-sm-2 col-form-label">SKS</label>
+                                            <div class="col-sm-10">
+                                                <input formControlName="sks" id="sks" type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label for="noTelp" class="col-sm-2 col-form-label">No Telepon</label>
+                                            <div class="col-sm-10">
+                                                <input formControlName="noTelp" id="noTelp" type="text"
                                                     class="form-control">
                                             </div>
                                         </div>
@@ -79,19 +97,26 @@
                                 <th>Nama</th>
                                 <th>Email</th>
                                 <th>NIDN</th>
+                                <th>IPK</th>
+                                <th>SKS</th>
+                                <th>No Telepon</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let item of listDosen; let i = index">
+                            <tr *ngFor="let item of listMahasiswa; let i = index">
                                 <td>{{ item.name }}</td>
                                 <td>{{ item.email }}</td>
-                                <td>{{ item.nidn }}</td>
+                                <td>{{ item.nim }}</td>
+                                <td>{{ item.ipk }}</td>
+                                <td>{{ item.sks }}</td>
+                                <td>{{ item.noTelp }}</td>
                                 <td>
                                     <button (click)="delete(item.id)" type="button" class="btn btn-danger m-1"><i
                                             class="bi bi-trash"></i></button>
-                                    <button (click)="update(item.id)" type="button" class="btn btn-primary"><i class="bi bi-pencil-square"
-                                            data-bs-toggle="modal" data-bs-target="#basicModal"></i></button>
+                                    <button (click)="update(item.id)" type="button" class="btn btn-primary"><i
+                                            class="bi bi-pencil-square" data-bs-toggle="modal"
+                                            data-bs-target="#basicModal"></i></button>
                                 </td>
                             </tr>
                         </tbody>
