@@ -18,6 +18,7 @@ import { MasterLokasiSkripsiComponent } from './layouts/master-lokasi-skripsi/ma
 import { PengajuanJudulPenelitianComponent } from './layouts/pengajuan-judul-penelitian/pengajuan-judul-penelitian.component';
 import { ListPenelitianComponent } from './layouts/list-penelitian/list-penelitian.component';
 import { MasterRuanganComponent } from './layouts/master-ruangan/master-ruangan.component';
+import { PengajuanSeminarProposalComponent } from './layouts/pengajuan-seminar-proposal/pengajuan-seminar-proposal.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -110,6 +111,12 @@ const routes: Routes = [
     path: 'master-ruangan',
     component: MasterRuanganComponent,
     title: 'Ruangan',
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'pengajuan-seminar-proposal',
+    component: PengajuanSeminarProposalComponent,
+    title: 'Pengajuan Seminar Proposal',
     canActivate: [AuthGuardService],
   },
 ];

@@ -23,6 +23,7 @@ import { MasterLokasiSkripsiComponent } from './layouts/master-lokasi-skripsi/ma
 import { PengajuanJudulPenelitianComponent } from './layouts/pengajuan-judul-penelitian/pengajuan-judul-penelitian.component';
 import { ListPenelitianComponent } from './layouts/list-penelitian/list-penelitian.component';
 import { MasterRuanganComponent } from './layouts/master-ruangan/master-ruangan.component';
+import { PengajuanSeminarProposalComponent } from './layouts/pengajuan-seminar-proposal/pengajuan-seminar-proposal.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { MasterRuanganComponent } from './layouts/master-ruangan/master-ruangan.
     MasterLokasiSkripsiComponent,
     PengajuanJudulPenelitianComponent,
     ListPenelitianComponent,
-    MasterRuanganComponent
+    MasterRuanganComponent,
+    PengajuanSeminarProposalComponent
   ],
   imports: [
     BrowserModule,
