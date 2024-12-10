@@ -19,6 +19,9 @@ import { MasterMahasiswaComponent } from './layouts/master-mahasiswa/master-maha
 import { MasterPeminatanComponent } from './layouts/master-peminatan/master-peminatan.component';
 import { MasterMataKuliahComponent } from './layouts/master-mata-kuliah/master-mata-kuliah.component';
 import { PengajuanPeminatanComponent } from './layouts/pengajuan-peminatan/pengajuan-peminatan.component';
+import { MasterLokasiSkripsiComponent } from './layouts/master-lokasi-skripsi/master-lokasi-skripsi.component';
+import { PengajuanJudulPenelitianComponent } from './layouts/pengajuan-judul-penelitian/pengajuan-judul-penelitian.component';
+import { ListPenelitianComponent } from './layouts/list-penelitian/list-penelitian.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +39,10 @@ import { PengajuanPeminatanComponent } from './layouts/pengajuan-peminatan/penga
     MasterMahasiswaComponent,
     MasterPeminatanComponent,
     MasterMataKuliahComponent,
-    PengajuanPeminatanComponent
+    PengajuanPeminatanComponent,
+    MasterLokasiSkripsiComponent,
+    PengajuanJudulPenelitianComponent,
+    ListPenelitianComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,160 @@
+<div class="pagetitle">
+    <h1>Pengajuan Judul Penelitian</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">Pengajuan Judul Penelitian</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+<section class="section">
+    <div class="row">
+        <div class="col-lg-12">
+
+            <!-- alert -->
+            <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="isVisible">
+                <i class="bi bi-check-circle me-1"></i>
+                {{ alertMessage }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label for="nama" class="form-label">Nama</label>
+                            <input value="{{ decodedToken.name }}" type="text" class="form-control" id="nama" disabled>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="nim" class="form-label">NIM</label>
+                            <input value="{{ decodedToken.nim }}" type="text" class="form-control" id="nim" disabled>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="ipk" class="form-label">IPK</label>
+                            <input value="{{ decodedToken.ipk }}" type="text" class="form-control" id="ipk" disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <button type="button" class="btn btn-outline-primary pull-right" data-bs-toggle="modal"
+                        data-bs-target="#basicModal">+ Tambah</button>
+                    <div class="modal fade" id="basicModal" tabindex="-1">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <form [formGroup]="formSkripsi" (ngSubmit)="submitFormSkripsi()">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Basic Modal</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row mb-3">
+                                            <label for="id" class="col-sm-2 col-form-label" hidden>Id</label>
+                                            <div class="col-sm-10">
+                                                <input formControlName="id" id="id" type="text"
+                                                    class="form-control" hidden>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <label for="judulSkripsi" class="col-sm-2 col-form-label">Judul Penelitian</label>
+                                            <div class="col-sm-10">
+                                                <input formControlName="judulSkripsi" id="judulSkripsi" type="text"
+                                                    class="form-control">
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <label for="idLokasi" class="col-sm-2 col-form-label">Lokasi Penelitian</label>
+                                            <div class="col-sm-10">
+                                                <select class="form-select" aria-label="State" name="idLokasi" id="idLokasi"
+                                                    [formControlName]="'idLokasi'" required>
+                                                    <option disabled selected value>Select an option</option>
+                                                    <option *ngFor="let item of lokasiSkripsi$ | async" [value]="item.id">{{
+                                                        item.namaLokasi }}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+    
+                                        <div class="row mb-3">
+                                            <label for="idDosen" class="col-sm-2 col-form-label">Dosen Pembimbing</label>
+                                            <div class="col-sm-10">
+                                                <select class="form-select" aria-label="State" name="idDosen" id="idDosen"
+                                                    [formControlName]="'idDosen'" required>
+                                                    <option disabled selected value>Select an option</option>
+                                                    <option *ngFor="let item of namaDosen$ | async" [value]="item.id">{{
+                                                        item.name }}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <label for="persentaseNilaiD" class="col-sm-2 col-form-label">Nilai D & D+ (%)</label>
+                                            <div class="col-sm-10">
+                                                <input formControlName="persentaseNilaiD" id="persentaseNilaiD" type="text"
+                                                    class="form-control">
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <label for="persentaseNilaiE" class="col-sm-2 col-form-label">Nilai E (%)</label>
+                                            <div class="col-sm-10">
+                                                <input formControlName="persentaseNilaiE" id="persentaseNilaiE" type="text"
+                                                    class="form-control">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Table with stripped rows -->
+                    <table class="table datatable">
+                        <thead>
+                            <tr>
+                                <th>Judul Penelitian</th>
+                                <th>Lokasi Penelitian</th>
+                                <th>Dosen Pembimbing</th>
+                                <th>Persentase Nilai D</th>
+                                <th>Persentase Nilai E</th>
+                                <th>Status Pengajuan</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of listPengajuanSkripsi; let i = index">
+                                <td>{{ item.judulSkripsi }}</td>
+                                <td>{{ item.idLokasi }}</td>
+                                <td>{{ item.idDosen }}</td>
+                                <td>{{ item.persentaseNilaiD }} </td>
+                                <td>{{ item.persentaseNilaiE }}</td>
+                                <td>{{item.statusPengajuan === 0 || item.statusPengajuan === null ? 'Menunggu persetujuan' : 'Disetujui'}}</td>
+                                <td>
+                                    <button (click)="delete(item.id)" type="button" class="btn btn-danger m-1"><i
+                                            class="bi bi-trash"></i></button>
+                                    <button (click)="update(item.id)" type="button" class="btn btn-primary"><i class="bi bi-pencil-square"
+                                            data-bs-toggle="modal" data-bs-target="#basicModal"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- End Table with stripped rows -->
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

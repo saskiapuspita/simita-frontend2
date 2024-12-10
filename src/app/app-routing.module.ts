@@ -14,6 +14,9 @@ import { MasterMahasiswaComponent } from './layouts/master-mahasiswa/master-maha
 import { MasterPeminatanComponent } from './layouts/master-peminatan/master-peminatan.component';
 import { MasterMataKuliahComponent } from './layouts/master-mata-kuliah/master-mata-kuliah.component';
 import { PengajuanPeminatanComponent } from './layouts/pengajuan-peminatan/pengajuan-peminatan.component';
+import { MasterLokasiSkripsiComponent } from './layouts/master-lokasi-skripsi/master-lokasi-skripsi.component';
+import { PengajuanJudulPenelitianComponent } from './layouts/pengajuan-judul-penelitian/pengajuan-judul-penelitian.component';
+import { ListPenelitianComponent } from './layouts/list-penelitian/list-penelitian.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -82,6 +85,24 @@ const routes: Routes = [
     path: 'master-mata-kuliah',
     component: MasterMataKuliahComponent,
     title: 'Master Mata Kuliah',
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'master-lokasi-skripsi',
+    component: MasterLokasiSkripsiComponent,
+    title: 'Master Lokasi Skripsi',
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'pengajuan-judul-penelitian',
+    component: PengajuanJudulPenelitianComponent,
+    title: 'Pengajuan Judul Penelitian',
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'list-penelitian',
+    component: ListPenelitianComponent,
+    title: 'List Penelitian',
     canActivate: [AuthGuardService],
   },
 ];

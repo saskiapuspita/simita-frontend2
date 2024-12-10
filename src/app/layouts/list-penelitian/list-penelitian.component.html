@@ -1,0 +1,35 @@
+<div class="pagetitle">
+    <h1>Pengajuan Judul Penelitian</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">Pengajuan Judul Penelitian</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+<section class="section">
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="card">
+                <div class="card-body">
+                    <!-- Table with stripped rows -->
+                    <table class="table datatable">
+                        <thead>
+                            <tr>
+                                <th>Judul Penelitian</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of listApprovedSkripsi; let i = index">
+                                <td>{{ item.judulSkripsi }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- End Table with stripped rows -->
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

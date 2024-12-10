@@ -5,11 +5,13 @@ import { Dosen } from 'src/app/interfaces/dosen';
 import { KelompokPkl } from 'src/app/interfaces/kelompok-pkl';
 import { Peminatan } from 'src/app/interfaces/peminatan';
 import { RekapitulasiPeminatan } from 'src/app/interfaces/rekapitulasi-peminatan';
+import { Skripsi } from 'src/app/interfaces/skripsi';
 import { AuthService } from 'src/app/services/auth.service';
 import { MasterDosenService } from 'src/app/services/master-dosen.service';
 import { MasterPeminatanService } from 'src/app/services/master-peminatan.service';
 import { PengajuanPklService } from 'src/app/services/pengajuan-pkl.service';
 import { RekapitulasiPeminatanService } from 'src/app/services/rekapitulasi-peminatan.service';
+import { SkripsiService } from 'src/app/services/skripsi.service';
 
 @Component({
   selector: 'app-approval',
@@ -22,19 +24,21 @@ export class ApprovalComponent {
   listPengajuanPkl!: any;
   listPengajuanPeminatan!: any;
   listApprovedPengajuanPeminatan: any;
+  listPengajuanSkripsi!: Skripsi[];
   formGenerateRekapitulasiPeminatan!: FormGroup;
   formAssignDosenPembimbing!: FormGroup;
   peminatan$!: Observable<Peminatan[]>;
   decodedToken: any;
   namaDosen$!: Observable<Dosen[]>;
   detailRekapitulasiPeminatan: any;
-
+  
   constructor(
     private authService: AuthService,
     private pengajuanPklService: PengajuanPklService,
     private rekapitulasiPeminatanService: RekapitulasiPeminatanService,
     private masterPeminatanService: MasterPeminatanService,
-    private masterDosenService: MasterDosenService
+    private masterDosenService: MasterDosenService,
+    private skripsiService: SkripsiService
   ) {}
 
   ngOnInit() {
@@ -44,6 +48,7 @@ export class ApprovalComponent {
     this.loadDataAnggotaPkl();
     this.loadDataPengajuanPeminatan();
     this.loadDataApprovedRekapitulasiPeminatan();
+    this.loadDataPengajuanSkripsi();
     this.formGenerateRekapitulasiPeminatan =
     this.generatePengajuanPeminatanFormGroup();
     this.namaDosen$ = this.fetchAllDosen();
@@ -60,6 +65,7 @@ export class ApprovalComponent {
       .fetchById(this.decodedToken.userId)
       .subscribe((res) => {
         this.listPengajuanPkl = res;
+        console.log("this.listPengajuanPkl: "+ this.listPengajuanPkl)
       });
   }
 
@@ -75,6 +81,12 @@ export class ApprovalComponent {
     });
   }
 
+  loadDataPengajuanSkripsi() {
+    this.skripsiService.fetchAllPengajuanSkripsi().subscribe((res) => {
+      this.listPengajuanSkripsi = res;
+    });
+  }
+
   approvePengajuanPkl(id: any): void {
     this.pengajuanPklService.updateStatusPengajuanPkl(id).subscribe(() => {
       this.loadDataAnggotaPkl();
@@ -87,6 +99,14 @@ export class ApprovalComponent {
       .subscribe(() => {
         this.loadDataPengajuanPeminatan();
       });
+  }
+
+  approvePengajuanJudulPenelitian(id: any): void {
+    console.log("idSkripsi: " + id);
+    
+    this.skripsiService.updateStatusPengajuanJudulSkripsi(id).subscribe(() => {
+      this.loadDataPengajuanSkripsi();
+    });
   }
 
   // alert
