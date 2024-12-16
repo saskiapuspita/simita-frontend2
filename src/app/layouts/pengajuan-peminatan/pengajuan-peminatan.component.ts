@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { first, Observable } from 'rxjs';
 import { MataKuliah } from 'src/app/interfaces/mata-kuliah';
 import { Peminatan } from 'src/app/interfaces/peminatan';
 import { PeminatanMahasiswa } from 'src/app/interfaces/peminatan-mahasiswa';
@@ -26,6 +26,7 @@ export class PengajuanPeminatanComponent {
   alertMessage: string = '';
   peminatan$!: Observable<Peminatan[]>;
   mataKuliah$!: any;
+  formUploadFileSuratRekomendasi!: FormGroup;
   //ascending
   listpeminatanSortAsc: any;
 
@@ -43,6 +44,44 @@ export class PengajuanPeminatanComponent {
     this.loadDataStatusPengajuanPeminatan();
     this.peminatan$ = this.loadPeminatan();
     this.mataKuliah$ = this.loadMataKuliah();
+    this.formUploadFileSuratRekomendasi =
+      this.createUploadFilePeminatanFormGroup();
+  }
+
+  createUploadFilePeminatanFormGroup(): FormGroup {
+    return new FormGroup({
+      buktiSuratRekomendasi: new FormControl(null)
+    });
+  }
+
+  onSubmitUploadFileSuratRekomendasi(
+    formUploadFileSuratRekomendasi: Pick<
+      PeminatanMahasiswa,
+      'buktiSuratRekomendasi'
+    >
+  ): void {
+    if(formUploadFileSuratRekomendasi.buktiSuratRekomendasi != null){
+    this.pengajuanPeminatanService
+      .uploadFileSuratRekomendasi(
+        formUploadFileSuratRekomendasi
+      )
+      .pipe(first())
+      .subscribe(() => {
+        alert('Upload Berhasil!');
+      });
+    } else {
+      alert('Upload gagal, format file tidak didukung!');
+    }
+  }
+
+  onImagePicked(event: Event): void {
+    const file = (event.target as HTMLInputElement)?.files?.[0]; // Here we use only the first file (single file)
+    console.log("file type : " + file?.type);
+    if(file?.type == 'image/png' || file?.type == 'image/jpeg') {
+      this.formUploadFileSuratRekomendasi.patchValue({ buktiSuratRekomendasi: file });
+    } else {
+      alert('Format file tidak didukung!');
+    }
   }
 
   // mata kuliah

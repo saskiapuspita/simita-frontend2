@@ -31,7 +31,7 @@ export interface PeminatanMahasiswa {
   bobotNilaiMatkul5: number;
   ipkMinat: number;
   haveRecommendation: number;
-  buktiSuratRekomendasi: string;
+  buktiSuratRekomendasi: any;
   idUser: number;
   created: Date;
 }

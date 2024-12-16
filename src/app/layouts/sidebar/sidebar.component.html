@@ -103,7 +103,7 @@
         </a>
       </li><!-- End Approval Page Nav -->
 
-      <li class="nav-item" *ngIf="UserRole == 'admin'">
+      <li class="nav-item" *ngIf="UserRole == 'admin' || UserRole == 'kepala departemen'">
         <a class="nav-link collapsed" data-bs-target="#master-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-menu-button-wide"></i><span>Master</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>

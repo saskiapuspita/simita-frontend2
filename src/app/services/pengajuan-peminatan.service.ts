@@ -95,6 +95,14 @@ export class PengajuanPeminatanService {
       );
   }
 
+  uploadFileSuratRekomendasi(formData: Partial<PeminatanMahasiswa>) {
+    let fd = new FormData();
+    if(formData.buktiSuratRekomendasi) {
+      fd.append('buktiSuratRekomendasi', formData.buktiSuratRekomendasi, formData.buktiSuratRekomendasi.name);
+    }
+    return this.http.post(`http://localhost:4000/datapeminatanmahasiswa/upload`, fd);
+  }
+
 
   // updateIsFinalSubmit(
   //   formData: Partial<PeminatanMahasiswa>,

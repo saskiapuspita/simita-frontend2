@@ -57,6 +57,7 @@ export class MasterPeminatanService {
         this.url,
         {
           nama: formData.nama,
+          kuotaPeminatan: formData.kuotaPeminatan,
           user: userId,
         },
         this.httpOptions
@@ -84,6 +85,7 @@ export class MasterPeminatanService {
         `${this.url}/${peminatanId}`,
         {
           nama: formData.nama,
+          kuotaPeminatan: formData.kuotaPeminatan,
           id: peminatanId,
         },
         this.httpOptions

@@ -47,6 +47,14 @@
                                                     class="form-control">
                                             </div>
                                         </div>
+
+                                        <div class="row mb-3">
+                                            <label for="kuotaPeminatan" class="col-sm-2 col-form-label">Kuota Peminatan</label>
+                                            <div class="col-sm-10">
+                                                <input formControlName="kuotaPeminatan" id="kuotaPeminatan" type="text"
+                                                    class="form-control">
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
@@ -63,12 +71,14 @@
                         <thead>
                             <tr>
                                 <th>Nama</th>
+                                <th>Kuota Peminatan</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let item of listPeminatan; let i = index">
                                 <td>{{ item.nama }}</td>
+                                <td>{{ item.kuotaPeminatan }}</td>
                                 <td>
                                     <button (click)="delete(item.id)" type="button" class="btn btn-danger m-1"><i
                                             class="bi bi-trash"></i></button>

@@ -38,6 +38,7 @@ export class MasterPeminatanComponent {
     return new FormGroup({
       id: new FormControl('', [Validators.required]),
       nama: new FormControl('', [Validators.required]),
+      kuotaPeminatan: new FormControl('', [Validators.required]),
     });
   }
 
@@ -93,13 +94,14 @@ export class MasterPeminatanComponent {
       this.detailPeminatan = res;
       this.formPeminatan.setValue({
         id: this.detailPeminatan[0].id,
-        nama: this.detailPeminatan[0].nama
+        nama: this.detailPeminatan[0].nama,
+        kuotaPeminatan: this.detailPeminatan[0].kuotaPeminatan
       });
     });
   }
 
   onSubmitUpdatePeminatan(
-    formPeminatan: Pick<Peminatan, 'nama'>,
+    formPeminatan: Pick<Peminatan, 'nama' | 'kuotaPeminatan'>,
     idPeminatan: Pick<Peminatan, 'id'>
   ): void {
     this.masterPeminatanService

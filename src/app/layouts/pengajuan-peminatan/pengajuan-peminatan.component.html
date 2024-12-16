@@ -234,14 +234,19 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-10">
-                                        <label for="inputNumber" class="form-label">File Upload</label>
-                                        <input class="form-control" type="file" id="formFile">
-                                    </div>
-
                                     <div>
                                         <button type="submit" class="btn btn-outline-primary m-1">Submit</button>
                                     </div>
+                                </div>
+                            </form>
+
+                            <form [formGroup]="formUploadFileSuratRekomendasi" (ngSubmit)="onSubmitUploadFileSuratRekomendasi(formUploadFileSuratRekomendasi.value)">
+                                <div class="row mb-3">
+                                    <label for="inputNumber" class="col-sm-2 col-form-label">Surat Rekomendasi</label>
+                                        <div class="col-sm-6">
+                                            <input class="form-control" type="file" id="formFile" (change)="onImagePicked($event)">
+                                        </div>
+                                    <div class="col-sm-4"><button type="submit" class="btn btn-primary mb-2">Upload Surat Rekomendasi</button></div>
                                 </div>
                             </form>
 
