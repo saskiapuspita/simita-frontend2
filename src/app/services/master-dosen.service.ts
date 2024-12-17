@@ -11,7 +11,8 @@ import { ErrorHandlerService } from './error-handler.service';
   providedIn: 'root'
 })
 export class MasterDosenService {
-  private url = 'http://localhost:4000/dosen';
+  private url = 'https://api.simitafapetub.site/dosen';
+  // 'http://localhost:4000/dosen';
 
   httpOptions: { headers: HttpHeaders } = {
     headers: new HttpHeaders({

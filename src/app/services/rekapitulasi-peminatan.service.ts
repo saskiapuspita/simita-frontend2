@@ -14,7 +14,7 @@ import { RekapitulasiPeminatan } from '../interfaces/rekapitulasi-peminatan';
   providedIn: 'root',
 })
 export class RekapitulasiPeminatanService {
-  private url = 'http://localhost:4000/rekappengajuanpeminatan';
+  private url = 'https://api.simitafapetub.site/rekappengajuanpeminatan';
 
   httpOptions: { headers: HttpHeaders } = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -59,7 +59,8 @@ export class RekapitulasiPeminatanService {
   fetchApproved(): Observable<RekapitulasiPeminatan[]> {
     return this.http
       .get<RekapitulasiPeminatan[]>(
-        `http://localhost:4000/middlewarerekappengajuanpeminatan`,
+        `https://api.simitafapetub.site/middlewarerekappengajuanpeminatan`,
+        // `http://localhost:4000/middlewarerekappengajuanpeminatan`,
         {
           responseType: 'json',
         }
