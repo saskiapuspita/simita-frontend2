@@ -13,8 +13,8 @@ import { Ruangan } from '../interfaces/ruangan';
 })
 export class RuanganService {
   private url = 
-  // 'https://api.simitafapetub.site/ruangan';
-  'http://localhost:4000/ruangan';
+  'https://api.simitafapetub.site/ruangan';
+  // 'http://localhost:4000/ruangan';
 
   httpOptions: { headers: HttpHeaders } = {
     headers: new HttpHeaders({

@@ -13,8 +13,8 @@ import { Skripsi } from '../interfaces/skripsi';
 })
 export class SkripsiService {
   private url = 
-  // 'https://api.simitafapetub.site/skripsi';
-  'http://localhost:4000/skripsi';
+  'https://api.simitafapetub.site/skripsi';
+  // 'http://localhost:4000/skripsi';
 
   httpOptions: { headers: HttpHeaders } = {
     headers: new HttpHeaders({
