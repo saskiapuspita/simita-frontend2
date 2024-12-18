@@ -56,9 +56,10 @@ export class PengajuanPeminatanService {
     if (formData.idMatkulMinat5 == null) {
       formData.idMatkulMinat5 = 0
     }
-    if (formData.nilaiMatkulMinat5 == null || formData.nilaiMatkulMinat5 == '') {
+    if (formData.nilaiMatkulMinat5 == null) {
       formData.nilaiMatkulMinat5 = '-'
     }
+
     return this.http
       .post<PeminatanMahasiswa>(
         this.url,
