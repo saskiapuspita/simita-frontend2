@@ -11,8 +11,9 @@ import { User } from '../interfaces/user';
   providedIn: 'root',
 })
 export class UserService {
-  private url = 'https://api.simitafapetub.site/user';
-  // 'http://localhost:4000/user';
+  private url = 
+  // 'https://api.simitafapetub.site/user';
+  'http://localhost:4000/user';
 
   httpOptions: { headers: HttpHeaders } = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),

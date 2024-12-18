@@ -100,7 +100,7 @@ export class PengajuanPeminatanComponent {
       .fetchById(this.decodedToken.userId)
       .subscribe((res) => {
         this.listPeminatan = res;
-        this.listpeminatanSortAsc = this.listPeminatan.sort((a: any, b: any) => a.urutanMinat - b.urutanMinat);
+        this.listpeminatanSortAsc = this.listPeminatan[0].sort((a: any, b: any) => a.urutanMinat - b.urutanMinat);
       });
   }
 
@@ -154,8 +154,8 @@ export class PengajuanPeminatanComponent {
       idMatkulMinat4: new FormControl('', [Validators.required]),
       nilaiMatkulMinat4: new FormControl('', [Validators.required]),
       idMatkulMinat5: new FormControl('', [Validators.required]),
-      nilaiMatkulMinat5: new FormControl('', [Validators.required]),
-      haveRecommendation: new FormControl('', [Validators.required]),
+      nilaiMatkulMinat5: new FormControl(''),
+      haveRecommendation: new FormControl(''),
     });
   }
 

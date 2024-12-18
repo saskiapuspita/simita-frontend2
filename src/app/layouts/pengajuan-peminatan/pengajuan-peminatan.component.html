@@ -256,7 +256,7 @@
                                     <tr>
                                         <th>Urutan Minat</th>
                                         <th>Minat</th>
-                                        <th>Nama Matkul</th>
+                                        <!-- <th>Nama Matkul</th>
                                         <th>Nilai Matkul</th>
                                         <th>Nama Matkul</th>
                                         <th>Nilai Matkul</th>
@@ -265,7 +265,7 @@
                                         <th>Nama Matkul</th>
                                         <th>Nilai Matkul</th>
                                         <th>Nama Matkul</th>
-                                        <th>Nilai Matkul</th>
+                                        <th>Nilai Matkul</th> -->
                                         <th>IPK Minat</th>
                                         <th>Rekomendasi Dosen</th>
                                         <th>Status Pengajuan</th>
@@ -276,7 +276,7 @@
                                     <tr *ngFor="let item of listPeminatan[0]; let i = index">
                                         <td>{{item.urutanMinat}}</td>
                                         <td>{{item.namaMinat}}</td>
-                                        <td>{{item.namaMatkulMinat1}}</td>
+                                        <!-- <td>{{item.namaMatkulMinat1}}</td>
                                         <td>{{item.nilaiMatkulMinat1}}</td>
                                         <td>{{item.namaMatkulMinat2}}</td>
                                         <td>{{item.nilaiMatkulMinat2}}</td>
@@ -285,7 +285,7 @@
                                         <td>{{item.namaMatkulMinat4}}</td>
                                         <td>{{item.nilaiMatkulMinat4}}</td>
                                         <td>{{item.namaMatkulMinat5}}</td>
-                                        <td>{{item.nilaiMatkulMinat5}}</td>
+                                        <td>{{item.nilaiMatkulMinat5}}</td> -->
                                         <td >{{item.ipkMinat | number : '1.2-2'}}</td>
                                         <td>{{item.haveRecommendation === 0 || item.haveRecommendation === null ? 'Tidak ada' : 'Ada'}}
                                         </td>
@@ -301,8 +301,8 @@
                         </div>
                         <div class="tab-pane fade" id="bordered-status-pengajuan" role="tabpanel"
                             aria-labelledby="status-pengajuan-tab">
-                            <h5 style="color: red;">// TO DO: hanya akan tampil data yang telah di approve oleh kadep dan di assign dosen pembimbing oleh kaminat</h5>
-                            <p style="color: red;">data yang tampil hanya akan ada 1 baris</p>
+                            <!-- <h5 style="color: red;">// TO DO: hanya akan tampil data yang telah di approve oleh kadep dan di assign dosen pembimbing oleh kaminat</h5>
+                            <p style="color: red;">data yang tampil hanya akan ada 1 baris</p> -->
                             <!-- Table with stripped rows -->
                             <table class="table table-sm table-bordered">
                                 <thead>
@@ -311,7 +311,7 @@
                                         <th>Minat</th>
                                         <th>Rekomendasi Dosen</th>
                                         <th>Status Pengajuan</th>
-                                        <th>Dosen Pembimbing</th>
+                                        <!-- <th>Dosen Pembimbing</th> -->
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -321,8 +321,8 @@
                                         <td>{{item.haveRecommendation === 0 || item.haveRecommendation === null ? 'Tidak ada' : 'Ada'}}
                                         </td>
                                         <td>{{item.statusPengajuan === 0 || item.statusPengajuan === null ? 'Menunggu persetujuan' : 'Disetujui'}}</td>
-                                        <td>
-                                        </td>
+                                        <!-- <td>
+                                        </td> -->
                                     </tr>
                                 </tbody>
                             </table>

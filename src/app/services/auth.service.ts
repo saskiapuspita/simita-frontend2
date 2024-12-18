@@ -15,8 +15,8 @@ import { ErrorHandlerService } from './error-handler.service';
 })
 export class AuthService {
   private url =
-    'https://api.simitafapetub.site/auth';
-    // 'http://localhost:4000/auth';
+    // 'https://api.simitafapetub.site/auth';
+    'http://localhost:4000/auth';
 
   loginStatus = new BehaviorSubject<boolean>(this.checkLoginStatus());
   private UserName = new BehaviorSubject<string>(localStorage.getItem('username')!);
