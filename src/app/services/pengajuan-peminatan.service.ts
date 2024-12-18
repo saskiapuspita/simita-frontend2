@@ -53,8 +53,8 @@ export class PengajuanPeminatanService {
     formData: Partial<PeminatanMahasiswa>,
     idUser: Pick<User, 'id'>
   ): Observable<PeminatanMahasiswa> {
-    if (formData.idMatkulMinat5 == null || formData.idMatkulMinat5 == '') {
-      formData.idMatkulMinat5 = '0'
+    if (formData.idMatkulMinat5 == null) {
+      formData.idMatkulMinat5 = 0
     }
     if (formData.nilaiMatkulMinat5 == null || formData.nilaiMatkulMinat5 == '') {
       formData.nilaiMatkulMinat5 = '-'
