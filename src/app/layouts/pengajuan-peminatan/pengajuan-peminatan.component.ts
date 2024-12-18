@@ -100,13 +100,11 @@ export class PengajuanPeminatanComponent {
       .fetchById(this.decodedToken.userId)
       .subscribe((res) => {
         this.listPeminatan = res;
-        this.listpeminatanSortAsc = this.listPeminatan[0].sort((a: any, b: any) => a.urutanMinat - b.urutanMinat);
+        this.listpeminatanSortAsc = this.listPeminatan.sort((a: any, b: any) => a.urutanMinat - b.urutanMinat);
       });
   }
 
   submitFormPeminatan() {
-    console.log("masuk ke sini.");
-    
     this.onSubmitAddPeminatan(this.formPengajuanPeminatan.value);
   }
 
@@ -128,6 +126,7 @@ export class PengajuanPeminatanComponent {
       | 'haveRecommendation'
     >
   ): void {
+    console.log('idMatkulMinat5:' + this.formPengajuanPeminatan.get('idMatkulMinat5')!.value);
     this.pengajuanPeminatanService
       .create(formPengajuanPeminatan, this.decodedToken.userId)
       .subscribe(() => {
@@ -153,9 +152,9 @@ export class PengajuanPeminatanComponent {
       nilaiMatkulMinat3: new FormControl('', [Validators.required]),
       idMatkulMinat4: new FormControl('', [Validators.required]),
       nilaiMatkulMinat4: new FormControl('', [Validators.required]),
-      idMatkulMinat5: new FormControl('', [Validators.required]),
-      nilaiMatkulMinat5: new FormControl(''),
-      haveRecommendation: new FormControl(''),
+      idMatkulMinat5: new FormControl(null),
+      nilaiMatkulMinat5: new FormControl(null),
+      haveRecommendation: new FormControl(null),
     });
   }
 
