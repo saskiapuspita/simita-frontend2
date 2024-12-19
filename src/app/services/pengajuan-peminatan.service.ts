@@ -13,7 +13,7 @@ import { PeminatanMahasiswa } from '../interfaces/peminatan-mahasiswa';
 })
 export class PengajuanPeminatanService {
   private url =
-    'https://api.simitafapetub.site/peminatanmahasiswa';
+    'https://api.simitafapetub.site/peminatanmhs';
     // 'http://localhost:4000/peminatanmhs';
 
   httpOptions: { headers: HttpHeaders } = {
