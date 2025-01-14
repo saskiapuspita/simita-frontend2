@@ -238,7 +238,7 @@
                             <select class="form-select" aria-label="State" name="idDosen" id="idDosen"
                                 [formControlName]="'idDosen'" required>
                                 <option disabled selected value>Select an option</option>
-                                <option *ngFor="let item of namaDosen$ | async" [value]="item.id">{{
+                                <option *ngFor="let item of namaDosen$ | async" [value]="item.idDosen">{{
                                     item.name }}
                                 </option>
                             </select>

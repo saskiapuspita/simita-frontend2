@@ -19,6 +19,7 @@ import { PengajuanJudulPenelitianComponent } from './layouts/pengajuan-judul-pen
 import { ListPenelitianComponent } from './layouts/list-penelitian/list-penelitian.component';
 import { MasterRuanganComponent } from './layouts/master-ruangan/master-ruangan.component';
 import { PengajuanSeminarProposalComponent } from './layouts/pengajuan-seminar-proposal/pengajuan-seminar-proposal.component';
+import { KuotaDosenComponent } from './layouts/kuota-dosen/kuota-dosen.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -117,6 +118,12 @@ const routes: Routes = [
     path: 'pengajuan-seminar-proposal',
     component: PengajuanSeminarProposalComponent,
     title: 'Pengajuan Seminar Proposal',
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'kuota-dosen',
+    component: KuotaDosenComponent,
+    title: 'Kuota Dosen',
     canActivate: [AuthGuardService],
   },
 ];

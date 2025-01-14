@@ -9,6 +9,7 @@ import { Skripsi } from 'src/app/interfaces/skripsi';
 import { AuthService } from 'src/app/services/auth.service';
 import { MasterDosenService } from 'src/app/services/master-dosen.service';
 import { MasterPeminatanService } from 'src/app/services/master-peminatan.service';
+import { MiddlewareService } from 'src/app/services/middleware.service';
 import { PengajuanPklService } from 'src/app/services/pengajuan-pkl.service';
 import { RekapitulasiPeminatanService } from 'src/app/services/rekapitulasi-peminatan.service';
 import { SkripsiService } from 'src/app/services/skripsi.service';
@@ -38,7 +39,8 @@ export class ApprovalComponent {
     private rekapitulasiPeminatanService: RekapitulasiPeminatanService,
     private masterPeminatanService: MasterPeminatanService,
     private masterDosenService: MasterDosenService,
-    private skripsiService: SkripsiService
+    private skripsiService: SkripsiService,
+    private middlewareService: MiddlewareService
   ) {}
 
   ngOnInit() {
@@ -51,13 +53,19 @@ export class ApprovalComponent {
     this.loadDataPengajuanSkripsi();
     this.formGenerateRekapitulasiPeminatan =
     this.generatePengajuanPeminatanFormGroup();
-    this.namaDosen$ = this.fetchAllDosen();
+    // this.namaDosen$ = this.fetchAllDosen();
+    this.namaDosen$ = this.fetchAvailableDosenPembimbingPeminatan();
     this.formAssignDosenPembimbing = this.assignDosenPembimbingFromGroup();
   }
 
   // dosen
   fetchAllDosen(): Observable<Dosen[]> {
     return this.masterDosenService.fetchAll();
+  }
+
+  // available dosen pembimbing peminatan
+  fetchAvailableDosenPembimbingPeminatan(): Observable<Dosen[]> {
+    return this.middlewareService.fetchAvailableDosenPembimbingPeminatan();
   }
 
   loadDataAnggotaPkl() {
@@ -78,6 +86,8 @@ export class ApprovalComponent {
   loadDataApprovedRekapitulasiPeminatan() {
     this.rekapitulasiPeminatanService.fetchApproved().subscribe((res) => {
       this.listApprovedPengajuanPeminatan = res;
+      console.log(this.listApprovedPengajuanPeminatan);
+      
     });
   }
 
@@ -98,6 +108,7 @@ export class ApprovalComponent {
       .updateStatusPengajuanPeminatan(id)
       .subscribe(() => {
         this.loadDataPengajuanPeminatan();
+        window.location.reload();
       });
   }
 

@@ -24,6 +24,7 @@ import { PengajuanJudulPenelitianComponent } from './layouts/pengajuan-judul-pen
 import { ListPenelitianComponent } from './layouts/list-penelitian/list-penelitian.component';
 import { MasterRuanganComponent } from './layouts/master-ruangan/master-ruangan.component';
 import { PengajuanSeminarProposalComponent } from './layouts/pengajuan-seminar-proposal/pengajuan-seminar-proposal.component';
+import { KuotaDosenComponent } from './layouts/kuota-dosen/kuota-dosen.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { PengajuanSeminarProposalComponent } from './layouts/pengajuan-seminar-p
     PengajuanJudulPenelitianComponent,
     ListPenelitianComponent,
     MasterRuanganComponent,
-    PengajuanSeminarProposalComponent
+    PengajuanSeminarProposalComponent,
+    KuotaDosenComponent
   ],
   imports: [
     BrowserModule,

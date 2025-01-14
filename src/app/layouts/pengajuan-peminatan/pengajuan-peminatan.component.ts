@@ -40,7 +40,7 @@ export class PengajuanPeminatanComponent {
   ngOnInit() {
     this.decodedToken = this.authService.decodeToken();
     // this.namaAnggota$ = this.fetchStudentNotAsAnggotaAtauKetua();
-    this.formPengajuanPeminatan = this.createPengajuanPklFormGroup();
+    this.formPengajuanPeminatan = this.createPengajuanPeminatanFormGroup();
     this.loadDataStatusPengajuanPeminatan();
     this.peminatan$ = this.loadPeminatan();
     this.mataKuliah$ = this.loadMataKuliah();
@@ -140,7 +140,7 @@ export class PengajuanPeminatanComponent {
   //   return this.pengajuanPeminatanService.fetchStudentNotAsAnggotaAtauKetua();
   // }
 
-  createPengajuanPklFormGroup(): FormGroup {
+  createPengajuanPeminatanFormGroup(): FormGroup {
     return new FormGroup({
       urutanMinat: new FormControl('', [Validators.required]),
       pilihanMinat: new FormControl('', [Validators.required]),
