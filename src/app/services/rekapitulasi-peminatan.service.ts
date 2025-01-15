@@ -76,6 +76,23 @@ export class RekapitulasiPeminatanService {
       );
   }
 
+  fetchApprovedById(idUser: Pick<User, 'id'>): Observable<any> {
+    return this.http
+      .get<RekapitulasiPeminatan>(
+        `https://api.simitafapetub.site/middlewarerekappengajuanpeminatan/${idUser}`,
+        // `http://localhost:4000/middlewarerekappengajuanpeminatan/${idUser}`,
+        this.httpOptions
+      )
+      .pipe(
+        first(),
+        catchError(
+          this.errorHandlerService.handleError<RekapitulasiPeminatan>(
+            'fetchById'
+          )
+        )
+      );
+  }
+
   generateRekapitulasiPeminatan(
     formData: Partial<RekapitulasiPeminatan>
   ): Observable<RekapitulasiPeminatan> {
