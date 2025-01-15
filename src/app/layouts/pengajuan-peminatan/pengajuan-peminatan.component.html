@@ -315,9 +315,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let item of listPeminatan; let i = index">
+                                    <tr *ngFor="let item of statusPengajuanPeminatan$; let i = index">
                                         <td>{{item.urutanMinat}}</td>
-                                        <td>{{item.namaMinat}}</td>
+                                        <td>{{item.namaPeminatan}}</td>
                                         <td>{{item.haveRecommendation === 0 || item.haveRecommendation === null ? 'Tidak ada' : 'Ada'}}
                                         </td>
                                         <td>{{item.statusPengajuan === 0 || item.statusPengajuan === null ? 'Menunggu persetujuan' : 'Disetujui'}}</td>

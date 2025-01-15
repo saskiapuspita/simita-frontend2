@@ -4,11 +4,13 @@ import { first, Observable } from 'rxjs';
 import { MataKuliah } from 'src/app/interfaces/mata-kuliah';
 import { Peminatan } from 'src/app/interfaces/peminatan';
 import { PeminatanMahasiswa } from 'src/app/interfaces/peminatan-mahasiswa';
+import { RekapitulasiPeminatan } from 'src/app/interfaces/rekapitulasi-peminatan';
 import { User } from 'src/app/interfaces/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { MasterMataKuliahService } from 'src/app/services/master-mata-kuliah.service';
 import { MasterPeminatanService } from 'src/app/services/master-peminatan.service';
 import { PengajuanPeminatanService } from 'src/app/services/pengajuan-peminatan.service';
+import { RekapitulasiPeminatanService } from 'src/app/services/rekapitulasi-peminatan.service';
 
 @Component({
   selector: 'app-pengajuan-peminatan',
@@ -26,6 +28,7 @@ export class PengajuanPeminatanComponent {
   alertMessage: string = '';
   peminatan$!: Observable<Peminatan[]>;
   mataKuliah$!: any;
+  statusPengajuanPeminatan$!: any;
   formUploadFileSuratRekomendasi!: FormGroup;
   //ascending
   listpeminatanSortAsc: any;
@@ -34,7 +37,8 @@ export class PengajuanPeminatanComponent {
     private authService: AuthService,
     private pengajuanPeminatanService: PengajuanPeminatanService,
     private masterPeminatanService: MasterPeminatanService,
-    private masterMataKuliahService: MasterMataKuliahService
+    private masterMataKuliahService: MasterMataKuliahService,
+    private rekapitulasiPeminatanService: RekapitulasiPeminatanService
   ) {}
 
   ngOnInit() {
@@ -44,6 +48,7 @@ export class PengajuanPeminatanComponent {
     this.loadDataStatusPengajuanPeminatan();
     this.peminatan$ = this.loadPeminatan();
     this.mataKuliah$ = this.loadMataKuliah();
+    this.loadApprovedPeminatanById();
     this.formUploadFileSuratRekomendasi =
       this.createUploadFilePeminatanFormGroup();
   }
@@ -102,6 +107,14 @@ export class PengajuanPeminatanComponent {
         this.listPeminatan = res;
         this.listpeminatanSortAsc = this.listPeminatan.sort((a: any, b: any) => a.urutanMinat - b.urutanMinat);
       });
+  }
+
+  // approved pengajuan peminatan by id
+  loadApprovedPeminatanById() {
+    this.rekapitulasiPeminatanService.fetchApprovedById(this.decodedToken.userId).subscribe((res) => {
+      this.statusPengajuanPeminatan$ = res.data;
+      console.log(this.statusPengajuanPeminatan$);
+    });
   }
 
   submitFormPeminatan() {
