@@ -56,7 +56,7 @@ export class AuthService {
           localStorage.setItem('token', tokenObject.token);
           localStorage.setItem('username', tokenObject.name);
           localStorage.setItem('userrole', tokenObject.role);
-          this.router.navigate(['dashboard']);
+          this.router.navigate(['user-profil']);
           // if (tokenObject.role == "mahasiswa") {
           //   this.router.navigate(['peminatanmahasiswa']);
           // } else {
