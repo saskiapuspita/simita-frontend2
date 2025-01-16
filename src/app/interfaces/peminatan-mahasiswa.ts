@@ -32,6 +32,7 @@ export interface PeminatanMahasiswa {
   ipkMinat: number;
   haveRecommendation: number;
   buktiSuratRekomendasi: any;
+  buktiKhs: any;
   idUser: number;
   created: Date;
 }

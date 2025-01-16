@@ -111,6 +111,15 @@ export class PengajuanPeminatanService {
     // return this.http.post(`http://localhost:4000/datapeminatanmahasiswa/upload`, fd);
   }
 
+  uploadFileKhs(formData: Partial<PeminatanMahasiswa>) {
+    let fd = new FormData();
+    if(formData.buktiKhs) {
+      fd.append('buktiKhs', formData.buktiKhs, formData.buktiKhs.name);
+    }
+    return this.http.post(`https://api.simitafapetub.site/datapeminatanmahasiswa/uploadKhs`, fd);
+    // return this.http.post(`http://localhost:4000/datapeminatanmahasiswa/uploadKhs`, fd);
+  }
+
 
   // updateIsFinalSubmit(
   //   formData: Partial<PeminatanMahasiswa>,

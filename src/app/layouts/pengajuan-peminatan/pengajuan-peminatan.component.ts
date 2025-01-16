@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { SafeUrl } from '@angular/platform-browser';
 import { first, Observable } from 'rxjs';
 import { MataKuliah } from 'src/app/interfaces/mata-kuliah';
 import { Peminatan } from 'src/app/interfaces/peminatan';
@@ -30,6 +31,10 @@ export class PengajuanPeminatanComponent {
   mataKuliah$!: any;
   statusPengajuanPeminatan$!: any;
   formUploadFileSuratRekomendasi!: FormGroup;
+  formUploadFileKhs!: FormGroup;
+  sourcePath: string =
+    'https://drive.google.com/file/d/1WfAUpvS4OIGsx6wMteuYZzNsHor3VNlR/view?usp=sharing';
+  fileName = 'suratrekomendasi.pdf';
   //ascending
   listpeminatanSortAsc: any;
 
@@ -51,11 +56,19 @@ export class PengajuanPeminatanComponent {
     this.loadApprovedPeminatanById();
     this.formUploadFileSuratRekomendasi =
       this.createUploadFilePeminatanFormGroup();
+    this.formUploadFileKhs =
+    this.createUploadFileKhsFormGroup();
   }
 
   createUploadFilePeminatanFormGroup(): FormGroup {
     return new FormGroup({
-      buktiSuratRekomendasi: new FormControl(null)
+      buktiSuratRekomendasi: new FormControl(null),
+    });
+  }
+
+  createUploadFileKhsFormGroup(): FormGroup {
+    return new FormGroup({
+      buktiKhs: new FormControl(null),
     });
   }
 
@@ -65,15 +78,33 @@ export class PengajuanPeminatanComponent {
       'buktiSuratRekomendasi'
     >
   ): void {
-    if(formUploadFileSuratRekomendasi.buktiSuratRekomendasi != null){
-    this.pengajuanPeminatanService
-      .uploadFileSuratRekomendasi(
-        formUploadFileSuratRekomendasi
-      )
-      .pipe(first())
-      .subscribe(() => {
-        alert('Upload Berhasil!');
-      });
+    if (formUploadFileSuratRekomendasi.buktiSuratRekomendasi != null) {
+      this.pengajuanPeminatanService
+        .uploadFileSuratRekomendasi(formUploadFileSuratRekomendasi)
+        .pipe(first())
+        .subscribe(() => {
+          alert('Upload Berhasil!');
+        });
+    } else {
+      alert('Upload gagal, format file tidak didukung!');
+    }
+  }
+
+  onSubmitUploadFileKhs(
+    formUploadFileKhs: Pick<
+      PeminatanMahasiswa,
+      'buktiKhs'
+    >
+  ): void {
+    console.log(formUploadFileKhs.buktiKhs);
+    
+    if (formUploadFileKhs.buktiKhs != null) {
+      this.pengajuanPeminatanService
+        .uploadFileKhs(formUploadFileKhs)
+        .pipe(first())
+        .subscribe(() => {
+          alert('Upload Berhasil!');
+        });
     } else {
       alert('Upload gagal, format file tidak didukung!');
     }
@@ -81,9 +112,23 @@ export class PengajuanPeminatanComponent {
 
   onImagePicked(event: Event): void {
     const file = (event.target as HTMLInputElement)?.files?.[0]; // Here we use only the first file (single file)
-    console.log("file type : " + file?.type);
-    if(file?.type == 'image/png' || file?.type == 'image/jpeg') {
-      this.formUploadFileSuratRekomendasi.patchValue({ buktiSuratRekomendasi: file });
+    console.log('file type : ' + file?.type);
+    if (file?.type == 'image/png' || file?.type == 'image/jpeg') {
+      this.formUploadFileSuratRekomendasi.patchValue({
+        buktiSuratRekomendasi: file,
+      });
+    } else {
+      alert('Format file tidak didukung!');
+    }
+  }
+
+  onImagePicked2(event: Event): void {
+    const file = (event.target as HTMLInputElement)?.files?.[0]; // Here we use only the first file (single file)
+    console.log('file type : ' + file?.type);
+    if (file?.type == 'image/png' || file?.type == 'image/jpeg') {
+      this.formUploadFileKhs.patchValue({
+        buktiKhs: file,
+      });
     } else {
       alert('Format file tidak didukung!');
     }
@@ -105,16 +150,20 @@ export class PengajuanPeminatanComponent {
       .fetchById(this.decodedToken.userId)
       .subscribe((res) => {
         this.listPeminatan = res;
-        this.listpeminatanSortAsc = this.listPeminatan.sort((a: any, b: any) => a.urutanMinat - b.urutanMinat);
+        this.listpeminatanSortAsc = this.listPeminatan.sort(
+          (a: any, b: any) => a.urutanMinat - b.urutanMinat
+        );
       });
   }
 
   // approved pengajuan peminatan by id
   loadApprovedPeminatanById() {
-    this.rekapitulasiPeminatanService.fetchApprovedById(this.decodedToken.userId).subscribe((res) => {
-      this.statusPengajuanPeminatan$ = res.data;
-      console.log(this.statusPengajuanPeminatan$);
-    });
+    this.rekapitulasiPeminatanService
+      .fetchApprovedById(this.decodedToken.userId)
+      .subscribe((res) => {
+        this.statusPengajuanPeminatan$ = res.data;
+        console.log(this.statusPengajuanPeminatan$);
+      });
   }
 
   submitFormPeminatan() {
@@ -139,7 +188,10 @@ export class PengajuanPeminatanComponent {
       | 'haveRecommendation'
     >
   ): void {
-    console.log('idMatkulMinat5:' + this.formPengajuanPeminatan.get('idMatkulMinat5')!.value);
+    console.log(
+      'idMatkulMinat5:' +
+        this.formPengajuanPeminatan.get('idMatkulMinat5')!.value
+    );
     this.pengajuanPeminatanService
       .create(formPengajuanPeminatan, this.decodedToken.userId)
       .subscribe(() => {
@@ -198,5 +250,8 @@ export class PengajuanPeminatanComponent {
     setTimeout(() => (this.isVisible = false), 2500);
   }
 
+  goToLink(url: string) {
+    window.open(url, '_blank');
+  }
   // TODO CHANGE MATA KULIAH BASED ON SELECTED MINAT
 }

@@ -234,6 +234,11 @@
                                         </div>
                                     </div>
 
+                                    <div class="col-md-4 card-content">
+                                        <label>Download Format Surat Rekomendasi</label>
+                                        <a (click)="goToLink(sourcePath)" [download]="fileName" class="btn btn-outline-primary"><i class="bi bi-cloud-download"></i></a>
+                                    </div>
+
                                     <div>
                                         <button type="submit" class="btn btn-outline-primary m-1">Submit</button>
                                     </div>
@@ -247,6 +252,16 @@
                                             <input class="form-control" type="file" id="formFile" (change)="onImagePicked($event)">
                                         </div>
                                     <div class="col-sm-4"><button type="submit" class="btn btn-primary mb-2">Upload Surat Rekomendasi</button></div>
+                                </div>
+                            </form>
+
+                            <form [formGroup]="formUploadFileKhs" (ngSubmit)="onSubmitUploadFileKhs(formUploadFileKhs.value)">
+                                <div class="row mb-3">
+                                    <label for="khs" class="col-sm-2 col-form-label">KHS</label>
+                                        <div class="col-sm-6">
+                                            <input class="form-control" type="file" id="formFileKhs" (change)="onImagePicked2($event)">
+                                        </div>
+                                    <div class="col-sm-4"><button type="submit" class="btn btn-primary mb-2">Upload KHS</button></div>
                                 </div>
                             </form>
 
