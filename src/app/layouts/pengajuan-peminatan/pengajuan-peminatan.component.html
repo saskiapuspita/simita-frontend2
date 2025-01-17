@@ -234,10 +234,45 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-4 card-content">
+                                    <div class="col-md-10 card-content">
                                         <label>Download Format Surat Rekomendasi</label>
                                         <a (click)="goToLink(sourcePath)" [download]="fileName" class="btn btn-outline-primary"><i class="bi bi-cloud-download"></i></a>
                                     </div>
+
+                                    <div class="col-md-12" *ngIf="formPengajuanPeminatan.get('haveRecommendation')?.value">
+                                        <label for="id" class="col-form-label">Judul Proyek</label>
+                                        <input formControlName="judulProyek" id="judulProyek" type="text" class="form-control">
+                                    </div>
+
+                                    <div class="col-md-6" *ngIf="formPengajuanPeminatan.get('haveRecommendation')?.value">
+                                        <label for="id" class="col-form-label">Sumber Pendanaan</label>
+                                        <input formControlName="sumberPendanaan" id="sumberPendanaan" type="text" class="form-control">
+                                    </div>
+
+                                    <div class="col-md-6" *ngIf="formPengajuanPeminatan.get('haveRecommendation')?.value">
+                                        <label for="id" class="col-form-label">Tahun Pendanaan</label>
+                                        <input formControlName="tahunPendanaanProyek" id="tahunPendanaanProyek" type="text" class="form-control">
+                                    </div>
+
+                                    <fieldset class="row mb-3" *ngIf="formPengajuanPeminatan.get('haveRecommendation')?.value">
+                                        <legend class="col-form-label">Status Proyek</legend>
+                                        <div class="col-sm-12">
+                                          <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="statusProyek" formControlName="statusProyek" id="statusProyek1" value="0">
+                                            <label class="form-check-label" for="statusProyek1">
+                                              Akan Berjalan
+                                            </label>
+                                          </div>
+                                          <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="statusProyek" formControlName="statusProyek" id="statusProyek2" value="1">
+                                            <label class="form-check-label" for="statusProyek2">
+                                              Sudah Berjalan
+                                            </label>
+                                          </div>
+                                        </div>
+                                      </fieldset>
+
+                                    <label><b>*Dengan mengklik tombol "Submit", "Saya setuju" bahwa data yang saya isikan adalah benar dan tidak dapat mengadukan keluhan dikemudian hari.</b></label>
 
                                     <div>
                                         <button type="submit" class="btn btn-outline-primary m-1">Submit</button>

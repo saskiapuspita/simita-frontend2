@@ -31,6 +31,10 @@ export interface PeminatanMahasiswa {
   bobotNilaiMatkul5: number;
   ipkMinat: number;
   haveRecommendation: number;
+  judulProyek: string;
+  sumberPendanaan: string;
+  tahunPendanaanProyek: string;
+  statusProyek: number;
   buktiSuratRekomendasi: any;
   buktiKhs: any;
   idUser: number;

@@ -56,8 +56,7 @@ export class PengajuanPeminatanComponent {
     this.loadApprovedPeminatanById();
     this.formUploadFileSuratRekomendasi =
       this.createUploadFilePeminatanFormGroup();
-    this.formUploadFileKhs =
-    this.createUploadFileKhsFormGroup();
+    this.formUploadFileKhs = this.createUploadFileKhsFormGroup();
   }
 
   createUploadFilePeminatanFormGroup(): FormGroup {
@@ -91,13 +90,10 @@ export class PengajuanPeminatanComponent {
   }
 
   onSubmitUploadFileKhs(
-    formUploadFileKhs: Pick<
-      PeminatanMahasiswa,
-      'buktiKhs'
-    >
+    formUploadFileKhs: Pick<PeminatanMahasiswa, 'buktiKhs'>
   ): void {
     console.log(formUploadFileKhs.buktiKhs);
-    
+
     if (formUploadFileKhs.buktiKhs != null) {
       this.pengajuanPeminatanService
         .uploadFileKhs(formUploadFileKhs)
@@ -186,8 +182,16 @@ export class PengajuanPeminatanComponent {
       | 'idMatkulMinat5'
       | 'nilaiMatkulMinat5'
       | 'haveRecommendation'
+      | 'judulProyek'
+      | 'sumberPendanaan'
+      | 'tahunPendanaanProyek'
+      | 'statusProyek'
     >
   ): void {
+    console.log(
+      'idMatkulMinat4:' +
+        this.formPengajuanPeminatan.get('idMatkulMinat4')!.value
+    );
     console.log(
       'idMatkulMinat5:' +
         this.formPengajuanPeminatan.get('idMatkulMinat5')!.value
@@ -215,11 +219,15 @@ export class PengajuanPeminatanComponent {
       nilaiMatkulMinat2: new FormControl('', [Validators.required]),
       idMatkulMinat3: new FormControl('', [Validators.required]),
       nilaiMatkulMinat3: new FormControl('', [Validators.required]),
-      idMatkulMinat4: new FormControl('', [Validators.required]),
-      nilaiMatkulMinat4: new FormControl('', [Validators.required]),
+      idMatkulMinat4: new FormControl(null),
+      nilaiMatkulMinat4: new FormControl(null),
       idMatkulMinat5: new FormControl(null),
       nilaiMatkulMinat5: new FormControl(null),
       haveRecommendation: new FormControl(null),
+      judulProyek: new FormControl(null),
+      sumberPendanaan: new FormControl(null),
+      tahunPendanaanProyek: new FormControl(null),
+      statusProyek: new FormControl(null),
     });
   }
 
