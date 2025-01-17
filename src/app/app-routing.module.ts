@@ -20,6 +20,7 @@ import { ListPenelitianComponent } from './layouts/list-penelitian/list-peneliti
 import { MasterRuanganComponent } from './layouts/master-ruangan/master-ruangan.component';
 import { PengajuanSeminarProposalComponent } from './layouts/pengajuan-seminar-proposal/pengajuan-seminar-proposal.component';
 import { KuotaDosenComponent } from './layouts/kuota-dosen/kuota-dosen.component';
+import { NilaiMataKuliahComponent } from './layouts/nilai-mata-kuliah/nilai-mata-kuliah.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -124,6 +125,12 @@ const routes: Routes = [
     path: 'kuota-dosen',
     component: KuotaDosenComponent,
     title: 'Kuota Dosen',
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'nilai-mata-kuliah',
+    component: NilaiMataKuliahComponent,
+    title: 'Nilai Mata Kuliah',
     canActivate: [AuthGuardService],
   },
 ];
