@@ -52,16 +52,19 @@ export class NilaiMataKuliahService {
   }
 
   create(
-    formData: Partial<NilaiMataKuliah>,
-    user: Pick<User, 'id'>
+    formData: Partial<NilaiMataKuliah>
   ): Observable<NilaiMataKuliah> {
+    console.log("formData.nilai "+ formData.nilai);
+    console.log("formData.mataKuliah "+ formData.mataKuliah);
+    console.log("formData.user "+ formData.user);
+    
     return this.http
       .post<NilaiMataKuliah>(
         this.url,
         {
           nilai: formData.nilai,
           mataKuliah: formData.mataKuliah,
-          user: user,
+          user: formData.user,
         },
         this.httpOptions
       )
@@ -93,6 +96,7 @@ export class NilaiMataKuliahService {
         {
           nilai: formData.nilai,
           mataKuliah: formData.mataKuliah,
+          user: formData.user
         },
         this.httpOptions
       )

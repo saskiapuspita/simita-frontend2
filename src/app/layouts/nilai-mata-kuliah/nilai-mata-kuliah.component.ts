@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { MataKuliah } from 'src/app/interfaces/mata-kuliah';
 import { NilaiMataKuliah } from 'src/app/interfaces/nilai-mata-kuliah';
 import { User } from 'src/app/interfaces/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { MasterMahasiswaService } from 'src/app/services/master-mahasiswa.service';
+import { MasterMataKuliahService } from 'src/app/services/master-mata-kuliah.service';
 import { NilaiMataKuliahService } from 'src/app/services/nilai-mata-kuliah.service';
 
 @Component({
@@ -20,11 +22,13 @@ export class NilaiMataKuliahComponent {
   detailNilaiMataKuliah: any;
   alertMessage: string = '';
   namaMahasiswa$: any;
+  namaMataKuliah$: any;
 
   constructor(
     private authService: AuthService,
     private nilaiMataKuliahService: NilaiMataKuliahService,
-    private masterMahasiswaService: MasterMahasiswaService
+    private masterMahasiswaService: MasterMahasiswaService,
+    private masterMataKuliahService: MasterMataKuliahService
   ) {}
 
   ngOnInit() {
@@ -32,10 +36,15 @@ export class NilaiMataKuliahComponent {
     this.formNilaiMataKuliah = this.addNilaiMataKuliahFormGroup();
     this.loadDataNilaiMataKuliah();
     this.namaMahasiswa$ = this.fetchAllMahasiswa();
+    this.namaMataKuliah$ = this.fetchAllMataKuliah();
   }
 
   fetchAllMahasiswa(): Observable<User[]> {
     return this.masterMahasiswaService.fetchAll();
+  }
+
+  fetchAllMataKuliah(): Observable<MataKuliah[]> {
+    return this.masterMataKuliahService.fetchAll();
   }
 
   loadDataNilaiMataKuliah() {
@@ -55,7 +64,6 @@ export class NilaiMataKuliahComponent {
 
   submitFormNilaiMataKuliah() {
     console.log('id: ' + this.formNilaiMataKuliah.controls['id'].value);
-    this.formNilaiMataKuliah.controls['id'].value;
     if (this.formNilaiMataKuliah.controls['id'].value == null || this.formNilaiMataKuliah.controls['id'].value == '') {
       this.onSubmitAddNilaiMataKuliah(this.formNilaiMataKuliah.value);
     } else if (this.formNilaiMataKuliah.controls['id'].value != null || this.formNilaiMataKuliah.controls['id'].value != '') {
@@ -67,7 +75,7 @@ export class NilaiMataKuliahComponent {
   }
 
   onSubmitAddNilaiMataKuliah(formNilaiMataKuliah: Pick<NilaiMataKuliah, 'nilai' | 'mataKuliah' | 'user'>): void {
-    this.nilaiMataKuliahService.create(formNilaiMataKuliah, this.decodedToken.userId).subscribe(() => {
+    this.nilaiMataKuliahService.create(formNilaiMataKuliah).subscribe(() => {
       this.formNilaiMataKuliah.reset();
       this.loadDataNilaiMataKuliah();
       this.showAlert('add');
@@ -93,19 +101,19 @@ export class NilaiMataKuliahComponent {
 
   update(idNilaiMataKuliah: any) {
     this.nilaiMataKuliahService.fetchById(idNilaiMataKuliah).subscribe((res: any) => {
-      this.detailNilaiMataKuliah = res.data;
+      this.detailNilaiMataKuliah = res;
       
       this.formNilaiMataKuliah.setValue({
         id: this.detailNilaiMataKuliah[0].id,
-        name: this.detailNilaiMataKuliah[0].name,
-        email: this.detailNilaiMataKuliah[0].email,
-        nidn: this.detailNilaiMataKuliah[0].nidn
+        user: this.detailNilaiMataKuliah[0].user,
+        mataKuliah: this.detailNilaiMataKuliah[0].mataKuliah,
+        nilai: this.detailNilaiMataKuliah[0].nilai
       });
     });
   }
 
   onSubmitUpdateNilaiMataKuliah(
-    formNilaiMataKuliah: Pick<NilaiMataKuliah, 'nilai' | 'mataKuliah'>,
+    formNilaiMataKuliah: Pick<NilaiMataKuliah, 'nilai' | 'mataKuliah' | 'user'>,
     idNilaiMataKuliah: Pick<NilaiMataKuliah, 'id'>
   ): void {
     this.nilaiMataKuliahService.update(formNilaiMataKuliah, idNilaiMataKuliah).subscribe(() => {

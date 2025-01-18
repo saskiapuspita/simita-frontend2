@@ -52,10 +52,15 @@
                                             </div>
                                         </div>
                                         <div class="row mb-3">
-                                            <label for="mataKuliah" class="col-sm-2 col-form-label">MataKuliah</label>
+                                            <label for="mataKuliah" class="col-sm-2 col-form-label">Nama Mata Kuliah</label>
                                             <div class="col-sm-10">
-                                                <input formControlName="mataKuliah" id="mataKuliah" type="text"
-                                                    class="form-control">
+                                                <select class="form-select" aria-label="State" name="mataKuliah" id="mataKuliah"
+                                                    [formControlName]="'mataKuliah'" required>
+                                                    <option disabled selected value>Select an option</option>
+                                                    <option *ngFor="let item of namaMataKuliah$ | async" [value]="item.id">{{
+                                                        item.nama }}
+                                                    </option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="row mb-3">
@@ -80,6 +85,8 @@
                     <table class="table datatable">
                         <thead>
                             <tr>
+                                <th>No.</th>
+                                <th>Nama Mahasiswa</th>
                                 <th>Nilai</th>
                                 <th>Mata Kuliah</th>
                                 <th></th>
@@ -87,8 +94,10 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let item of listNilaiMataKuliah; let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ item.namaMahasiswa }}</td>
                                 <td>{{ item.nilai }}</td>
-                                <td>{{ item.mataKuliah }}</td>
+                                <td>{{ item.namaMataKuliah }}</td>
                                 <td>
                                     <button (click)="delete(item.id)" type="button" class="btn btn-danger m-1"><i
                                             class="bi bi-trash"></i></button>
