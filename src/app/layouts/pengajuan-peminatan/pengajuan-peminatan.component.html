@@ -26,18 +26,43 @@
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="pengajuan-peminatan-tab" data-bs-toggle="tab"
                                 data-bs-target="#bordered-pengajuan-peminatan" type="button" role="tab"
-                                aria-controls="pengajuan-peminatan" aria-selected="true"><b>Pengajuan Peminatan</b></button>
+                                aria-controls="pengajuan-peminatan" aria-selected="true"><b>Pengajuan
+                                    Peminatan</b></button>
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="status-pengajuan-tab" data-bs-toggle="tab"
                                 data-bs-target="#bordered-status-pengajuan" type="button" role="tab"
                                 aria-controls="status-pengajuan" aria-selected="false"><b>Status Pengajuan
-                                Peminatan</b></button>
+                                    Peminatan</b></button>
                         </li>
                     </ul>
                     <div class="tab-content pt-2" id="borderedTabContent">
                         <div class="tab-pane fade show active" id="bordered-pengajuan-peminatan" role="tabpanel"
                             aria-labelledby="pengajuan-peminatan-tab">
+
+                            <!-- Table with stripped rows -->
+                            <table class="table table-sm table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Nama Mahasiswa</th>
+                                        <th>Nama Mata Kuliah</th>
+                                        <th>SKS</th>
+                                        <th>Nilai</th>
+                                        <th>Nama Minat</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of listNilaiMataKuliah; let i = index">
+                                        <td>{{item.namaMahasiswa}}</td>
+                                        <td>{{item.namaMataKuliah}}</td>
+                                        <td>{{item.sks}}</td>
+                                        <td>{{item.nilai}}</td>
+                                        <td>{{item.namaMinat}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <!-- End Table with stripped rows -->
+
                             <form [formGroup]="formPengajuanPeminatan" (ngSubmit)="submitFormPeminatan()">
                                 <div class="row g-3">
 
@@ -58,8 +83,8 @@
 
                                     <div class="col-md-10">
                                         <label for="pilihanMinat" class="form-label">Nama Peminatan</label>
-                                        <select class="form-select" aria-label="State" name="pilihanMinat" id="pilihanMinat"
-                                            [formControlName]="'pilihanMinat'" required>
+                                        <select class="form-select" aria-label="State" name="pilihanMinat"
+                                            id="pilihanMinat" [formControlName]="'pilihanMinat'" required>
                                             <option disabled selected value>Select an option</option>
                                             <option *ngFor="let item of peminatan$ | async" [value]="item.id">{{
                                                 item.nama }}
@@ -70,7 +95,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6">
+                                    <!-- <div class="col-md-6">
                                         <label for="idMatkulMinat1" class="form-label">Nama Mata Kuliah</label>
                                         <select class="form-select" aria-label="State" name="idMatkulMinat1"
                                             id="idMatkulMinat1" [formControlName]="'idMatkulMinat1'" required>
@@ -223,11 +248,12 @@
                                         <div class="invalid-feedback">
                                             Please select a valid state.
                                         </div>
-                                    </div>
+                                    </div> -->
 
                                     <div class="col-md-2">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="haveRecommendation" formControlName="haveRecommendation">
+                                            <input class="form-check-input" type="checkbox" id="haveRecommendation"
+                                                formControlName="haveRecommendation">
                                             <label class="form-check-label" for="haveRecommendation">
                                                 Punya Surat Rekomendasi
                                             </label>
@@ -236,43 +262,55 @@
 
                                     <div class="col-md-10 card-content">
                                         <label>Download Format Surat Rekomendasi</label>
-                                        <a (click)="goToLink(sourcePath)" [download]="fileName" class="btn btn-outline-primary"><i class="bi bi-cloud-download"></i></a>
+                                        <a (click)="goToLink(sourcePath)" [download]="fileName"
+                                            class="btn btn-outline-primary"><i class="bi bi-cloud-download"></i></a>
                                     </div>
 
-                                    <div class="col-md-12" *ngIf="formPengajuanPeminatan.get('haveRecommendation')?.value">
+                                    <div class="col-md-12"
+                                        *ngIf="formPengajuanPeminatan.get('haveRecommendation')?.value">
                                         <label for="id" class="col-form-label">Judul Proyek</label>
-                                        <input formControlName="judulProyek" id="judulProyek" type="text" class="form-control">
+                                        <input formControlName="judulProyek" id="judulProyek" type="text"
+                                            class="form-control">
                                     </div>
 
-                                    <div class="col-md-6" *ngIf="formPengajuanPeminatan.get('haveRecommendation')?.value">
+                                    <div class="col-md-6"
+                                        *ngIf="formPengajuanPeminatan.get('haveRecommendation')?.value">
                                         <label for="id" class="col-form-label">Sumber Pendanaan</label>
-                                        <input formControlName="sumberPendanaan" id="sumberPendanaan" type="text" class="form-control">
+                                        <input formControlName="sumberPendanaan" id="sumberPendanaan" type="text"
+                                            class="form-control">
                                     </div>
 
-                                    <div class="col-md-6" *ngIf="formPengajuanPeminatan.get('haveRecommendation')?.value">
+                                    <div class="col-md-6"
+                                        *ngIf="formPengajuanPeminatan.get('haveRecommendation')?.value">
                                         <label for="id" class="col-form-label">Tahun Pendanaan</label>
-                                        <input formControlName="tahunPendanaanProyek" id="tahunPendanaanProyek" type="text" class="form-control">
+                                        <input formControlName="tahunPendanaanProyek" id="tahunPendanaanProyek"
+                                            type="text" class="form-control">
                                     </div>
 
-                                    <fieldset class="row mb-3" *ngIf="formPengajuanPeminatan.get('haveRecommendation')?.value">
+                                    <fieldset class="row mb-3"
+                                        *ngIf="formPengajuanPeminatan.get('haveRecommendation')?.value">
                                         <legend class="col-form-label">Status Proyek</legend>
                                         <div class="col-sm-12">
-                                          <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="statusProyek" formControlName="statusProyek" id="statusProyek1" value="0">
-                                            <label class="form-check-label" for="statusProyek1">
-                                              Akan Berjalan
-                                            </label>
-                                          </div>
-                                          <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="statusProyek" formControlName="statusProyek" id="statusProyek2" value="1">
-                                            <label class="form-check-label" for="statusProyek2">
-                                              Sudah Berjalan
-                                            </label>
-                                          </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="statusProyek"
+                                                    formControlName="statusProyek" id="statusProyek1" value="0">
+                                                <label class="form-check-label" for="statusProyek1">
+                                                    Akan Berjalan
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="statusProyek"
+                                                    formControlName="statusProyek" id="statusProyek2" value="1">
+                                                <label class="form-check-label" for="statusProyek2">
+                                                    Sudah Berjalan
+                                                </label>
+                                            </div>
                                         </div>
-                                      </fieldset>
+                                    </fieldset>
 
-                                    <label><b>*Dengan mengklik tombol "Submit", "Saya setuju" bahwa data yang saya isikan adalah benar dan tidak dapat mengadukan keluhan dikemudian hari.</b></label>
+                                    <label><b>*Dengan mengklik tombol "Submit", "Saya setuju" bahwa data yang saya
+                                            isikan adalah benar dan tidak dapat mengadukan keluhan dikemudian
+                                            hari.</b></label>
 
                                     <div>
                                         <button type="submit" class="btn btn-outline-primary m-1">Submit</button>
@@ -280,23 +318,29 @@
                                 </div>
                             </form>
 
-                            <form [formGroup]="formUploadFileSuratRekomendasi" (ngSubmit)="onSubmitUploadFileSuratRekomendasi(formUploadFileSuratRekomendasi.value)">
+                            <form [formGroup]="formUploadFileSuratRekomendasi"
+                                (ngSubmit)="onSubmitUploadFileSuratRekomendasi(formUploadFileSuratRekomendasi.value)">
                                 <div class="row mb-3">
                                     <label for="inputNumber" class="col-sm-2 col-form-label">Surat Rekomendasi</label>
-                                        <div class="col-sm-6">
-                                            <input class="form-control" type="file" id="formFile" (change)="onImagePicked($event)">
-                                        </div>
-                                    <div class="col-sm-4"><button type="submit" class="btn btn-primary mb-2">Upload Surat Rekomendasi</button></div>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" type="file" id="formFile"
+                                            (change)="onImagePicked($event)">
+                                    </div>
+                                    <div class="col-sm-4"><button type="submit" class="btn btn-primary mb-2">Upload
+                                            Surat Rekomendasi</button></div>
                                 </div>
                             </form>
 
-                            <form [formGroup]="formUploadFileKhs" (ngSubmit)="onSubmitUploadFileKhs(formUploadFileKhs.value)">
+                            <form [formGroup]="formUploadFileKhs"
+                                (ngSubmit)="onSubmitUploadFileKhs(formUploadFileKhs.value)">
                                 <div class="row mb-3">
                                     <label for="khs" class="col-sm-2 col-form-label">KHS</label>
-                                        <div class="col-sm-6">
-                                            <input class="form-control" type="file" id="formFileKhs" (change)="onImagePicked2($event)">
-                                        </div>
-                                    <div class="col-sm-4"><button type="submit" class="btn btn-primary mb-2">Upload KHS</button></div>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" type="file" id="formFileKhs"
+                                            (change)="onImagePicked2($event)">
+                                    </div>
+                                    <div class="col-sm-4"><button type="submit" class="btn btn-primary mb-2">Upload
+                                            KHS</button></div>
                                 </div>
                             </form>
 
@@ -336,7 +380,7 @@
                                         <td>{{item.nilaiMatkulMinat4}}</td>
                                         <td>{{item.namaMatkulMinat5}}</td>
                                         <td>{{item.nilaiMatkulMinat5}}</td> -->
-                                        <td >{{item.ipkMinat | number : '1.2-2'}}</td>
+                                        <td>{{item.ipkMinat | number : '1.2-2'}}</td>
                                         <td>{{item.haveRecommendation === 0 || item.haveRecommendation === null ? 'Tidak ada' : 'Ada'}}
                                         </td>
                                         <td>{{item.statusPengajuan === 0 || item.statusPengajuan === null ? 'Menunggu persetujuan' : 'Disetujui'}}</td>

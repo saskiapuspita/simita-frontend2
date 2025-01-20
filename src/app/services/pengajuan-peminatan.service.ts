@@ -53,36 +53,12 @@ export class PengajuanPeminatanService {
     formData: Partial<PeminatanMahasiswa>,
     idUser: Pick<User, 'id'>
   ): Observable<PeminatanMahasiswa> {
-    if (formData.idMatkulMinat4 == null) {
-      formData.idMatkulMinat4 = 0
-    }
-    if (formData.nilaiMatkulMinat4 == null) {
-      formData.nilaiMatkulMinat4 = '-'
-    }
-
-    if (formData.idMatkulMinat5 == null) {
-      formData.idMatkulMinat5 = 0
-    }
-    if (formData.nilaiMatkulMinat5 == null) {
-      formData.nilaiMatkulMinat5 = '-'
-    }
-
     return this.http
       .post<PeminatanMahasiswa>(
         this.url,
         {
           urutanMinat: formData.urutanMinat,
           pilihanMinat: formData.pilihanMinat,
-          idMatkulMinat1: formData.idMatkulMinat1,
-          nilaiMatkulMinat1: formData.nilaiMatkulMinat1,
-          idMatkulMinat2: formData.idMatkulMinat2,
-          nilaiMatkulMinat2: formData.nilaiMatkulMinat2,
-          idMatkulMinat3: formData.idMatkulMinat3,
-          nilaiMatkulMinat3: formData.nilaiMatkulMinat3,
-          idMatkulMinat4: formData.idMatkulMinat4,
-          nilaiMatkulMinat4: formData.nilaiMatkulMinat4,
-          idMatkulMinat5: formData.idMatkulMinat5,
-          nilaiMatkulMinat5: formData.nilaiMatkulMinat5,
           haveRecommendation: formData.haveRecommendation,
           judulProyek: formData.judulProyek,
           sumberPendanaan: formData.sumberPendanaan,

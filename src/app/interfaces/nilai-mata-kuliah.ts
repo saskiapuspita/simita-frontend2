@@ -6,5 +6,8 @@ export interface NilaiMataKuliah {
     nilai: string;
     mataKuliah: number;
     namaMataKuliah: string;
+    sks: number;
+    minat: number;
+    namaMinat: string;
     user: Pick<User, 'id'>;
 }

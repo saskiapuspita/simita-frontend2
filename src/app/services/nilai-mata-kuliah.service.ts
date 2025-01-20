@@ -13,8 +13,8 @@ import { NilaiMataKuliah } from '../interfaces/nilai-mata-kuliah';
 })
 export class NilaiMataKuliahService {
   private url =
-    // 'https://api.simitafapetub.site/nilaimatakuliah';
-    'http://localhost:4000/nilaimatakuliah';
+    'https://api.simitafapetub.site/nilaimatakuliah';
+    // 'http://localhost:4000/nilaimatakuliah';
 
   httpOptions: { headers: HttpHeaders } = {
     headers: new HttpHeaders({
@@ -103,6 +103,18 @@ export class NilaiMataKuliahService {
       .pipe(
         catchError(
           this.errorHandlerService.handleError<NilaiMataKuliah>('update')
+        )
+      );
+  }
+
+  fetchByIdUser(id: Pick<User, 'id'>): Observable<{}> {
+    return this.http
+      .get<NilaiMataKuliah>(`https://api.simitafapetub.site/middlewarenilaimatakuliah/${id}`, this.httpOptions)
+      // .get<NilaiMataKuliah>(`http://localhost:4000/middlewarenilaimatakuliah/${id}`, this.httpOptions)
+      .pipe(
+        first(),
+        catchError(
+          this.errorHandlerService.handleError<NilaiMataKuliah>('fetchByIdUser')
         )
       );
   }

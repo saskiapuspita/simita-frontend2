@@ -10,6 +10,7 @@ import { User } from 'src/app/interfaces/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { MasterMataKuliahService } from 'src/app/services/master-mata-kuliah.service';
 import { MasterPeminatanService } from 'src/app/services/master-peminatan.service';
+import { NilaiMataKuliahService } from 'src/app/services/nilai-mata-kuliah.service';
 import { PengajuanPeminatanService } from 'src/app/services/pengajuan-peminatan.service';
 import { RekapitulasiPeminatanService } from 'src/app/services/rekapitulasi-peminatan.service';
 
@@ -35,6 +36,8 @@ export class PengajuanPeminatanComponent {
   sourcePath: string =
     'https://drive.google.com/file/d/1WfAUpvS4OIGsx6wMteuYZzNsHor3VNlR/view?usp=sharing';
   fileName = 'suratrekomendasi.pdf';
+  listNilaiMataKuliah!: any;
+  nilaiMataKuliah: any;
   //ascending
   listpeminatanSortAsc: any;
 
@@ -43,7 +46,8 @@ export class PengajuanPeminatanComponent {
     private pengajuanPeminatanService: PengajuanPeminatanService,
     private masterPeminatanService: MasterPeminatanService,
     private masterMataKuliahService: MasterMataKuliahService,
-    private rekapitulasiPeminatanService: RekapitulasiPeminatanService
+    private rekapitulasiPeminatanService: RekapitulasiPeminatanService,
+    private nilaiMataKuliahService: NilaiMataKuliahService
   ) {}
 
   ngOnInit() {
@@ -53,6 +57,7 @@ export class PengajuanPeminatanComponent {
     this.loadDataStatusPengajuanPeminatan();
     this.peminatan$ = this.loadPeminatan();
     this.mataKuliah$ = this.loadMataKuliah();
+    this.loadNilaiMataKuliah();
     this.loadApprovedPeminatanById();
     this.formUploadFileSuratRekomendasi =
       this.createUploadFilePeminatanFormGroup();
@@ -130,9 +135,29 @@ export class PengajuanPeminatanComponent {
     }
   }
 
+  onSelectionChange($event: any): void {
+    this.nilaiMataKuliah = this.listNilaiMataKuliah.filter(
+      (c: { mataKuliah: any }) => c.mataKuliah === $event
+    );
+    let item = this.nilaiMataKuliah[0];
+    console.log('item.id' + item.id);
+
+    this.formPengajuanPeminatan.controls['nilaiMatkulMinat1'].setValue(item.id);
+    console.log($event);
+  }
+
   // mata kuliah
   loadMataKuliah(): Observable<MataKuliah[]> {
     return this.masterMataKuliahService.fetchNamaPeminatanBasedOnIdMinat();
+  }
+
+  // nilai mata kuliah
+  loadNilaiMataKuliah() {
+      this.nilaiMataKuliahService
+      .fetchByIdUser(this.decodedToken.userId)
+      .subscribe((res) => {
+        this.listNilaiMataKuliah = res;
+      });
   }
 
   // peminatan
@@ -158,7 +183,6 @@ export class PengajuanPeminatanComponent {
       .fetchApprovedById(this.decodedToken.userId)
       .subscribe((res) => {
         this.statusPengajuanPeminatan$ = res.data;
-        console.log(this.statusPengajuanPeminatan$);
       });
   }
 
@@ -171,16 +195,6 @@ export class PengajuanPeminatanComponent {
       PeminatanMahasiswa,
       | 'urutanMinat'
       | 'pilihanMinat'
-      | 'idMatkulMinat1'
-      | 'nilaiMatkulMinat1'
-      | 'idMatkulMinat2'
-      | 'nilaiMatkulMinat2'
-      | 'idMatkulMinat3'
-      | 'nilaiMatkulMinat3'
-      | 'idMatkulMinat4'
-      | 'nilaiMatkulMinat4'
-      | 'idMatkulMinat5'
-      | 'nilaiMatkulMinat5'
       | 'haveRecommendation'
       | 'judulProyek'
       | 'sumberPendanaan'
@@ -188,14 +202,14 @@ export class PengajuanPeminatanComponent {
       | 'statusProyek'
     >
   ): void {
-    console.log(
-      'idMatkulMinat4:' +
-        this.formPengajuanPeminatan.get('idMatkulMinat4')!.value
-    );
-    console.log(
-      'idMatkulMinat5:' +
-        this.formPengajuanPeminatan.get('idMatkulMinat5')!.value
-    );
+    // console.log(
+    //   'idMatkulMinat4:' +
+    //     this.formPengajuanPeminatan.get('idMatkulMinat4')!.value
+    // );
+    // console.log(
+    //   'idMatkulMinat5:' +
+    //     this.formPengajuanPeminatan.get('idMatkulMinat5')!.value
+    // );
     this.pengajuanPeminatanService
       .create(formPengajuanPeminatan, this.decodedToken.userId)
       .subscribe(() => {
@@ -213,16 +227,16 @@ export class PengajuanPeminatanComponent {
     return new FormGroup({
       urutanMinat: new FormControl('', [Validators.required]),
       pilihanMinat: new FormControl('', [Validators.required]),
-      idMatkulMinat1: new FormControl('', [Validators.required]),
-      nilaiMatkulMinat1: new FormControl('', [Validators.required]),
-      idMatkulMinat2: new FormControl('', [Validators.required]),
-      nilaiMatkulMinat2: new FormControl('', [Validators.required]),
-      idMatkulMinat3: new FormControl('', [Validators.required]),
-      nilaiMatkulMinat3: new FormControl('', [Validators.required]),
-      idMatkulMinat4: new FormControl(null),
-      nilaiMatkulMinat4: new FormControl(null),
-      idMatkulMinat5: new FormControl(null),
-      nilaiMatkulMinat5: new FormControl(null),
+      // idMatkulMinat1: new FormControl('', [Validators.required]),
+      // nilaiMatkulMinat1: new FormControl('', [Validators.required]),
+      // idMatkulMinat2: new FormControl('', [Validators.required]),
+      // nilaiMatkulMinat2: new FormControl('', [Validators.required]),
+      // idMatkulMinat3: new FormControl('', [Validators.required]),
+      // nilaiMatkulMinat3: new FormControl('', [Validators.required]),
+      // idMatkulMinat4: new FormControl(null),
+      // nilaiMatkulMinat4: new FormControl(null),
+      // idMatkulMinat5: new FormControl(null),
+      // nilaiMatkulMinat5: new FormControl(null),
       haveRecommendation: new FormControl(null),
       judulProyek: new FormControl(null),
       sumberPendanaan: new FormControl(null),
