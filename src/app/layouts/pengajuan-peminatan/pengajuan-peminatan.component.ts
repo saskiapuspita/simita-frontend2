@@ -114,7 +114,7 @@ export class PengajuanPeminatanComponent {
   onImagePicked(event: Event): void {
     const file = (event.target as HTMLInputElement)?.files?.[0]; // Here we use only the first file (single file)
     console.log('file type : ' + file?.type);
-    if (file?.type == 'image/png' || file?.type == 'image/jpeg') {
+    if (file?.type == 'application/pdf') {
       this.formUploadFileSuratRekomendasi.patchValue({
         buktiSuratRekomendasi: file,
       });
@@ -126,7 +126,7 @@ export class PengajuanPeminatanComponent {
   onImagePicked2(event: Event): void {
     const file = (event.target as HTMLInputElement)?.files?.[0]; // Here we use only the first file (single file)
     console.log('file type : ' + file?.type);
-    if (file?.type == 'image/png' || file?.type == 'image/jpeg') {
+    if (file?.type == 'application/pdf') {
       this.formUploadFileKhs.patchValue({
         buktiKhs: file,
       });

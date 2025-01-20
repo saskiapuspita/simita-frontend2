@@ -321,7 +321,7 @@
                             <form [formGroup]="formUploadFileSuratRekomendasi"
                                 (ngSubmit)="onSubmitUploadFileSuratRekomendasi(formUploadFileSuratRekomendasi.value)">
                                 <div class="row mb-3">
-                                    <label for="inputNumber" class="col-sm-2 col-form-label">Surat Rekomendasi</label>
+                                    <label for="inputNumber" class="col-sm-2 col-form-label">Surat Rekomendasi <b>*(format pdf, nama file: nama_nim)</b></label>
                                     <div class="col-sm-6">
                                         <input class="form-control" type="file" id="formFile"
                                             (change)="onImagePicked($event)">
@@ -334,7 +334,7 @@
                             <form [formGroup]="formUploadFileKhs"
                                 (ngSubmit)="onSubmitUploadFileKhs(formUploadFileKhs.value)">
                                 <div class="row mb-3">
-                                    <label for="khs" class="col-sm-2 col-form-label">KHS</label>
+                                    <label for="khs" class="col-sm-2 col-form-label">KHS <b>*(format pdf, nama file: nama_nim)</b></label>
                                     <div class="col-sm-6">
                                         <input class="form-control" type="file" id="formFileKhs"
                                             (change)="onImagePicked2($event)">
