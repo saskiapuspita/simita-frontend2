@@ -12,8 +12,8 @@ import { ErrorHandlerService } from './error-handler.service';
 })
 export class MasterMahasiswaService {
   private url =
-    // 'https://api.simitafapetub.site/user';
-    'http://localhost:4000/user';
+    'https://api.simitafapetub.site/user';
+    // 'http://localhost:4000/user';
 
   httpOptions: { headers: HttpHeaders } = {
     headers: new HttpHeaders({

@@ -8,8 +8,8 @@ import { Observable } from 'rxjs';
 export class AuthApiService {
 
   apiUrl = 
-  // 'https://api.simitafapetub.site';
-  'http://localhost:4000';
+  'https://api.simitafapetub.site';
+  // 'http://localhost:4000';
 
   constructor(private http: HttpClient) { }
 
