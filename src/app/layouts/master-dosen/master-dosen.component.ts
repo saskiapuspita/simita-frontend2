@@ -1,9 +1,14 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Dosen } from 'src/app/interfaces/dosen';
+import { KuotaDosen } from 'src/app/interfaces/kuota-dosen';
+import { Peminatan } from 'src/app/interfaces/peminatan';
 import { AuthService } from 'src/app/services/auth.service';
+import { KuotaDosenService } from 'src/app/services/kuota-dosen.service';
 import { MasterDosenService } from 'src/app/services/master-dosen.service';
+import { MasterPeminatanService } from 'src/app/services/master-peminatan.service';
 
 @Component({
   selector: 'app-master-dosen',
@@ -14,19 +19,30 @@ export class MasterDosenComponent {
   decodedToken: any;
   isVisible: boolean = false;
   formDosen!: FormGroup;
+  formDepartemenDosen!: FormGroup;
   listDosen!: Dosen[];
   detailDosen: any;
   alertMessage: string = '';
+  peminatan$!: Observable<Peminatan[]>;
 
   constructor(
     private authService: AuthService,
-    private masterDosenService: MasterDosenService
+    private masterDosenService: MasterDosenService,
+    private masterPeminatanService: MasterPeminatanService,
+    private kuotaDosenService: KuotaDosenService
   ) {}
 
   ngOnInit() {
     this.decodedToken = this.authService.decodeToken();
     this.formDosen = this.addDosenFormGroup();
+    this.formDepartemenDosen = this.departemenDosenFormGroup();
     this.loadDataDosen();
+    this.peminatan$ = this.loadPeminatan();
+  }
+
+  // peminatan
+  loadPeminatan(): Observable<Peminatan[]> {
+    return this.masterPeminatanService.fetchAll();
   }
 
   loadDataDosen() {
@@ -41,6 +57,13 @@ export class MasterDosenComponent {
       name: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required]),
       nidn: new FormControl('', [Validators.required]),
+    });
+  }
+
+  departemenDosenFormGroup(): FormGroup {
+    return new FormGroup({
+      idDosen: new FormControl('', [Validators.required]),
+      departemenDosen: new FormControl('', [Validators.required])
     });
   }
 
@@ -105,6 +128,27 @@ export class MasterDosenComponent {
       this.showAlert('update');
       this.loadDataDosen();
     });
+  }
+
+  updateDepartemenDosen(id: any) {
+    console.log("ini id dosen: " + id);
+    this.formDepartemenDosen.patchValue({
+      idDosen: id
+    });
+  }
+
+  assignDepartemenDosen(
+    formDepartemenDosen: Pick<KuotaDosen, 'departemenDosen'>
+  ): void {
+    console.log('idDosen: ' + this.formDepartemenDosen.controls['idDosen'].value);
+    var idDosen = this.formDepartemenDosen.controls['idDosen'].value;
+    if (idDosen != null || idDosen != '') {
+      this.kuotaDosenService.assignDepartemenDosen(formDepartemenDosen, idDosen).subscribe(() => {
+        this.formDepartemenDosen.reset();
+        this.showAlert('Lecture successfully assign to the departement.');
+        this.loadDataDosen();
+      });
+    }
   }
 
   delete(id: any) {

@@ -1,0 +1,144 @@
+<div class="pagetitle">
+    <h1>Seminar</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">Seminar</li>
+            <li class="breadcrumb-item">Pengajuan Seminar Hasil</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+<section class="section">
+    <div class="row">
+        <div class="col-lg-12">
+
+            <!-- alert -->
+            <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="isVisible">
+                <i class="bi bi-check-circle me-1"></i>
+                {{ alertMessage }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="nama" class="form-label">Nama</label>
+                            <input value="{{ decodedToken.name }}" type="text" class="form-control" id="nama" disabled>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="nim" class="form-label">NIM</label>
+                            <input value="{{ decodedToken.nim }}" type="text" class="form-control" id="nim" disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <form [formGroup]="formSeminarHasil" (ngSubmit)="submitFormSeminarHasil()">
+                        <div class="row mb-3" hidden>
+                            <label for="idSkripsi" class="col-sm-2 col-form-label">Id Skripsi</label>
+                            <div class="col-sm-10">
+                                <input formControlName="idSkripsi" id="idSkripsi" type="text" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="judulSkripsi" class="col-sm-2 col-form-label">Judul
+                                Penelitian</label>
+                            <div class="col-sm-10">
+                                <input formControlName="judulSkripsi" id="judulSkripsi" type="text"
+                                    class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="tanggalSeminar" class="col-sm-2 col-form-label">Tanggal
+                                Seminar</label>
+                            <div class="col-sm-10">
+                                <input formControlName="tanggalSeminar" id="tanggalSeminar" type="date"
+                                    class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="waktuMulai" class="col-sm-2 col-form-label">Waktu
+                                Mulai</label>
+                            <div class="col-sm-10">
+                                <ngb-timepicker [formControlName]="'waktuMulai'" />
+                                <!-- <pre>Selected hour: {{ this.formSeminarHasil.get('waktuSeminar')?.value.hour }}</pre>
+                                <pre>Selected minute: {{ this.formSeminarHasil.get('waktuSeminar')?.value.minute }}</pre>
+                                <pre>Selected second: {{ this.formSeminarHasil.get('waktuSeminar')?.value.second }}</pre> -->
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="waktuBerakhir" class="col-sm-2 col-form-label">Waktu
+                                Berakhir</label>
+                            <div class="col-sm-10">
+                                <ngb-timepicker [formControlName]="'waktuBerakhir'" />
+                                <!-- <pre>Selected hour: {{ this.formSeminarHasil.get('waktuSeminar')?.value.hour }}</pre>
+                                <pre>Selected minute: {{ this.formSeminarHasil.get('waktuSeminar')?.value.minute }}</pre>
+                                <pre>Selected second: {{ this.formSeminarHasil.get('waktuSeminar')?.value.second }}</pre> -->
+                            </div>
+                        </div>
+
+                        <div>
+                            <button (click)="cekKetersediaanRuangan()" type="button" class="btn btn-success"><i
+                                    class="bi bi-check-circle"></i> Cek Ketersediaan Ruangan</button>
+                        </div>
+
+                        <div class="container mt-4">
+                            <div class="row">
+                                <div class="col-md-4" *ngFor="let ruangan of ruanganList">
+                                    <div class="card shadow-lg border-0 mb-4" [ngClass]="{
+                                    'bg-success text-white': ruangan.status === 'Tersedia' && selectedRuangan?.id === ruangan.id,
+                                    'bg-danger text-white': ruangan.status === 'Tidak Tersedia',
+                                    'border-primary': selectedRuangan?.id === ruangan.id
+                                  }" (click)="selectRuangan(ruangan)" style="cursor: pointer;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ ruangan.namaRuang }}</h5>
+                                            <p class="card-text" hidden>Id: {{ ruangan.id }}</p>
+                                            <p class="card-text">Status: {{ ruangan.status_ruang }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- <div *ngIf="selectedRuangan" class="alert alert-info mt-3">
+                                <strong>Ruangan Dipilih:</strong> {{ selectedRuangan.id }}
+                            </div> -->
+                        </div>
+
+                        <div class="row mb-3" *ngIf="selectedRuangan">
+                            <label for="idRuang" class="col-sm-2 col-form-label">Ruangan yang dipilih</label>
+                            <div class="col-sm-10">
+                                <input formControlName="idRuang" id="idRuang" type="text" class="form-control"
+                                    value="{{ this.formSeminarHasil.get('idRuang')?.value }}">
+                            </div>
+                        </div>
+
+                        <!-- <div class="row mb-3">
+                            <label for="idRuang" class="col-sm-2 col-form-label">Ruang Seminar</label>
+                            <div class="col-sm-10">
+                                <select class="form-select" aria-label="State" name="idRuang" id="idRuang"
+                                    [formControlName]="'idRuang'" required>
+                                    <option disabled selected value>Select an option</option>
+                                    <option *ngFor="let item of availableRoom$ | async" [value]="item.id">{{
+                                        item.namaRuang }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div> -->
+
+                        <div>
+                            <button type="submit" class="btn btn-primary m-1">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

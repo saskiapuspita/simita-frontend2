@@ -1,0 +1,52 @@
+<div class="pagetitle">
+    <h1>Pengajuan Judul Penelitian</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">Pengajuan Judul Penelitian</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+<section class="section">
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="card">
+                <div class="card-body">
+                    <!-- Table with stripped rows -->
+                    <table class="table datatable">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>NIM - Nama Mahasiswa</th>
+                                <th>Minat</th>
+                                <th>Judul Penelitian</th>
+                                <th>Lokasi Penelitian</th>
+                                <th>Dosen Pembimbing</th>
+                                <th>Status Pengajuan</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of listPengajuanSkripsi; let i = index">
+                                <td>{{ i+1 }}</td>
+                                <td>{{ item.nim }} - {{ item.namaMahasiswa }}</td>
+                                <td>{{ item.namaPeminatan }}</td>
+                                <td>{{ item.judulSkripsi }}</td>
+                                <td>{{ item.namaLokasi }}</td>
+                                <td>{{ item.namaDosen }}</td>
+                                <td>{{item.statusPengajuan === 0 || item.statusPengajuan === null ? 'Menunggu persetujuan' : 'Disetujui'}}</td>
+                                <td>
+                                    <button (click)="delete(item.id)" type="button" class="btn btn-danger m-1"><i
+                                            class="bi bi-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- End Table with stripped rows -->
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

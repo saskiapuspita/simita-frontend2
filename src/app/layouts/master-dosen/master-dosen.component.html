@@ -72,6 +72,48 @@
                         </div>
                     </div>
 
+                    <!-- modal assign departemen -->
+                    <div class="modal fade" id="assignDepartemenDosenModal" tabindex="-1">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <form [formGroup]="formDepartemenDosen" (ngSubmit)="assignDepartemenDosen(formDepartemenDosen.value)">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Assign Departemen</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row mb-3">
+                                            <label for="idDosen" class="col-sm-2 col-form-label">Id</label>
+                                            <div class="col-sm-10">
+                                                <input formControlName="idDosen" id="idDosen" type="text"
+                                                    class="form-control">
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <label for="departemenDosen" class="col-sm-2 col-form-label">Nama Peminatan</label>
+                                            <div class="col-sm-10">
+                                                <select class="form-select" aria-label="State" name="departemenDosen"
+                                                id="departemenDosen" [formControlName]="'departemenDosen'" required>
+                                                <option disabled selected value>Select an option</option>
+                                                <option *ngFor="let item of peminatan$ | async" [value]="item.id">{{
+                                                    item.nama }}
+                                                </option>
+                                            </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Table with stripped rows -->
                     <table class="table datatable">
                         <thead>
@@ -90,8 +132,10 @@
                                 <td>
                                     <button (click)="delete(item.id)" type="button" class="btn btn-danger m-1"><i
                                             class="bi bi-trash"></i></button>
-                                    <button (click)="update(item.id)" type="button" class="btn btn-primary"><i class="bi bi-pencil-square"
+                                    <button (click)="update(item.id)" type="button" class="btn btn-primary m-1"><i class="bi bi-pencil-square"
                                             data-bs-toggle="modal" data-bs-target="#basicModal"></i></button>
+                                    <button (click)="updateDepartemenDosen(item.id)" type="button" class="btn btn-primary m-1"><i class="bi bi-card-checklist"
+                                                data-bs-toggle="modal" data-bs-target="#assignDepartemenDosenModal"></i></button>
                                 </td>
                             </tr>
                         </tbody>

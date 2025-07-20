@@ -13,8 +13,8 @@ import { PeminatanMahasiswa } from '../interfaces/peminatan-mahasiswa';
 })
 export class PengajuanPeminatanService {
   private url =
-    'https://api.simitafapetub.site/peminatanmhs';
-    // 'http://localhost:4000/peminatanmhs';
+    // 'https://api.simitafapetub.site/peminatanmhs';
+    'http://localhost:4000/peminatanmhs';
 
   httpOptions: { headers: HttpHeaders } = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -94,8 +94,8 @@ export class PengajuanPeminatanService {
     if(formData.buktiSuratRekomendasi) {
       fd.append('buktiSuratRekomendasi', formData.buktiSuratRekomendasi, formData.buktiSuratRekomendasi.name);
     }
-    return this.http.post(`https://api.simitafapetub.site/datapeminatanmahasiswa/upload`, fd);
-    // return this.http.post(`http://localhost:4000/datapeminatanmahasiswa/upload`, fd);
+    // return this.http.post(`https://api.simitafapetub.site/datapeminatanmahasiswa/upload`, fd);
+    return this.http.post(`http://localhost:4000/datapeminatanmahasiswa/upload`, fd);
   }
 
   uploadFileKhs(formData: Partial<PeminatanMahasiswa>) {
@@ -103,8 +103,8 @@ export class PengajuanPeminatanService {
     if(formData.buktiKhs) {
       fd.append('buktiKhs', formData.buktiKhs, formData.buktiKhs.name);
     }
-    return this.http.post(`https://api.simitafapetub.site/datapeminatanmahasiswa/uploadKhs`, fd);
-    // return this.http.post(`http://localhost:4000/datapeminatanmahasiswa/uploadKhs`, fd);
+    // return this.http.post(`https://api.simitafapetub.site/datapeminatanmahasiswa/uploadKhs`, fd);
+    return this.http.post(`http://localhost:4000/datapeminatanmahasiswa/uploadKhs`, fd);
   }
 
 

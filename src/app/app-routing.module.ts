@@ -21,6 +21,11 @@ import { MasterRuanganComponent } from './layouts/master-ruangan/master-ruangan.
 import { PengajuanSeminarProposalComponent } from './layouts/pengajuan-seminar-proposal/pengajuan-seminar-proposal.component';
 import { KuotaDosenComponent } from './layouts/kuota-dosen/kuota-dosen.component';
 import { NilaiMataKuliahComponent } from './layouts/nilai-mata-kuliah/nilai-mata-kuliah.component';
+import { StatusJudulPenetianComponent } from './layouts/status-judul-penetian/status-judul-penetian.component';
+import { ApprovalJudulPenelitianComponent } from './layouts/approval-judul-penelitian/approval-judul-penelitian.component';
+import { RekapitulasiPeminatanComponent } from './layouts/rekapitulasi-peminatan/rekapitulasi-peminatan.component';
+import { PengajuanSeminarHasilComponent } from './layouts/pengajuan-seminar-hasil/pengajuan-seminar-hasil.component';
+import { MonitoringTugasAkhirComponent } from './layouts/monitoring-tugas-akhir/monitoring-tugas-akhir.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -53,6 +58,12 @@ const routes: Routes = [
     path: 'pengajuan-peminatan',
     component: PengajuanPeminatanComponent,
     title: 'Pengajuan Peminatan',
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'rekapitulasi-peminatan',
+    component: RekapitulasiPeminatanComponent,
+    title: 'Rekapitulasi Peminatan',
     canActivate: [AuthGuardService],
   },
   {
@@ -104,6 +115,18 @@ const routes: Routes = [
     canActivate: [AuthGuardService],
   },
   {
+    path: 'status-judul-penelitian',
+    component: StatusJudulPenetianComponent,
+    title: 'Status Pengajuan Judul Penelitian',
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'approval-judul-penelitian',
+    component: ApprovalJudulPenelitianComponent,
+    title: 'Approval Judul Penelitian',
+    canActivate: [AuthGuardService],
+  },
+  {
     path: 'list-penelitian',
     component: ListPenelitianComponent,
     title: 'List Penelitian',
@@ -122,6 +145,12 @@ const routes: Routes = [
     canActivate: [AuthGuardService],
   },
   {
+    path: 'pengajuan-seminar-hasil',
+    component: PengajuanSeminarHasilComponent,
+    title: 'Pengajuan Seminar Hasil',
+    canActivate: [AuthGuardService],
+  },
+  {
     path: 'kuota-dosen',
     component: KuotaDosenComponent,
     title: 'Kuota Dosen',
@@ -131,6 +160,12 @@ const routes: Routes = [
     path: 'nilai-mata-kuliah',
     component: NilaiMataKuliahComponent,
     title: 'Nilai Mata Kuliah',
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'monitoring-tugas-akhir',
+    component: MonitoringTugasAkhirComponent,
+    title: 'Monitoring Tugas Akhir',
     canActivate: [AuthGuardService],
   },
 ];

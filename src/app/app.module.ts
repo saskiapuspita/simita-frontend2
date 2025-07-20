@@ -26,6 +26,17 @@ import { MasterRuanganComponent } from './layouts/master-ruangan/master-ruangan.
 import { PengajuanSeminarProposalComponent } from './layouts/pengajuan-seminar-proposal/pengajuan-seminar-proposal.component';
 import { KuotaDosenComponent } from './layouts/kuota-dosen/kuota-dosen.component';
 import { NilaiMataKuliahComponent } from './layouts/nilai-mata-kuliah/nilai-mata-kuliah.component';
+import { CustomPaginationComponent } from './layouts/custom-pagination/custom-pagination.component';
+import { StatusJudulPenetianComponent } from './layouts/status-judul-penetian/status-judul-penetian.component';
+import { ApprovalJudulPenelitianComponent } from './layouts/approval-judul-penelitian/approval-judul-penelitian.component';
+import { FilterPipe } from './filter.pipe';
+import { RekapitulasiPeminatanComponent } from './layouts/rekapitulasi-peminatan/rekapitulasi-peminatan.component';
+import { PengajuanSeminarHasilComponent } from './layouts/pengajuan-seminar-hasil/pengajuan-seminar-hasil.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DateTimePickerComponent } from './layouts/date-time-picker/date-time-picker.component';
+import { FaIconLibrary, FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { faCalendar, faClock } from "@fortawesome/free-regular-svg-icons";
+import { MonitoringTugasAkhirComponent } from './layouts/monitoring-tugas-akhir/monitoring-tugas-akhir.component';
 
 @NgModule({
   declarations: [
@@ -50,14 +61,25 @@ import { NilaiMataKuliahComponent } from './layouts/nilai-mata-kuliah/nilai-mata
     MasterRuanganComponent,
     PengajuanSeminarProposalComponent,
     KuotaDosenComponent,
-    NilaiMataKuliahComponent
+    NilaiMataKuliahComponent,
+    CustomPaginationComponent,
+    StatusJudulPenetianComponent,
+    ApprovalJudulPenelitianComponent,
+    FilterPipe,
+    RekapitulasiPeminatanComponent,
+    PengajuanSeminarHasilComponent,
+    DateTimePickerComponent,
+    MonitoringTugasAkhirComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule,
+    FontAwesomeModule,
+    ReactiveFormsModule
   ],
   providers: [
     {
@@ -68,4 +90,8 @@ import { NilaiMataKuliahComponent } from './layouts/nilai-mata-kuliah/nilai-mata
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+  constructor(library: FaIconLibrary) {
+    library.addIcons(faCalendar, faClock);
+  }
+}

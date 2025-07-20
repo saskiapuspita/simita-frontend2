@@ -13,8 +13,8 @@ import { LokasiPkl } from '../interfaces/lokasi-pkl';
 })
 export class LokasiPklService {
   private url = 
-  'https://api.simitafapetub.site/lokasiPkl';
-  // 'http://localhost:4000/lokasiPkl';
+  // 'https://api.simitafapetub.site/lokasiPkl';
+  'http://localhost:4000/lokasiPkl';
 
   httpOptions: { headers: HttpHeaders } = {
     headers: new HttpHeaders({

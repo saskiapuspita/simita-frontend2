@@ -13,8 +13,8 @@ import { SeminarProposal } from '../interfaces/seminar-proposal';
 })
 export class SeminarProposalService {
   private url = 
-  'https://api.simitafapetub.site/seminarproposal';
-  // 'http://localhost:4000/seminarproposal';
+  // 'https://api.simitafapetub.site/seminarproposal';
+  'http://localhost:4000/seminarproposal';
 
   httpOptions: { headers: HttpHeaders } = {
     headers: new HttpHeaders({

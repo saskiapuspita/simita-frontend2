@@ -1,48 +1,62 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Dosen } from 'src/app/interfaces/dosen';
 import { LokasiSkripsi } from 'src/app/interfaces/lokasi-skripsi';
+import { Peminatan } from 'src/app/interfaces/peminatan';
 import { Skripsi } from 'src/app/interfaces/skripsi';
 import { AuthService } from 'src/app/services/auth.service';
-import { MasterDosenService } from 'src/app/services/master-dosen.service';
+import { KuotaDosenService } from 'src/app/services/kuota-dosen.service';
 import { MasterLokasiSkripsiService } from 'src/app/services/master-lokasi-skripsi.service';
+import { MasterPeminatanService } from 'src/app/services/master-peminatan.service';
+import { RekapitulasiPeminatanService } from 'src/app/services/rekapitulasi-peminatan.service';
 import { SkripsiService } from 'src/app/services/skripsi.service';
 
 @Component({
   selector: 'app-pengajuan-judul-penelitian',
   templateUrl: './pengajuan-judul-penelitian.component.html',
-  styleUrls: ['./pengajuan-judul-penelitian.component.scss']
+  styleUrls: ['./pengajuan-judul-penelitian.component.scss'],
 })
 export class PengajuanJudulPenelitianComponent {
   decodedToken: any;
   isVisible: boolean = false;
   formSkripsi!: FormGroup;
-  listPengajuanSkripsi!: Skripsi[];
-  detailSkripsi: any;
   alertMessage: string = '';
   lokasiSkripsi$!: Observable<LokasiSkripsi[]>;
-  namaDosen$!: Observable<Dosen[]>;
+  namaDosen$!: any;
+  peminatanMahasiswa: any;
+  peminatan$!: Observable<Peminatan[]>;
 
   constructor(
     private authService: AuthService,
     private skripsiService: SkripsiService,
-    private masterDosenService: MasterDosenService,
-    private masterLokasiSkripsiService: MasterLokasiSkripsiService
+    private masterLokasiSkripsiService: MasterLokasiSkripsiService,
+    private rekapPeminatanMahasiswaService: RekapitulasiPeminatanService,
+    private kuotaDosenService: KuotaDosenService,
+    private masterPeminatanService: MasterPeminatanService,
   ) {}
 
   ngOnInit() {
     this.decodedToken = this.authService.decodeToken();
     this.formSkripsi = this.addSkripsiFormGroup();
-    this.loadDataPengajuanSkripsi();
-    this.namaDosen$ = this.fetchAllDosen();
+    this.peminatanMahasiswa = this.loadPeminatanMahasiswa();
     this.lokasiSkripsi$ = this.fetchAllLokasiSkripsi();
+    this.peminatan$ = this.loadPeminatan();
+    
+  }
+
+  // peminatan
+  loadPeminatan(): Observable<Peminatan[]> {
+    return this.masterPeminatanService.fetchAll();
   }
 
   // dosen
-  fetchAllDosen(): Observable<Dosen[]> {
-    return this.masterDosenService.fetchAll();
+  fetchDosenByDepartemen(idPeminatan: any) {
+    this.kuotaDosenService
+      .fetchDosenByDepartemen(idPeminatan)
+      .subscribe((res) => {
+        this.namaDosen$ = res;
+        console.log(this.namaDosen$);
+      });
   }
 
   // lokasi skripsi
@@ -50,42 +64,44 @@ export class PengajuanJudulPenelitianComponent {
     return this.masterLokasiSkripsiService.fetchAll();
   }
 
-  loadDataPengajuanSkripsi() {
-    this.skripsiService.fetchAllPengajuanSkripsi().subscribe((res) => {
-      this.listPengajuanSkripsi = res;
-    });
+  // fetch peminatan mahasiswa
+  loadPeminatanMahasiswa() {
+    this.rekapPeminatanMahasiswaService
+      .fetchPeminatanByUserId(this.decodedToken.userId)
+      .subscribe((res) => {
+        this.peminatanMahasiswa = res.data;
+        // this.formSkripsi.get('idPeminatan')?.disable();
+        // this.formSkripsi.get('idPeminatan')?.patchValue(this.peminatanMahasiswa[0].idPeminatan);
+        this.formSkripsi.patchValue({
+          idPeminatan: this.peminatanMahasiswa[0].idPeminatan,
+        });
+
+        this.fetchDosenByDepartemen(this.peminatanMahasiswa[0].idPeminatan);
+      });
   }
 
   addSkripsiFormGroup(): FormGroup {
     return new FormGroup({
-      id: new FormControl('', [Validators.required]),
+      idPeminatan: new FormControl('', [Validators.required]),
       judulSkripsi: new FormControl('', [Validators.required]),
       idLokasi: new FormControl('', [Validators.required]),
       idDosen: new FormControl('', [Validators.required]),
-      persentaseNilaiD: new FormControl('', [Validators.required]),
-      persentaseNilaiE: new FormControl('', [Validators.required])
     });
   }
 
   submitFormSkripsi() {
-    console.log('id: ' + this.formSkripsi.controls['id'].value);
-    this.formSkripsi.controls['id'].value;
-    if (this.formSkripsi.controls['id'].value == null || this.formSkripsi.controls['id'].value == '') {
-      this.onSubmitAddSkripsi(this.formSkripsi.value);
-    } else if (this.formSkripsi.controls['id'].value != null || this.formSkripsi.controls['id'].value != '') {
-      this.onSubmitUpdateSkripsi(
-        this.formSkripsi.value,
-        this.formSkripsi.controls['id'].value
-      );
-    }
+    this.onSubmitAddSkripsi(this.formSkripsi.value);
   }
 
-  onSubmitAddSkripsi(formSkripsi: Pick<Skripsi, 'id'>): void {
-    this.skripsiService.create(formSkripsi, this.decodedToken.userId).subscribe(() => {
-      this.formSkripsi.reset();
-      this.loadDataPengajuanSkripsi();
-      this.showAlert('add');
-    });
+  onSubmitAddSkripsi(formSkripsi: Pick<Skripsi, 'idPeminatan' | 'judulSkripsi' | 'idLokasi' | 'idDosen'>): void {
+    console.log(this.formSkripsi.value);
+    
+    this.skripsiService
+      .create(formSkripsi, this.decodedToken.userId)
+      .subscribe(() => {
+        this.formSkripsi.reset();
+        this.showAlert('add');
+      });
   }
 
   showAlert(action: string): void {
@@ -103,38 +119,5 @@ export class PengajuanJudulPenelitianComponent {
 
     this.isVisible = true;
     setTimeout(() => (this.isVisible = false), 2500);
-  }
-
-  update(idSkripsi: any) {
-    this.skripsiService.fetchById(idSkripsi).subscribe((res: any) => {
-      this.detailSkripsi = res.data;
-      
-      this.formSkripsi.setValue({
-        id: this.detailSkripsi[0].id,
-        judulSkripsi: this.detailSkripsi[0].judulSkripsi,
-        idLokasi: this.detailSkripsi[0].idLokasi,
-        idDosen: this.detailSkripsi[0].idDosen,
-        persentaseNilaiD: this.detailSkripsi[0].persentaseNilaiD,
-        persentaseNilaiE: this.detailSkripsi[0].persentaseNilaiE
-      });
-    });
-  }
-
-  onSubmitUpdateSkripsi(
-    formSkripsi: Pick<Skripsi, 'judulSkripsi' | 'idLokasi' | 'idDosen' | 'persentaseNilaiD' | 'persentaseNilaiE'>,
-    idSkripsi: Pick<Skripsi, 'id'>
-  ): void {
-    this.skripsiService.update(formSkripsi, idSkripsi).subscribe(() => {
-      this.formSkripsi.reset();
-      this.showAlert('update');
-      this.loadDataPengajuanSkripsi();
-    });
-  }
-
-  delete(id: any) {
-    this.skripsiService.delete(id).subscribe(() => {
-      this.showAlert('delete');
-      this.loadDataPengajuanSkripsi();
-    });
   }
 }

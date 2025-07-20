@@ -1,0 +1,63 @@
+<div class="pagetitle">
+    <h1>Approval Judul Penelitian</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">Approval</li>
+            <li class="breadcrumb-item">Approval Judul Penelitian</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+<section class="section">
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="isVisible">
+                <i class="bi bi-check-circle me-1"></i>
+                {{ alertMessage }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+
+                    <form class="form-inline">
+                        <input class="form-control mr-sm-2" type="search" [(ngModel)]="searchText" [ngModelOptions]="{standalone: true}" id="search" placeholder="Search" aria-label="Search">
+                    </form>
+
+                    <table class="table table-sm table-bordered">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>NIM - Nama Mahasiswa</th>
+                                <th>Peminatan</th>
+                                <th>Judul Skripsi</th>
+                                <th>Lokasi Skripsi</th>
+                                <th>Dosen Pembimbing</th>
+                                <th>Status Pengajuan</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of listPengajuanSkripsi | filter: searchText; let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ item.nim }} - {{ item.namaMahasiswa }}</td>
+                                <td>{{ item.namaPeminatan }}</td>
+                                <td>{{ item.judulSkripsi }}</td>
+                                <td>{{ item.namaLokasi }}</td>
+                                <td>{{ item.namaDosen }}</td>
+                                <td>{{ item.statusPengajuan === 0 ? 'Menunggu persetujuan' : 'Disetujui' }}</td>
+                                <td>
+                                    <button (click)="approvePengajuanJudulPenelitian(item.id)"
+                                        [disabled]="item.statusPengajuan === 1" type="button" class="btn btn-success"><i
+                                            class="bi bi-check-circle"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

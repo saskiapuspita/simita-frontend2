@@ -1,0 +1,34 @@
+<!-- <pagination-template #p="paginationApi" [id]="id" [maxSize]="maxSize" (pageChange)="pageChange.emit($event)">
+
+
+
+    <ul class="ngx-pagination" role="navigation" [attr.aria-label]="screenReaderPaginationLabel"
+        *ngIf="!(autoHide && p.pages.length <= 1)">
+
+
+        <li [class.current]="p.getCurrent() === page.value" *ngFor="let page of p.pages">
+
+            <div *ngIf="p.getCurrent() === page.value">
+                <span class="show-for-sr">{{ screenReaderCurrentLabel }} </span>
+                <span>{{ 5*(page.label-1)+1 }} - {{5*p.getCurrent()}}</span>
+            </div>
+        </li>
+
+        <li class="total-pages" *ngIf="directionLinks">
+            <span>
+                of {{totalListCount * p.pages.length }}
+            </span>
+        </li>
+        <li class="pagination-previous" [class.disabled]="p.isFirstPage()" *ngIf="directionLinks">
+            <a *ngIf="!p.isFirstPage()" (click)="p.previous()"> </a>
+        </li>
+        <li class="pagination-next" [class.disabled]="p.isLastPage()" *ngIf="directionLinks">
+            <a *ngIf="!p.isLastPage()" (click)="p.next()" [attr.aria-label]="nextLabel + ' ' + screenReaderPageLabel">
+                <span class="show-for-sr">{{ screenReaderPageLabel }}</span>
+            </a>
+            <span *ngIf="p.isLastPage()">
+                <span class="show-for-sr">{{ screenReaderPageLabel }}</span>
+            </span>
+        </li>
+    </ul>
+</pagination-template> -->

@@ -13,8 +13,8 @@ import { KuotaDosen } from '../interfaces/kuota-dosen';
 })
 export class KuotaDosenService {
   private url = 
-  'https://api.simitafapetub.site/kuotadosen';
-  // 'http://localhost:4000/kuotadosen';
+  // 'https://api.simitafapetub.site/kuotadosen';
+  'http://localhost:4000/kuotadosen';
 
   httpOptions: { headers: HttpHeaders } = {
     headers: new HttpHeaders({
@@ -88,6 +88,34 @@ export class KuotaDosenService {
       )
       .pipe(
         catchError(this.errorHandlerService.handleError<KuotaDosen>('update'))
+      );
+  }
+
+  assignDepartemenDosen(
+    formData: Partial<KuotaDosen>,
+    id: Pick<KuotaDosen, 'id'>
+  ): Observable<KuotaDosen> {
+    console.log("formData.departemenDosen: " + formData.departemenDosen);
+    
+    return this.http
+      .patch<KuotaDosen>(
+        `http://localhost:4000/middlewaredepartemendosen/${id}`,
+        {
+          departemenDosen: formData.departemenDosen,
+        },
+        this.httpOptions
+      )
+      .pipe(
+        catchError(this.errorHandlerService.handleError<KuotaDosen>('assignDepartemenDosen'))
+      );
+  }
+
+  fetchDosenByDepartemen(idPeminatan: number): Observable<{}> {
+    return this.http
+      .get<KuotaDosen>(`http://localhost:4000/middlewaredepartemendosen/${idPeminatan}`, this.httpOptions)
+      .pipe(
+        first(),
+        catchError(this.errorHandlerService.handleError<KuotaDosen>('fetchDosenByDepartemen'))
       );
   }
 }

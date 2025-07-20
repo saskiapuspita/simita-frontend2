@@ -12,9 +12,9 @@ import { Skripsi } from '../interfaces/skripsi';
   providedIn: 'root',
 })
 export class SkripsiService {
-  private url = 
-  'https://api.simitafapetub.site/skripsi';
-  // 'http://localhost:4000/skripsi';
+  private url =
+    // 'https://api.simitafapetub.site/skripsi';
+    'http://localhost:4000/skripsi';
 
   httpOptions: { headers: HttpHeaders } = {
     headers: new HttpHeaders({
@@ -66,16 +66,20 @@ export class SkripsiService {
     formData: Partial<Skripsi>,
     userId: Pick<User, 'id'>
   ): Observable<Skripsi> {
+    console.log('formData.idPeminatan: ' + formData.idPeminatan);
+    console.log('formData.judulSkripsi: ' + formData.judulSkripsi);
+    console.log('formData.idLokasi: ' + formData.idLokasi);
+    console.log('formData.idDosen: ' + formData.idDosen);
+
     return this.http
       .post<Skripsi>(
         this.url,
         {
           idUser: userId,
+          idPeminatan: formData.idPeminatan,
           judulSkripsi: formData.judulSkripsi,
           idLokasi: formData.idLokasi,
           idDosen: formData.idDosen,
-          persentaseNilaiD: formData.persentaseNilaiD,
-          persentaseNilaiE: formData.persentaseNilaiE,
         },
         this.httpOptions
       )
@@ -129,6 +133,23 @@ export class SkripsiService {
         catchError(
           this.errorHandlerService.handleError<Skripsi>(
             'updateStatusPengajuanJudulSkripsi'
+          )
+        )
+      );
+  }
+
+  fetchApprovedSkripsiByUserId(idUser: Pick<User, 'id'>): Observable<any> {
+    return this.http
+      .get<Skripsi>(
+        // `https://api.simitafapetub.site/middlewareskripsibyuserid/${idUser}`,
+        `http://localhost:4000/middlewareskripsibyuserid/${idUser}`,
+        this.httpOptions
+      )
+      .pipe(
+        first(),
+        catchError(
+          this.errorHandlerService.handleError<Skripsi>(
+            'fetchPeminatanByUserId'
           )
         )
       );

@@ -13,8 +13,8 @@ import { ErrorHandlerService } from './error-handler.service';
 })
 export class PeminatanService {
   private url = 
-  'https://api.simitafapetub.site/peminatan';
-  // 'http://localhost:4000/peminatan';
+  // 'https://api.simitafapetub.site/peminatan';
+  'http://localhost:4000/peminatan';
 
   httpOptions: { headers: HttpHeaders } = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),

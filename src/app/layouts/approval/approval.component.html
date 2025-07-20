@@ -87,25 +87,8 @@
                             <form [formGroup]="formGenerateRekapitulasiPeminatan"
                                 (ngSubmit)="submitFormGenerateRekapitulasiPeminatan()"
                                 *ngIf="UserRole == 'kepala departemen' || UserRole == 'admin'">
-                                <div class="row g-3">
-                                    <div class="col-12">
-                                        <label for="idPeminatan" class="form-label">Peminatan</label>
-                                        <select class="form-select" aria-label="State" name="idPeminatan"
-                                            id="idPeminatan" [formControlName]="'idPeminatan'" required>
-                                            <option disabled selected value>Select an option</option>
-                                            <option *ngFor="let item of peminatan$ | async" [value]="item.id">{{
-                                                item.nama
-                                                }}
-                                            </option>
-                                        </select>
-                                        <div class="invalid-feedback">
-                                            Please select a valid state.
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <button type="submit" class="btn btn-outline-primary m-1">Submit</button>
-                                    </div>
+                                <div class="d-grid gap-2 mt-3">
+                                    <button type="submit" class="btn btn-outline-primary m-1">Generate Rekapitulasi Peminatan</button>
                                 </div>
                             </form>
                             <table class="table table-sm table-bordered"

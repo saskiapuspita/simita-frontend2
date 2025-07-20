@@ -5,4 +5,5 @@ export interface RekapitulasiPeminatan {
     namaMahasiswa: string;
     statusPengajuan: number
     idDosen: number;
+    idUser: number;
 }

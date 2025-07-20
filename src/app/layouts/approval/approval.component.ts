@@ -130,19 +130,12 @@ export class ApprovalComponent {
   }
 
   submitFormGenerateRekapitulasiPeminatan() {
-    this.onSubmitGenerateRekapitulasiPeminatan(
-      this.formGenerateRekapitulasiPeminatan.value
-    );
+    this.onSubmitGenerateRekapitulasiPeminatan();
   }
 
-  onSubmitGenerateRekapitulasiPeminatan(
-    formGenerateRekapitulasiPeminatan: Pick<
-      RekapitulasiPeminatan,
-      'idPeminatan'
-    >
-  ): void {
+  onSubmitGenerateRekapitulasiPeminatan(): void {
     this.rekapitulasiPeminatanService
-      .generateRekapitulasiPeminatan(formGenerateRekapitulasiPeminatan)
+      .generateRekapitulasiPeminatan()
       .subscribe(() => {
         this.formGenerateRekapitulasiPeminatan.reset();
         this.showAlert();

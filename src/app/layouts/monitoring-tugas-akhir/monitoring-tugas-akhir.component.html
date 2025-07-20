@@ -1,0 +1,191 @@
+<div class="pagetitle">
+    <h1>Monitoring Tugas Akhir</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">Seminar</li>
+            <li class="breadcrumb-item">Pengajuan Seminar Hasil</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+<section class="section">
+    <div class="row">
+        <div class="col-lg-12">
+
+            <!-- alert -->
+            <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="isVisible">
+                <i class="bi bi-check-circle me-1"></i>
+                {{ alertMessage }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="nama" class="form-label">Nama</label>
+                            <input value="{{ decodedToken.name }}" type="text" class="form-control" id="nama" disabled>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="nim" class="form-label">NIM</label>
+                            <input value="{{ decodedToken.nim }}" type="text" class="form-control" id="nim" disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+
+                    <!-- Bordered Tabs -->
+                    <ul class="nav nav-tabs nav-tabs-bordered" id="borderedTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
+                                data-bs-target="#bordered-home" type="button" role="tab" aria-controls="home"
+                                aria-selected="true">Tambah Judul Tugas Akhir</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="lembarmonitoring-tab" data-bs-toggle="tab"
+                                data-bs-target="#bordered-lembarmonitoring" type="button" role="tab"
+                                aria-controls="lembarmonitoring" aria-selected="false">Form Lembar Monitoring</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content pt-2" id="borderedTabContent">
+                        <div class="tab-pane fade show active" id="bordered-home" role="tabpanel"
+                            aria-labelledby="home-tab">
+                            <form [formGroup]="formMonitoringSkripsi" (ngSubmit)="submitFormMonitoringSkripsi()">
+
+                                <div class="col-md-12">
+                                    <label for="judulSkripsi" class="col-sm-2 col-form-label">Judul Penelitian</label>
+                                    <input formControlName="judulSkripsi" id="judulSkripsi" type="text"
+                                        class="form-control">
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label for="idDosenPembimbing1" class="col-sm-2 col-form-label">Dosen Pembimbing
+                                        1</label>
+                                    <select class="form-select" aria-label="State" name="idDosenPembimbing1"
+                                        id="idDosenPembimbing1" [formControlName]="'idDosenPembimbing1'" required>
+                                        <option disabled selected value>Select an option</option>
+                                        <option *ngFor="let item of namaDosen$ | async" [value]="item.id">{{
+                                            item.name }}
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label for="idDosenPembimbing2" class="col-sm-2 col-form-label">Dosen Pembimbing
+                                        2 (opsional)</label>
+                                    <select class="form-select" aria-label="State" name="idDosenPembimbing2"
+                                        id="idDosenPembimbing2" [formControlName]="'idDosenPembimbing2'" required>
+                                        <option disabled selected value>Select an option</option>
+                                        <option *ngFor="let item of namaDosen$ | async" [value]="item.id">{{
+                                            item.name }}
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <button type="submit" class="btn btn-primary m-1">Submit</button>
+                                </div>
+                            </form>
+=
+                            <!-- Table with stripped rows -->
+                            <table class="table table-sm table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Judul Tugas Akhir</th>
+                                        <th>Dosen Pembimbing 1</th>
+                                        <th>Dosen Pembimbing 2</th>
+                                        <!-- <th></th> -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of tugasAkhir; let i = index">
+                                        <td>{{item.judulSkripsi}}</td>
+                                        <td>{{item.namaDosen1}}</td>
+                                        <td>{{item.namaDosen2}}</td>
+                                        <!-- <td>
+                                            <button (click)="delete(item.id)" type="button"
+                                                class="btn btn-danger m-1"><i class="bi bi-trash"></i></button>
+                                        </td> -->
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <!-- End Table with stripped rows -->
+                        </div>
+                        <div class="tab-pane fade" id="bordered-lembarmonitoring" role="tabpanel"
+                            aria-labelledby="lembarmonitoring-tab">
+                            <form [formGroup]="formDetailMonitoringSkripsi" (ngSubmit)="submitFormDetailMonitoringSkripsi()">
+                                <div class="col-md-12" hidden>
+                                    <label for="idMonitoringSkripsi" class="col-sm-2 col-form-label">Id Monitoring Skripsi</label>
+                                        <input formControlName="idMonitoringSkripsi" id="idMonitoringSkripsi" type="text"
+                                            class="form-control">
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label for="tanggalMonitoring" class="col-sm-2 col-form-label">Tanggal Monitoring
+                                    </label>
+                                    <input formControlName="tanggalMonitoring" id="tanggalMonitoring" type="date"
+                                        class="form-control">
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label for="uraianKegiatan" class="col-sm-2 col-form-label">Uraian Kegiatan</label>
+                                    <select class="form-select" aria-label="State" name="uraianKegiatan"
+                                        id="uraianKegiatan" [formControlName]="'uraianKegiatan'" required>
+                                        <option disabled selected value>Select an option</option>
+                                        <option value="diskusi topik tugas akhir">Diskusi Topik Tugas Akhir</option>
+                                        <option value="diskusi penentuan judul tugas akhir">Diskusi Penentuan Judul
+                                            Tugas Akhir</option>
+                                        <option value="konsultasi proposal tugas akhir 1">Konsultasi Proposal Tugas
+                                            Akhir 1</option>
+                                        <option value="konsultasi proposal tugas akhir 2">Konsultasi Proposal Tugas
+                                            Akhir 2</option>
+                                        <option value="seminar proposal">Seminar Proposal</option>
+                                        <option value="revisi proposal 1">Revisi Proposal 1</option>
+                                        <option value="revisi proposal 2">Revisi Proposal 2</option>
+                                        <option value="penelitian">Penelitian</option>
+                                        <option value="konsultasi data penelitian">Konsultasi Data Penelitian</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <button type="submit" class="btn btn-primary m-1">Submit</button>
+                                </div>
+                            </form>
+
+                            <!-- Table with stripped rows -->
+                            <table class="table table-sm table-bordered" id="pdfTable" #pdfTable>
+                                <thead>
+                                    <tr>
+                                        <th>Tanggal Monitoring</th>
+                                        <th>Uraian Kegiatan</th>
+                                        <th>Created On</th>
+                                        <!-- <th></th> -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of listDetailTugasAkhir; let i = index">
+                                        <td>{{item.tanggalMonitoring}}</td>
+                                        <td>{{item.uraianKegiatan}}</td>
+                                        <td>{{item.created}}</td>
+                                        <!-- <td>
+                                            <button (click)="delete(item.id)" type="button"
+                                                class="btn btn-danger m-1"><i class="bi bi-trash"></i></button>
+                                        </td> -->
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <!-- End Table with stripped rows -->
+
+                            <button (click)="downloadPDF()">Export PDF</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

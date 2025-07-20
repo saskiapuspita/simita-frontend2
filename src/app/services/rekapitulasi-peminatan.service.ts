@@ -14,8 +14,8 @@ import { RekapitulasiPeminatan } from '../interfaces/rekapitulasi-peminatan';
   providedIn: 'root',
 })
 export class RekapitulasiPeminatanService {
-  private url = 'https://api.simitafapetub.site/rekappengajuanpeminatan';
-  // private url = 'http://localhost:4000/rekappengajuanpeminatan';
+  // private url = 'https://api.simitafapetub.site/rekappengajuanpeminatan';
+  private url = 'http://localhost:4000/rekappengajuanpeminatan';
 
   httpOptions: { headers: HttpHeaders } = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -60,8 +60,8 @@ export class RekapitulasiPeminatanService {
   fetchApproved(): Observable<RekapitulasiPeminatan[]> {
     return this.http
       .get<RekapitulasiPeminatan[]>(
-        `https://api.simitafapetub.site/middlewarerekappengajuanpeminatan`,
-        // `http://localhost:4000/middlewarerekappengajuanpeminatan`,
+        // `https://api.simitafapetub.site/middlewarerekappengajuanpeminatan`,
+        `http://localhost:4000/middlewarerekappengajuanpeminatan`,
         {
           responseType: 'json',
         }
@@ -79,8 +79,8 @@ export class RekapitulasiPeminatanService {
   fetchApprovedById(idUser: Pick<User, 'id'>): Observable<any> {
     return this.http
       .get<RekapitulasiPeminatan>(
-        `https://api.simitafapetub.site/middlewarerekappengajuanpeminatan/${idUser}`,
-        // `http://localhost:4000/middlewarerekappengajuanpeminatan/${idUser}`,
+        // `https://api.simitafapetub.site/middlewarerekappengajuanpeminatan/${idUser}`,
+        `http://localhost:4000/middlewarerekappengajuanpeminatan/${idUser}`,
         this.httpOptions
       )
       .pipe(
@@ -93,15 +93,10 @@ export class RekapitulasiPeminatanService {
       );
   }
 
-  generateRekapitulasiPeminatan(
-    formData: Partial<RekapitulasiPeminatan>
-  ): Observable<RekapitulasiPeminatan> {
+  generateRekapitulasiPeminatan(): Observable<RekapitulasiPeminatan> {
     return this.http
       .post<RekapitulasiPeminatan>(
         `${this.url}/fetchRekapitulasiPeminatan`,
-        {
-          idPeminatan: formData.idPeminatan,
-        },
         this.httpOptions
       )
       .pipe(
@@ -149,6 +144,103 @@ export class RekapitulasiPeminatanService {
         catchError(
           this.errorHandlerService.handleError<RekapitulasiPeminatan>(
             'updateDosenPembimbingPeminatan'
+          )
+        )
+      );
+  }
+
+  fetchPeminatanByUserId(idUser: Pick<User, 'id'>): Observable<any> {
+    return this.http
+      .get<RekapitulasiPeminatan>(
+        // `https://api.simitafapetub.site/middlewarerekappeminatanmhs/${idUser}`,
+        `http://localhost:4000/middlewarerekappeminatanmhs/${idUser}`,
+        this.httpOptions
+      )
+      .pipe(
+        first(),
+        catchError(
+          this.errorHandlerService.handleError<RekapitulasiPeminatan>(
+            'fetchById'
+          )
+        )
+      );
+  }
+
+  fetchRekapitulasiPeminatanProter(): Observable<RekapitulasiPeminatan[]> {
+    return this.http
+      .get<RekapitulasiPeminatan[]>(
+        `http://localhost:4000/middlewaregetrekappeminatanproter`,
+        { responseType: 'json' }
+      )
+      .pipe(
+        catchError(
+          this.errorHandlerService.handleError<RekapitulasiPeminatan[]>(
+            'fetchRekapitulasiPeminatanProter',
+            []
+          )
+        )
+      );
+  }
+
+  fetchRekapitulasiPeminatanNMT(): Observable<RekapitulasiPeminatan[]> {
+    return this.http
+      .get<RekapitulasiPeminatan[]>(
+        `http://localhost:4000/middlewaregetrekappeminatannmt`,
+        { responseType: 'json' }
+      )
+      .pipe(
+        catchError(
+          this.errorHandlerService.handleError<RekapitulasiPeminatan[]>(
+            'fetchRekapitulasiPeminatanNMT',
+            []
+          )
+        )
+      );
+  }
+
+  fetchRekapitulasiPeminatanSosek(): Observable<RekapitulasiPeminatan[]> {
+    return this.http
+      .get<RekapitulasiPeminatan[]>(
+        `http://localhost:4000/middlewaregetrekappeminatansosek`,
+        { responseType: 'json' }
+      )
+      .pipe(
+        catchError(
+          this.errorHandlerService.handleError<RekapitulasiPeminatan[]>(
+            'fetchRekapitulasiPeminatanSosek',
+            []
+          )
+        )
+      );
+  }
+
+  fetchRekapitulasiPeminatanTHT(): Observable<RekapitulasiPeminatan[]> {
+    return this.http
+      .get<RekapitulasiPeminatan[]>(
+        `http://localhost:4000/middlewaregetrekappeminatantht`,
+        { responseType: 'json' }
+      )
+      .pipe(
+        catchError(
+          this.errorHandlerService.handleError<RekapitulasiPeminatan[]>(
+            'fetchRekapitulasiPeminatanTHT',
+            []
+          )
+        )
+      );
+  }
+
+  fetchRekapitulasiPeminatanRPT(): Observable<RekapitulasiPeminatan[]> {
+    return this.http
+      .get<RekapitulasiPeminatan[]>(
+        `http://localhost:4000/middlewaregetrekappeminatanrpt`,
+        { responseType: 'json' }
+      )
+      .pipe(
+        catchError(
+          this.errorHandlerService.handleError<RekapitulasiPeminatan[]>(
+            'fetchRekapitulasiPeminatanRPT',
+            []
           )
         )
       );
