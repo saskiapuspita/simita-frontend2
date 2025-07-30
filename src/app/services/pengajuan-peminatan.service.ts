@@ -59,11 +59,11 @@ export class PengajuanPeminatanService {
         {
           urutanMinat: formData.urutanMinat,
           pilihanMinat: formData.pilihanMinat,
-          haveRecommendation: formData.haveRecommendation,
-          judulProyek: formData.judulProyek,
-          sumberPendanaan: formData.sumberPendanaan,
-          tahunPendanaanProyek: formData.tahunPendanaanProyek,
-          statusProyek: formData.statusProyek,
+          // haveRecommendation: formData.haveRecommendation,
+          // judulProyek: formData.judulProyek,
+          // sumberPendanaan: formData.sumberPendanaan,
+          // tahunPendanaanProyek: formData.tahunPendanaanProyek,
+          // statusProyek: formData.statusProyek,
           idUser: idUser,
         },
         this.httpOptions

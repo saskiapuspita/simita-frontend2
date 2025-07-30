@@ -12,11 +12,11 @@ import { User } from '../interfaces/user';
   providedIn: 'root',
 })
 export class PengajuanPklService {
-  // private apiUrlKelompokPkl = 'https://api.simitafapetub.site/kelompokPkl';
-  // private apiUrlPengajuanPkl = 'https://api.simitafapetub.site/pengajuanPkl';
+  private apiUrlKelompokPkl = 'https://api.simitafapetub.com/kelompokPkl';
+  private apiUrlPengajuanPkl = 'https://api.simitafapetub.com/pengajuanPkl';
 
-  private apiUrlKelompokPkl = 'http://localhost:4000/kelompokPkl';
-  private apiUrlPengajuanPkl = 'http://localhost:4000/pengajuanPkl';
+  // private apiUrlKelompokPkl = 'http://localhost:4000/kelompokPkl';
+  // private apiUrlPengajuanPkl = 'http://localhost:4000/pengajuanPkl';
 
   httpOptions: { headers: HttpHeaders } = {
     headers: new HttpHeaders({
