@@ -13,8 +13,8 @@ import { LokasiSkripsi } from '../interfaces/lokasi-skripsi';
 })
 export class MasterLokasiSkripsiService {
   private url = 
-  // 'https://api.simitafapetub.site/lokasiSkripsi';
-  'http://localhost:4000/lokasiSkripsi';
+  'https://api.simitafapetub.com/lokasiSkripsi';
+  // 'http://localhost:4000/lokasiSkripsi';
 
   httpOptions: { headers: HttpHeaders } = {
     headers: new HttpHeaders({

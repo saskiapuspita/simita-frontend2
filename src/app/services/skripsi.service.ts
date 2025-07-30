@@ -13,8 +13,8 @@ import { Skripsi } from '../interfaces/skripsi';
 })
 export class SkripsiService {
   private url =
-    // 'https://api.simitafapetub.site/skripsi';
-    'http://localhost:4000/skripsi';
+    'https://api.simitafapetub.com/skripsi';
+    // 'http://localhost:4000/skripsi';
 
   httpOptions: { headers: HttpHeaders } = {
     headers: new HttpHeaders({
@@ -141,8 +141,8 @@ export class SkripsiService {
   fetchApprovedSkripsiByUserId(idUser: Pick<User, 'id'>): Observable<any> {
     return this.http
       .get<Skripsi>(
-        // `https://api.simitafapetub.site/middlewareskripsibyuserid/${idUser}`,
-        `http://localhost:4000/middlewareskripsibyuserid/${idUser}`,
+        `https://api.simitafapetub.com/middlewareskripsibyuserid/${idUser}`,
+        // `http://localhost:4000/middlewareskripsibyuserid/${idUser}`,
         this.httpOptions
       )
       .pipe(

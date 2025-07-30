@@ -13,8 +13,8 @@ import { KuotaDosen } from '../interfaces/kuota-dosen';
 })
 export class KuotaDosenService {
   private url = 
-  // 'https://api.simitafapetub.site/kuotadosen';
-  'http://localhost:4000/kuotadosen';
+  'https://api.simitafapetub.com/kuotadosen';
+  // 'http://localhost:4000/kuotadosen';
 
   httpOptions: { headers: HttpHeaders } = {
     headers: new HttpHeaders({

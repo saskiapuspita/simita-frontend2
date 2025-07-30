@@ -13,8 +13,8 @@ import { Peminatan } from '../interfaces/peminatan';
 })
 export class MasterPeminatanService {
   private url =
-    // 'https://api.simitafapetub.site/peminatan';
-    'http://localhost:4000/peminatan';
+    'https://api.simitafapetub.com/peminatan';
+    // 'http://localhost:4000/peminatan';
 
   httpOptions: { headers: HttpHeaders } = {
     headers: new HttpHeaders({

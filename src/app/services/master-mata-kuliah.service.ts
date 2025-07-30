@@ -14,8 +14,8 @@ import { Peminatan } from '../interfaces/peminatan';
 })
 export class MasterMataKuliahService {
   private url =
-    // 'https://api.simitafapetub.site/matakuliah';
-    'http://localhost:4000/matakuliah';
+    'https://api.simitafapetub.com/matakuliah';
+    // 'http://localhost:4000/matakuliah';
 
   httpOptions: { headers: HttpHeaders } = {
     headers: new HttpHeaders({
@@ -68,8 +68,8 @@ export class MasterMataKuliahService {
   fetchNamaPeminatanBasedOnIdMinat(): Observable<any[]> {
     return this.http
       .get<any[]>(
-        // `https://api.simitafapetub.site/middlewarematakuliah`,
-        `http://localhost:4000/middlewarematakuliah`,
+        `https://api.simitafapetub.com/middlewarematakuliah`,
+        // `http://localhost:4000/middlewarematakuliah`,
         {
           responseType: 'json',
         }

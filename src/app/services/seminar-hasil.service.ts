@@ -15,8 +15,8 @@ export class SeminarHasilService {
   combinedDateTimeMulaiSeminarString: any;
   combinedDateTimeBerakhirSeminarString: any;
   private url =
-    // 'https://api.simitafapetub.site/seminarhasil';
-    'http://localhost:4000/seminarhasil';
+    'https://api.simitafapetub.com/seminarhasil';
+    // 'http://localhost:4000/seminarhasil';
 
   httpOptions: { headers: HttpHeaders } = {
     headers: new HttpHeaders({
