@@ -195,11 +195,11 @@ export class PengajuanPeminatanComponent {
       PeminatanMahasiswa,
       | 'urutanMinat'
       | 'pilihanMinat'
-      | 'haveRecommendation'
-      | 'judulProyek'
-      | 'sumberPendanaan'
-      | 'tahunPendanaanProyek'
-      | 'statusProyek'
+      // | 'haveRecommendation'
+      // | 'judulProyek'
+      // | 'sumberPendanaan'
+      // | 'tahunPendanaanProyek'
+      // | 'statusProyek'
     >
   ): void {
     // console.log(
@@ -237,7 +237,7 @@ export class PengajuanPeminatanComponent {
       // nilaiMatkulMinat4: new FormControl(null),
       // idMatkulMinat5: new FormControl(null),
       // nilaiMatkulMinat5: new FormControl(null),
-      
+
       // haveRecommendation: new FormControl(null),
       // judulProyek: new FormControl(null),
       // sumberPendanaan: new FormControl(null),
