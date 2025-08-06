@@ -13,7 +13,7 @@ import { MonitoringTugasAkhir } from '../interfaces/monitoring-tugas-akhir';
 })
 export class MonitoringTugasAkhirService {
   private url =
-    'https://api.simitafapetub.com/monitoringtugasakhir';
+    'https://api.simitafapetub.com/monitoringskripsi';
     // 'http://localhost:4000/monitoringskripsi';
 
   httpOptions: { headers: HttpHeaders } = {
