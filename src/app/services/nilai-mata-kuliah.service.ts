@@ -109,8 +109,10 @@ export class NilaiMataKuliahService {
 
   fetchByIdUser(id: Pick<User, 'id'>): Observable<{}> {
     return this.http
-      .get<NilaiMataKuliah>(`https://api.simitafapetub.com/middlewarenilaimatakuliah/${id}`, this.httpOptions)
-      // .get<NilaiMataKuliah>(`http://localhost:4000/middlewarenilaimatakuliah/${id}`, this.httpOptions)
+      .get<NilaiMataKuliah>(
+        `https://api.simitafapetub.com/middlewarenilaimatakuliah/${id}`, 
+        // `http://localhost:4000/middlewarenilaimatakuliah/${id}`, 
+        this.httpOptions)
       .pipe(
         first(),
         catchError(

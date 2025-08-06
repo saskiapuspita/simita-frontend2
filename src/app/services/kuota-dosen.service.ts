@@ -9,12 +9,12 @@ import { ErrorHandlerService } from './error-handler.service';
 import { KuotaDosen } from '../interfaces/kuota-dosen';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class KuotaDosenService {
-  private url = 
-  'https://api.simitafapetub.com/kuotadosen';
-  // 'http://localhost:4000/kuotadosen';
+  private url =
+    'https://api.simitafapetub.com/kuotadosen';
+    // 'http://localhost:4000/kuotadosen';
 
   httpOptions: { headers: HttpHeaders } = {
     headers: new HttpHeaders({
@@ -31,7 +31,9 @@ export class KuotaDosenService {
     return this.http
       .get<KuotaDosen[]>(this.url, { responseType: 'json' })
       .pipe(
-        catchError(this.errorHandlerService.handleError<KuotaDosen[]>('fetchAll', []))
+        catchError(
+          this.errorHandlerService.handleError<KuotaDosen[]>('fetchAll', [])
+        )
       );
   }
 
@@ -40,7 +42,9 @@ export class KuotaDosenService {
       .get<KuotaDosen>(`${this.url}/${id}`, this.httpOptions)
       .pipe(
         first(),
-        catchError(this.errorHandlerService.handleError<KuotaDosen>('fetchById'))
+        catchError(
+          this.errorHandlerService.handleError<KuotaDosen>('fetchById')
+        )
       );
   }
 
@@ -53,7 +57,7 @@ export class KuotaDosenService {
           kuotaDosenUntukPeminatan: formData.kuotaDosenUntukPeminatan,
           kuotaDosenUntukSkripsi: formData.kuotaDosenUntukSkripsi,
           kuotaDosenUntukTesis: formData.kuotaDosenUntukTesis,
-          kuotaDosenUntukDisertasi: formData.kuotaDosenUntukDisertasi
+          kuotaDosenUntukDisertasi: formData.kuotaDosenUntukDisertasi,
         },
         this.httpOptions
       )
@@ -82,7 +86,7 @@ export class KuotaDosenService {
           kuotaDosenUntukPeminatan: formData.kuotaDosenUntukPeminatan,
           kuotaDosenUntukSkripsi: formData.kuotaDosenUntukSkripsi,
           kuotaDosenUntukTesis: formData.kuotaDosenUntukTesis,
-          kuotaDosenUntukDisertasi: formData.kuotaDosenUntukDisertasi
+          kuotaDosenUntukDisertasi: formData.kuotaDosenUntukDisertasi,
         },
         this.httpOptions
       )
@@ -95,27 +99,38 @@ export class KuotaDosenService {
     formData: Partial<KuotaDosen>,
     id: Pick<KuotaDosen, 'id'>
   ): Observable<KuotaDosen> {
-    console.log("formData.departemenDosen: " + formData.departemenDosen);
-    
+    console.log('formData.departemenDosen: ' + formData.departemenDosen);
+
     return this.http
       .patch<KuotaDosen>(
-        `http://localhost:4000/middlewaredepartemendosen/${id}`,
+        `https://api.simitafapetub.com/middlewaredepartemendosen/${id}`,
+        // `http://localhost:4000/middlewaredepartemendosen/${id}`,
         {
           departemenDosen: formData.departemenDosen,
         },
         this.httpOptions
       )
       .pipe(
-        catchError(this.errorHandlerService.handleError<KuotaDosen>('assignDepartemenDosen'))
+        catchError(
+          this.errorHandlerService.handleError<KuotaDosen>(
+            'assignDepartemenDosen'
+          )
+        )
       );
   }
 
   fetchDosenByDepartemen(idPeminatan: number): Observable<{}> {
     return this.http
-      .get<KuotaDosen>(`http://localhost:4000/middlewaredepartemendosen/${idPeminatan}`, this.httpOptions)
+      .get<KuotaDosen>(
+        `https://api.simitafapetub.com/middlewaredepartemendosen/${idPeminatan}`, this.httpOptions)
+        // `http://localhost:4000/middlewaredepartemendosen/${idPeminatan}`, this.httpOptions)
       .pipe(
         first(),
-        catchError(this.errorHandlerService.handleError<KuotaDosen>('fetchDosenByDepartemen'))
+        catchError(
+          this.errorHandlerService.handleError<KuotaDosen>(
+            'fetchDosenByDepartemen'
+          )
+        )
       );
   }
 }

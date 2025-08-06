@@ -93,6 +93,11 @@ export class RekapitulasiPeminatanComponent {
       .generateRekapitulasiPeminatan()
       .subscribe(() => {
         this.loadDataPengajuanPeminatanProter();
+        this.loadDataPengajuanPeminatanNMT();
+        this.loadDataPengajuanPeminatanSosek();
+        this.loadDataPengajuanPeminatanTHT();
+        this.loadDataPengajuanPeminatanRPT();
+        window.location.reload();
       });
   }
 

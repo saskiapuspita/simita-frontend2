@@ -191,7 +191,8 @@ export class SeminarHasilService {
     );
     return this.http
       .post<SeminarHasil>(
-        `http://localhost:4000/ruanganseminar`,
+        `https://api.simitafapetub.com/ruanganseminar`,
+        // `http://localhost:4000/ruanganseminar`,
         {
           waktuMulai: this.combinedDateTimeMulaiSeminarString,
           waktuBerakhir: this.combinedDateTimeBerakhirSeminarString,

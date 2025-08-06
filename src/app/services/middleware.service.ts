@@ -24,7 +24,10 @@ export class MiddlewareService {
 
   fetchAvailableDosenPembimbingPeminatan(): Observable<Dosen[]> {
     return this.http
-      .get<Dosen[]>(`http://localhost:4000/middlewarekuotadosenpeminatan`, { responseType: 'json' })
+      .get<Dosen[]>(
+        `https://api.simitafapetub.com/middlewarekuotadosenpeminatan`,
+        // `http://localhost:4000/middlewarekuotadosenpeminatan`, 
+        { responseType: 'json' })
       .pipe(
         catchError(this.errorHandlerService.handleError<Dosen[]>('fetchAvailableDosenPembimbingPeminatan', []))
       );
